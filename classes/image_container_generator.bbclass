@@ -90,7 +90,6 @@ def define_sanity_check(bb, d):
 #-> version        -build version: debug, release, production
 # ------------------------------------------------------------------------------
 generate_containers_environment() {
-
         secure='${@bb.utils.contains("SECURE_CONTAINERS", "1", "-s", "",d)}'
         soc_ver="${@define_soc_version(bb, d)}"
         oe_ver="${@get_oe_version(bb, d)}"
@@ -104,21 +103,22 @@ generate_containers_environment() {
         sleep_us='${@oe.utils.conditional("SD_NOTIFY_SLEEP_US", "", "", "--usleep=${SD_NOTIFY_SLEEP_US}",d)}'
         common_options="$sleep_us $sanityCheck -t SOC_VER=$soc_ver,OE_VER=$oe_ver,version=$version,RDK_VER=$rdk_ver,RDKHAL_VER=$rdkhal_ver"
 
+       export PYTHONPATH=$PYTHONPATH:${TOOL_DIR}/src/lib/dobby:${TOOL_DIR}/src/lib/
 # NON SECURE CONTAINERS
         files="`find ${XML_CONF} -type f -a -name '*.xml'|sort -V`"
         if [ "$files" != "" ]; then
-                python ${TOOL} -r ${IMAGE_ROOTFS} $secure $shared_rootfs $common_options $files
+                python3 ${TOOL} -r ${IMAGE_ROOTFS} $secure $shared_rootfs $common_options $files
         fi
 
 # SECURE CONTAINERS
         files="`find ${XML_CONF_SECURE} -type f -a -name '*.xml' -a \! -name '*_DBUS*'|sort -V`"
         if [ "$files" != "" ]; then
-                python ${TOOL} -r ${IMAGE_ROOTFS} -s $shared_rootfs $common_options $files
+                python3 ${TOOL} -r ${IMAGE_ROOTFS} -s $shared_rootfs $common_options $files
         fi
         # DBUS does not start properly in container with a shared rootfs, so overrule this option here
         files="`find ${XML_CONF_SECURE} -type f -a -name '*.xml' -a -name '*_DBUS*'|sort -V`"
         if [ "$files" != "" ]; then
-                python ${TOOL} -r ${IMAGE_ROOTFS} -s                $common_options $files
+                python3 ${TOOL} -r ${IMAGE_ROOTFS} -s                $common_options $files
         fi
 
 }
