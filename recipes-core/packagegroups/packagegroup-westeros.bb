@@ -14,8 +14,6 @@ RDEPENDS_packagegroup-westeros = "\
     westeros-simplebuffer \
     westeros-simpleshell \
     westeros-sink \
-    westeros-soc \
-    ${WESTEROS_RENDERER} \
 "
 
 WESTEROS_RENDERER ?= ""

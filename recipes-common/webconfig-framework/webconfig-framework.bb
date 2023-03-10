@@ -20,6 +20,11 @@ S = "${WORKDIR}/git"
 
 inherit autotools systemd pkgconfig
 
+#skip package renaming
+DEBIAN_NOAUTONAME_${PN} = "1"
+DEBIAN_NOAUTONAME_${PN}-dev = "1"
+DEBIAN_NOAUTONAME_${PN}-dbg = "1"
+
 CFLAGS += " \
     -D_GNU_SOURCE -D__USE_XOPEN \
     -I${STAGING_INCDIR}/dbus-1.0 \

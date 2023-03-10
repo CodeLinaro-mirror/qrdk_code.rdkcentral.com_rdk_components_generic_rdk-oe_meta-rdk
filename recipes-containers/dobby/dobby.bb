@@ -4,8 +4,18 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c466d4ab8a68655eb1edf0bf8c1a8fb8"
 
 include dobby.inc
 
+SRC_URI_append_kirkstone = " file://Fix_compile_gcc11.patch  \
+                             file://Add_config_header_kirkstone.patch \
+                           "
+
 DEPENDS = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd ', '', d)} libnl dbus jsoncpp boost yajl python3 breakpad breakpad-wrapper "
 RDEPENDS_${PN} = "crun (>= 0.14.1) ${@bb.utils.contains('DISTRO_FEATURES', 'dac', '', ' dobby-thunderplugin', d)} "
+
+python do_patch_new () {
+    bb.build.exec_func('patch_do_patch', d)
+}
+
+addtask do_patch_new after do_configure before do_compile
 
 S = "${WORKDIR}/git"
 

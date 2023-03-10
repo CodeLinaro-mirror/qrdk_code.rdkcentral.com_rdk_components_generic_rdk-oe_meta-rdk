@@ -33,5 +33,5 @@ CXXFLAGS += " -std=c++11 -fPIC -D_REENTRANT -rdynamic -Wall -Werror ${INCLUDE_DI
 CFLAGS += " -std=c99 -Wall -Werror ${INCLUDE_DIRS}"
 
 SRC_URI = "${RDK_GENERIC_ROOT_GIT}/rbusmirror/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH}"
-SRCREV ?= "${AUTOREV}"
+#SRCREV ?= "${AUTOREV}"
 S = "${WORKDIR}/git"

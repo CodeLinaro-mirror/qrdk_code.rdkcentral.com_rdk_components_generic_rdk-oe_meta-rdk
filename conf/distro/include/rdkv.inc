@@ -138,7 +138,6 @@ DISTRO_FEATURES_append_dunfell = " systemd-journal-cache"
 #Masking the below recipes because in kirkstone build recipes pulling older version due to layer priority
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-support/fcgi/fcgi_2.4.0.bb', '', d)}"
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-devtools/jsonrpc/jsonrpc_0.7.0.bb', '', d)}"
-BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-devtools/jsoncpp/jsoncpp_1.8.4.bb', '', d)}"
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-devtools/jsoncpp/jsoncpp_0.6.0-rc2.bb', '', d)}"
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-common/spawn-fcgi/spawn-fcgi_1.6.3.bb', '', d)}"
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-support/libev/libev_4.24.bb', '', d)}"

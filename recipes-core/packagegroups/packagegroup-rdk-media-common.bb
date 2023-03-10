@@ -33,7 +33,6 @@ RDEPENDS_packagegroup-rdk-media-common = "\
     key-simulator \
     tcpdump \
     rdk-diagnostics \
-    ipv6calc-main \
     iptables \
     ${@bb.utils.contains("DISTRO_FEATURES", "bluetooth", "${BLUEZ} bluetooth-core bluetooth-mgr virtual/media-utils", "", d)} \
     systemd-usb-support \
@@ -44,7 +43,6 @@ RDEPENDS_packagegroup-rdk-media-common = "\
     socat \
     rdkmediaplayer \
     ${@bb.utils.contains("DISTRO_FEATURES", "ledmgr", "ledmgr", "" , d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "safec", "safec", "" , d)} \
     rbus \
     telemetry \
     webconfig-framework \

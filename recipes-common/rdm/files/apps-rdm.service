@@ -1,6 +1,7 @@
 [Unit]
 Description= Apps Download Service
 After=swupdate.service
+ConditionPathExists=/tmp/.xconfssrdownloadurl
 
 [Service]
 SyslogIdentifier=apps-rdm

@@ -19,27 +19,20 @@ RDEPENDS_packagegroup-rdk-baserootfs = "\
     e2fsprogs-mke2fs \
     e2fsprogs-tune2fs \
     fcgi \
-    glib-2.0 \
-    gnutls \
-    gssdp \
     iksemel \
-    jansson \
     libgcrypt \
     libgpg-error \
     libpcre \
     libsoup-2.4 \
-    libxml2 \
     lighttpd \
     log4c \
     logrotate \
     mtd-utils-ubifs \
     neon \
     network-hotplug \
-    popt \
     spawn-fcgi \
     yajl \
     xupnp \
-    gupnp-av \
     procps \
     "
 

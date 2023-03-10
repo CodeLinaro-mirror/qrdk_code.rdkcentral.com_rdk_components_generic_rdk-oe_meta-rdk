@@ -25,6 +25,8 @@ SYSLOG-NG_SERVICE_nlmon = "nlmon.service"
 SYSLOG-NG_DESTINATION_nlmon = "nlmon.log"
 SYSLOG-NG_LOGRATE_nlmon = "medium"
 
+RDEPENDS_${PN} += "libnl"
+
 do_install_append () {
    install -d ${D}/lib/rdk
    install -d ${D}${sysconfdir}

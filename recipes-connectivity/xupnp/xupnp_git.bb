@@ -18,6 +18,7 @@ FILES_${PN} += "${libdir}/"
 CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-sign-compare -Wno-deprecated-declarations -Wno-type-limits -Wno-unused-parameter -Wno-lto-type-mismatch -fcommon"
 
 DEPENDS = "glib-2.0 gupnp fcgi dbus gnutls rdk-logger libgcrypt libgpg-error "
+RDEPENDS_${PN} += "gnutls"
 
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'telemetry2_0', 'telemetry', '', d)}"

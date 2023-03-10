@@ -9,7 +9,6 @@ PACKAGES = "\
 
 RDEPENDS_packagegroup-wpe-webkit = "\
     wpe-webkit \
-    libwpe \
     wpe-backend-rdk-platform-plugin \
     wpe-webkit-web-inspector-plugin \
     ${@bb.utils.contains('DISTRO_FEATURES', 'enable_wpe-webdriver', 'wpe-webdriver', '', d)} \
