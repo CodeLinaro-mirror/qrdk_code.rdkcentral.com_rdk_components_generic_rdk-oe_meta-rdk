@@ -2,15 +2,14 @@ Date: Mon, 16 Aug 2021 18:53:41 +0000
 From: 0ca5225942bc473cc9d917de66802d4e69dbb008 Mon Sep 17 00:00:00 2001
 Subject: Introduce state aware memory observer
 Source: COMCAST
+License: GPLV2
 Upstream-Status: N/A
 Signed-off-by: Eugene Mutavchi <Ievgen_Mutavchi@comcast.com>
-
 ---
  WebKitBrowser/StateAwareMemoryObserver.h | 77 ++++++++++++++++++++++++
  WebKitBrowser/WebKitBrowser.cpp          | 10 ++-
  2 files changed, 86 insertions(+), 1 deletion(-)
  create mode 100644 WebKitBrowser/StateAwareMemoryObserver.h
-
 Index: git/WebKitBrowser/StateAwareMemoryObserver.h
 ===================================================================
 --- /dev/null
@@ -66,7 +65,7 @@ Index: git/WebKitBrowser/StateAwareMemoryObserver.h
 +      {
 +        return _memory->Processes();
 +      }
-+      const bool IsOperational() const override
++      bool IsOperational() const override
 +      {
 +        return _memory->IsOperational();
 +      }
@@ -131,6 +130,15 @@ Index: git/WebKitBrowser/WebKitBrowser.cpp
  
          _service = nullptr;
          _browser = nullptr;
+@@ -259,7 +264,7 @@ namespace Plugin {
+         if (path.empty() == false) {
+             string fullPath = _persistentStoragePath + path;
+             Core::Directory dir(fullPath.c_str());
+-            if (!dir.Destroy(true)) {
++            if (!dir.Destroy()) {
+                 TRACE(Trace::Error, (_T("Failed to delete %s\n"), fullPath.c_str()));
+                 result = Core::ERROR_GENERAL;
+             }
 @@ -305,6 +307,11 @@ namespace Plugin {
          string message(string("{ \"suspended\": ") + (state == PluginHost::IStateControl::SUSPENDED ? _T("true") : _T("false")) + string(" }"));
          _service->Notify(message);
@@ -143,3 +151,12 @@ Index: git/WebKitBrowser/WebKitBrowser.cpp
      }
  
      void WebKitBrowser::Deactivated(RPC::IRemoteConnection* connection)
+@@ -452,7 +462,7 @@ namespace WebKitBrowser {
+             _children = Core::ProcessInfo::Iterator(_main.Id());
+             return ((_startTime == 0) || (_main.IsActive() == true) ? 1 : 0) + _children.Count();
+         }
+-        const bool IsOperational() const override
++        bool IsOperational() const override
+         {
+             uint32_t requiredProcesses = 0;
+

@@ -1,0 +1,317 @@
+Index: git/WebKitBrowser/Extension/main.cpp
+===================================================================
+--- git.orig/WebKitBrowser/Extension/main.cpp
++++ git/WebKitBrowser/Extension/main.cpp
+@@ -91,7 +91,11 @@ public:
+             TRACE(Trace::Error, (_T("Could not open connection to node %s. Error: %s"), _comClient->Source().RemoteId(), Core::NumberType<uint32_t>(result).Text()));
+         } else {
+             // Due to the LXC container support all ID's get mapped. For the TraceBuffer, use the host given ID.
++#ifdef __CORE_MESSAGING__
++            Messaging::MessageUnit::Instance().Open(_comClient->ConnectionId());
++#else
+             Trace::TraceUnit::Instance().Open(_comClient->ConnectionId());
++#endif
+         }
+ 
+         _extension = WEBKIT_WEB_EXTENSION(g_object_ref(extension));
+Index: git/WebKitBrowser/BrowserConsoleLog.h
+===================================================================
+--- git.orig/WebKitBrowser/BrowserConsoleLog.h
++++ git/WebKitBrowser/BrowserConsoleLog.h
+@@ -37,7 +37,7 @@ public:
+     BrowserConsoleLog(const string& prefix, const string& message, const uint64_t line, const uint64_t column)
+     {
+         _text = '[' + prefix + "][" + Core::NumberType<uint64_t>(line).Text() + ',' + Core::NumberType<uint64_t>(column).Text() + ']' + message;
+-        const uint16_t maxStringLength = Trace::TRACINGBUFFERSIZE - 1;
++        const uint16_t maxStringLength = Messaging::MessageUnit::DataSize - 1;
+         if (_text.length() > maxStringLength) {
+             _text = _text.substr(0, maxStringLength);
+         }
+@@ -46,7 +46,7 @@ public:
+     BrowserConsoleLog(const string& prefix, const WKStringRef message, const uint64_t line, const uint64_t column)
+     { 
+         _text = '[' + prefix + "][" + Core::NumberType<uint64_t>(line).Text() + ',' + Core::NumberType<uint64_t>(column).Text() + ']' + WebKit::Utils::WKStringToString(message);
+-        const uint16_t maxStringLength = Trace::TRACINGBUFFERSIZE - 1;
++        const uint16_t maxStringLength = Messaging::MessageUnit::DataSize - 1;
+         if (_text.length() > maxStringLength) {
+             _text = _text.substr(0, maxStringLength);
+         }
+Index: git/WebKitBrowser/InjectedBundle/main.cpp
+===================================================================
+--- git.orig/WebKitBrowser/InjectedBundle/main.cpp
++++ git/WebKitBrowser/InjectedBundle/main.cpp
+@@ -108,7 +108,11 @@ public:
+             TRACE(Trace::Error, (_T("Could not open connection to node %s. Error: %s"), _comClient->Source().RemoteId().c_str(), Core::NumberType<uint32_t>(result).Text().c_str()));
+         } else {
+             // Due to the LXC container support all ID's get mapped. For the TraceBuffer, use the host given ID.
++#ifdef __CORE_MESSAGING__
++            Messaging::MessageUnit::Instance().Open(_comClient->ConnectionId());
++#else
+             Trace::TraceUnit::Instance().Open(_comClient->ConnectionId());
++#endif
+         }
+         _whiteListedOriginDomainPairs = WhiteListedOriginDomainsList::RequestFromWPEFramework();
+ 
+@@ -337,7 +341,7 @@ static WKBundlePageUIClientV4 s_pageUICl
+         uint32_t columnNumber, WKStringRef url, const void* clientInfo) {
+         auto prepareMessage = [&]() {
+             string messageString = WebKit::Utils::WKStringToString(message);
+-            const uint16_t maxStringLength = Trace::TRACINGBUFFERSIZE - 1;
++            const uint16_t maxStringLength = Messaging::MessageUnit::DataSize - 1;
+             if (messageString.length() > maxStringLength) {
+                 messageString = messageString.substr(0, maxStringLength);
+             }
+Index: git/WebKitBrowser/TimeZone/TimeZoneSupport.cpp
+===================================================================
+--- git.orig/WebKitBrowser/TimeZone/TimeZoneSupport.cpp
++++ git/WebKitBrowser/TimeZone/TimeZoneSupport.cpp
+@@ -18,7 +18,6 @@
+  */
+  
+ #include <syslog.h>
+-
+ #include "TimeZoneSupport.h"
+ 
+ #ifdef TZ_FILE
+@@ -54,7 +53,7 @@ namespace TZ {
+                 if (timeZone != tzSupport->_previousTimeZone) {
+                     tzSupport->_previousTimeZone = timeZone;
+                     timeZone = ":" + timeZone;
+-                    SYSLOG(Trace::Information, (_T("TimeZone is updated to \"%s\" from \"%s\" file"), timeZone.c_str(), tzSupport->_tzFile.c_str()));
++                    TRACE_GLOBAL(Trace::Information, (_T("TimeZone is updated to \"%s\" from \"%s\" file"), timeZone.c_str(), tzSupport->_tzFile.c_str()));
+                     Core::SystemInfo::SetEnvironment(_T("TZ"), _T(timeZone), true);
+                     tzset();
+                 }
+@@ -76,7 +75,7 @@ namespace TZ {
+     void TimeZoneSupport::Initialize()
+     {
+         if(_tzFile.empty()) {
+-            SYSLOG(Trace::Warning, (_T("Invalid file input for TZ update")));
++            TRACE(Trace::Warning, (_T("Invalid file input for TZ update")));
+             return;
+         }
+ 
+@@ -89,7 +88,7 @@ namespace TZ {
+ 
+         _timeZoneFileMonitor = g_file_monitor_file(file, G_FILE_MONITOR_NONE, nullptr, nullptr);
+         _timeZoneFileMonitorId = g_signal_connect(_timeZoneFileMonitor, "changed", reinterpret_cast<GCallback>(HandleTimeZoneFileUpdate), this);
+-        SYSLOG(Trace::Information, (_T("Installed file monitor for \"%s\""), _tzFile.c_str()));
++        TRACE_GLOBAL(Trace::Information, (_T("Installed file monitor for \"%s\""), _tzFile.c_str()));
+ 
+         g_object_unref(file);
+     }
+Index: git/WebKitBrowser/WebKitBrowser.cpp
+===================================================================
+--- git.orig/WebKitBrowser/WebKitBrowser.cpp
++++ git/WebKitBrowser/WebKitBrowser.cpp
+@@ -25,6 +25,9 @@
+ #define API_VERSION_NUMBER_MINOR 1
+ #define API_VERSION_NUMBER_PATCH 11
+ 
++//#undef TRACE
++//#define TRACE SYSLOG
++
+ namespace WPEFramework {
+ 
+ namespace {
+@@ -119,8 +122,8 @@ namespace Plugin {
+ 
+             _cookieJar = _browser->QueryInterface<Exchange::IBrowserCookieJar>();
+             if (_cookieJar) {
+-                _cookieJar->Register(&_notification);
+-                Exchange::JBrowserCookieJar::Register(*this, _cookieJar);
++//                _cookieJar->Register(&_notification);
++//                Exchange::JBrowserCookieJar::Register(*this, _cookieJar);
+             }
+ 
+             _browserScripting = _browser->QueryInterface<Exchange::IBrowserScripting>();
+@@ -152,9 +155,9 @@ namespace Plugin {
+             _browserScripting->Release();
+         }
+         if (_cookieJar) {
+-            Exchange::JBrowserCookieJar::Unregister(*this);
+-            _cookieJar->Unregister(&_notification);
+-            _cookieJar->Release();
++//            Exchange::JBrowserCookieJar::Unregister(*this);
++//            _cookieJar->Unregister(&_notification);
++//            _cookieJar->Release();
+         }
+         UnregisterAll();
+ 
+@@ -336,10 +339,12 @@ namespace Plugin {
+         event_bridgequery(message);
+     }
+ 
++#if 0
+     void WebKitBrowser::CookieJarChanged()
+     {
+         Exchange::JBrowserCookieJar::Event::CookieJarChanged(*this);
+     }
++#endif
+ 
+     void WebKitBrowser::StateChange(const PluginHost::IStateControl::state state)
+     {
+Index: git/WebKitBrowser/WebKitImplementation.cpp
+===================================================================
+--- git.orig/WebKitBrowser/WebKitImplementation.cpp
++++ git/WebKitBrowser/WebKitImplementation.cpp
+@@ -2459,7 +2459,7 @@ static GSourceFuncs _handlerIntervention
+                 struct sysinfo info;
+                 if (sysinfo(&info) != 0)
+                 {
+-                    SYSLOG(Trace::Error, (_T("Failed to get sysinfo error=%d."), errno));
++                    SYSLOG_GLOBAL(Logging::Error, (_T("Failed to get sysinfo error=%d."), errno));
+                     return;
+                 }
+                 static const long NPROC_ONLN = sysconf(_SC_NPROCESSORS_ONLN);
+@@ -2479,7 +2479,7 @@ static GSourceFuncs _handlerIntervention
+                 std::vector<std::string> items = splitString(statmLine, ' ');
+                 if (items.size() < 7)
+                 {
+-                    SYSLOG(Trace::Error, (_T("Unexpected size(%u) of 'statm' line."), items.size()));
++                    SYSLOG_GLOBAL(Logging::Error, (_T("Unexpected size(%u) of 'statm' line."), items.size()));
+                     return;
+                 }
+                 static const long PageSize = sysconf(_SC_PAGE_SIZE);
+@@ -2492,14 +2492,14 @@ static GSourceFuncs _handlerIntervention
+             {
+                 if (pid <= 1)
+                 {
+-                    SYSLOG(Trace::Error, (_T("Cannot get stats for process id = %u"), pid));
++                    SYSLOG_GLOBAL(Logging::Error, (_T("Cannot get stats for process id = %u"), pid));
+                     return false;
+                 }
+                 std::string procPath = std::string("/proc/") + std::to_string(pid) + "/statm";
+                 std::ifstream statmStream(procPath);
+                 if (!statmStream.is_open() || !std::getline(statmStream, statmLine))
+                 {
+-                    SYSLOG(Trace::Error, (_T("Cannot read process 'statm' file for process id = %u"), pid));
++                    SYSLOG_GLOBAL(Logging::Error, (_T("Cannot read process 'statm' file for process id = %u"), pid));
+                     return false;
+                 }
+                 return true;
+@@ -2751,7 +2751,7 @@ static GSourceFuncs _handlerIntervention
+         static void loadFailedCallback(WebKitWebView*, WebKitLoadEvent loadEvent, const gchar* failingURI, GError* error, WebKitImplementation* browser)
+         {
+             string message(string("{ \"url\": \"") + failingURI + string("\", \"Error message\": \"") + error->message + string("\", \"loadEvent\":") + Core::NumberType<uint32_t>(loadEvent).Text() + string(" }"));
+-            SYSLOG(Trace::Information, (_T("LoadFailed: %s"), message.c_str()));
++	    TRACE_GLOBAL(Trace::Information, (_T("LoadFailed: %s"), message.c_str()));
+             if (g_error_matches(error, WEBKIT_NETWORK_ERROR, WEBKIT_NETWORK_ERROR_CANCELLED)) {
+                 browser->_ignoreLoadFinishedOnce = true;
+                 return;
+@@ -2762,13 +2762,13 @@ static GSourceFuncs _handlerIntervention
+         {
+             switch (reason) {
+             case WEBKIT_WEB_PROCESS_CRASHED:
+-                SYSLOG(Trace::Fatal, (_T("CRASH: WebProcess crashed: exiting ...")));
++                SYSLOG_GLOBAL(Logging::Fatal, (_T("CRASH: WebProcess crashed: exiting ...")));
+                 break;
+             case WEBKIT_WEB_PROCESS_EXCEEDED_MEMORY_LIMIT:
+-                SYSLOG(Trace::Fatal, (_T("CRASH: WebProcess terminated due to memory limit: exiting ...")));
++                SYSLOG_GLOBAL(Logging::Fatal, (_T("CRASH: WebProcess terminated due to memory limit: exiting ...")));
+                 break;
+             case WEBKIT_WEB_PROCESS_TERMINATED_BY_API:
+-                SYSLOG(Trace::Fatal, (_T("CRASH: WebProcess terminated by API")));
++                SYSLOG_GLOBAL(Logging::Fatal, (_T("CRASH: WebProcess terminated by API")));
+                 break;
+             }
+             exit(1);
+@@ -3363,7 +3363,7 @@ static GSourceFuncs _handlerIntervention
+                     gchar* scriptContent;
+                     auto success = g_file_get_contents(path.c_str(), &scriptContent, nullptr, nullptr);
+                     if (!success) {
+-                        SYSLOG(Trace::Error, (_T("Unable to read user script '%s'"), path.c_str()));
++                        SYSLOG_GLOBAL(Logging::Error, (_T("Unable to read user script '%s'"), path.c_str()));
+                         return;
+                     }
+                     AddUserScriptImpl(scriptContent, false);
+@@ -3493,7 +3493,7 @@ static GSourceFuncs _handlerIntervention
+                     _unresponsiveReplyNum = kWebProcessUnresponsiveReplyDefaultLimit;
+                     Logging::DumpSystemFiles(webprocessPID);
+                     if (syscall(__NR_tgkill, webprocessPID, webprocessPID, SIGFPE) == -1) {
+-                        SYSLOG(Trace::Error, (_T("tgkill failed, signal=%d process=%u errno=%d (%s)"), SIGFPE, webprocessPID, errno, strerror(errno)));
++                        SYSLOG_GLOBAL(Logging::Error, (_T("tgkill failed, signal=%d process=%u errno=%d (%s)"), SIGFPE, webprocessPID, errno, strerror(errno)));
+                     }
+                 } else {
+                     DeactivateBrowser(PluginHost::IShell::FAILURE);
+@@ -3505,7 +3505,7 @@ static GSourceFuncs _handlerIntervention
+                 Logging::DumpSystemFiles(webprocessPID);
+ 
+                 if (syscall(__NR_tgkill, webprocessPID, webprocessPID, SIGFPE) == -1) {
+-                    SYSLOG(Trace::Error, (_T("tgkill failed, signal=%d process=%u errno=%d (%s)"), SIGFPE, webprocessPID, errno, strerror(errno)));
++                    SYSLOG_GLOBAL(Logging::Error, (_T("tgkill failed, signal=%d process=%u errno=%d (%s)"), SIGFPE, webprocessPID, errno, strerror(errno)));
+                 }
+             } else if (_unresponsiveReplyNum == (2 * kWebProcessUnresponsiveReplyDefaultLimit)) {
+                 DeactivateBrowser(PluginHost::IShell::WATCHDOG_EXPIRED);
+@@ -3520,7 +3520,7 @@ static GSourceFuncs _handlerIntervention
+                 if (self->_unresponsiveReplyNum > 0) {
+ 
+                     std::string activeURL(webkit_web_view_get_uri(self->_view));
+-                    SYSLOG(Logging::Notification, (_T("WebProcess recovered after %d unresponsive replies, url=%s\n"),
++                    SYSLOG_GLOBAL(Logging::Notification, (_T("WebProcess recovered after %d unresponsive replies, url=%s\n"),
+                                                 self->_unresponsiveReplyNum, activeURL.c_str()));
+                     self->_unresponsiveReplyNum = 0;
+                 }
+@@ -3534,7 +3534,7 @@ static GSourceFuncs _handlerIntervention
+ 
+                 std::string activeURL = GetPageActiveURL(page);
+                 pid_t webprocessPID = WKPageGetProcessIdentifier(page);
+-                SYSLOG(Logging::Notification, (_T("WebProcess recovered after %d unresponsive replies, pid=%u, url=%s\n"),
++                SYSLOG_GLOBAL(Logging::Notification, (_T("WebProcess recovered after %d unresponsive replies, pid=%u, url=%s\n"),
+                                             self._unresponsiveReplyNum, webprocessPID, activeURL.c_str()));
+                 self._unresponsiveReplyNum = 0;
+             }
+@@ -3766,7 +3766,7 @@ static GSourceFuncs _handlerIntervention
+ 
+         string url = GetPageActiveURL(page);
+         string message(string("{ \"url\": \"") + url + string("\", \"Error code\":") + Core::NumberType<uint32_t>(errorcode).Text() + string(" }"));
+-        SYSLOG(Trace::Information, (_T("LoadFailed: %s"), message.c_str()));
++        TRACE_GLOBAL(Trace::Information, (_T("LoadFailed: %s"), message.c_str()));
+ 
+         bool isCanceled =
+             errorDomain &&
+@@ -3783,7 +3783,7 @@ static GSourceFuncs _handlerIntervention
+ 
+     /* static */ void webProcessDidCrash(WKPageRef, const void*)
+     {
+-        SYSLOG(Trace::Fatal, (_T("CRASH: WebProcess crashed, exiting...")));
++        SYSLOG_GLOBAL(Logging::Fatal, (_T("CRASH: WebProcess crashed, exiting...")));
+         exit(1);
+     }
+ 
+Index: git/WebKitBrowser/TimeZone/Module.h
+===================================================================
+--- /dev/null
++++ git/WebKitBrowser/TimeZone/Module.h
+@@ -0,0 +1,31 @@
++/*
++ * If not stated otherwise in this file or this component's LICENSE file the
++ * following copyright and licenses apply:
++ *
++ * Copyright 2020 RDK Management
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++#pragma once
++
++#ifndef MODULE_NAME
++#define MODULE_NAME Plugin_WebKitBrowserTimezoneSupport
++#endif
++
++#include <com/com.h>
++#include <core/core.h>
++#include <tracing/tracing.h>
++
++#undef EXTERNAL
++#define EXTERNAL

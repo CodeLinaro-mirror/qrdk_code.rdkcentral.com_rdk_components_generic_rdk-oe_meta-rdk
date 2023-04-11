@@ -9,12 +9,12 @@ S = "${WORKDIR}/git/WebKitBrowser"
 
 SRC_URI = "git://github.com/rdkcentral/rdkservices.git;protocol=git;branch=main\
   file://0001-RDKTV-177-Configure-wpeframework-plugin-startup-orde.patch;patchdir=../ \
-  file://0002-Use-SYSLOG-instead-of-TRACE.patch;patchdir=../ \
   file://0003-Increase-browser-creation-timeout.patch;patchdir=../ \
   file://0004-Reduce-BrowserConsoleLog.patch;patchdir=../ \
   file://0005-Enable-mixed-content.patch;patchdir=../ \
   file://0006-Introduce-state-aware-memory-observer.patch;patchdir=../ \
   file://0007-Launch-Metrics-data-collection.patch;patchdir=../ \
+  file://0008-R4.2_build_fix.patch;patchdir=../ \
 "
 
 # Tip of the main at Mar 21, 2023
