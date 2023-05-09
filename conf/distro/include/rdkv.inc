@@ -127,9 +127,6 @@ BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'ssl-1.1.1', '|.meta-rdk-ext/
 
 inherit ${@bb.utils.contains('DISTRO_FEATURES', 'sbom', 'create-spdx', '', d)}
 
-PREFERRED_VERSION_libcobalt ?= "22.lts.stable"
-PREFERRED_VERSION_libcobalt_morty = "21.lts.stable"
-
 
 #TR69Agent as distro
 DISTRO_FEATURES_append_client = " tr69agent"

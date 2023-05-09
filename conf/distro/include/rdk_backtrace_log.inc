@@ -33,6 +33,7 @@ BACKTRACE_DEPENDS_pn-aml-audio-service = " breakpad-wrapper"
 BACKTRACE_DEPENDS_pn-asbluetoothrcu  = " breakpad-wrapper"
 BACKTRACE_DEPENDS_pn-dnsmasq = " breakpad-wrapper"
 BACKTRACE_DEPENDS_pn-rdkfwupgrader = " breakpad-wrapper"
+BACKTRACE_DEPENDS_pn-cobaltlauncher = " breakpad-wrapper"
 
 BACKTRACE_LDFLAGS_pn-iarmbus = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
 BACKTRACE_LDFLAGS_pn-iarmmgrs = " -lbreakpadwrapper "
@@ -71,7 +72,7 @@ BACKTRACE_DEPENDS_pn-lighttpd = " crashlog"
 
 BACKTRACE_LDFLAGS_pn-busybox = " -Wl,--no-as-needed -lcrashlog -Wl,--as-needed"
 BACKTRACE_LDFLAGS_pn-lighttpd = " -Wl,--no-as-needed -lcrashlog -Wl,--as-needed"
-
+BACKTRACE_LDFLAGS_pn-cobaltlauncher = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
 
 DEPENDS_append = " ${@LOG_BACKTRACE == "y" and BACKTRACE_DEPENDS or ""}"
 LDFLAGS_append = " ${@LOG_BACKTRACE == "y" and BACKTRACE_LDFLAGS or ""}"
