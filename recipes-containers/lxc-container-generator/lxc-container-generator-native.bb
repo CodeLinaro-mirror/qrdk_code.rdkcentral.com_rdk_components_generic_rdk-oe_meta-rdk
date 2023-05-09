@@ -3,7 +3,7 @@ DESCRIPTION = "The container generator and other components are used to post pro
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-PV="3"
+PV = "${RDK_RELEASE}+git${SRCPV}"
 PR="0"
 
 SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/lxc-container-generator;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_MASTER_BRANCH};name=lxc-container-generator"

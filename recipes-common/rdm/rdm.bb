@@ -4,7 +4,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/rdm;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=rdmgeneric"
 
-PV = "${RDK_RELEASE}"
+PV = "${RDK_RELEASE}+git${SRCPV}"
 SRCREV_rdmgeneric = "${AUTOREV}"
 SRCREV_FORMAT = "rdmgeneric"
 S = "${WORKDIR}/git"
