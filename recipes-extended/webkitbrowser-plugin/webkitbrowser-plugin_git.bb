@@ -9,12 +9,13 @@ S = "${WORKDIR}/git/WebKitBrowser"
 
 SRC_URI = "git://github.com/rdkcentral/rdkservices.git;protocol=git;branch=main\
   file://0001-RDKTV-177-Configure-wpeframework-plugin-startup-orde.patch;patchdir=../ \
-  file://0002-Use-SYSLOG-instead-of-TRACE.patch;patchdir=../ \
+  ${@bb.utils.contains('DISTRO_FEATURES', 'wpe_r4', " ", " file://0002-Use-SYSLOG-instead-of-TRACE.patch;patchdir=../", d)} \
   file://0003-Increase-browser-creation-timeout.patch;patchdir=../ \
   file://0004-Reduce-BrowserConsoleLog.patch;patchdir=../ \
   file://0005-Enable-mixed-content.patch;patchdir=../ \
   file://0006-Introduce-state-aware-memory-observer.patch;patchdir=../ \
   file://0007-Launch-Metrics-data-collection.patch;patchdir=../ \
+  file://0009-Browser-Port-Thunder-R4-Support.patch;patchdir=../ \
 "
 
 # Tip of the main at Apr 11, 2023
@@ -119,6 +120,8 @@ EXTRA_OECMAKE += " \
     -DPLUGIN_JSPP_WEBINSPECTOR_ADDRESS="${JSPP_WEBINSPECTOR_ADDRESS}" \
     -DPLUGIN_JSPP_LOCALSTORAGE_ENABLE="${JSPP_LOCALSTORAGE_ENABLE}" \
 "
+
+EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'wpe_r4', ' -DUSE_THUNDER_R4=ON', '', d)}"
 
 FILES_SOLIBSDEV = ""
 FILES_${PN} += "${libdir}/wpeframework/plugins/*.so ${libdir}/*.so ${datadir}/WPEFramework/*"
