@@ -147,3 +147,9 @@ BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-support/libtinyxml2/libtinyxml2_git.bb', '', d)}"
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-extended/procps/procps_3.3.12.bb', '', d)}"
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-devtools/doxygen/doxygen_1.7.6.1.bb', '', d)}"
+
+#DISTRO_FEATURES_append ?= " wpe_r4"
+PREFERRED_VERSION_wpeframework =  "${@bb.utils.contains('DISTRO_FEATURES', 'wpe_r4', '4.2', '2.1', d)}"
+PREFERRED_VERSION_wpeframework-clientlibraries =  "${@bb.utils.contains('DISTRO_FEATURES', 'wpe_r4', '4.2', '2.1', d)}"
+PREFERRED_VERSION_wpeframework-interfaces =  "${@bb.utils.contains('DISTRO_FEATURES', 'wpe_r4', '4.2', '2.1', d)}"
+PREFERRED_VERSION_wpeframework-tools-native =  "${@bb.utils.contains('DISTRO_FEATURES', 'wpe_r4', '4.2', '2.1', d)}"
