@@ -12,6 +12,9 @@ S = "${WORKDIR}/git"
 inherit pkgconfig cmake systemd
 #dobby logs storage file is decided using device.properties. syslog-ng-config-gen framework decide the log file.
 
+#config.h file generation for kirkstone builds
+DEPENDS_append_kirkstone = " autoconf-native automake-native "
+CFLAGS_append_kirkstone = " --sysroot=${RECIPE_SYSROOT}"
 
 # Always build debug version for now
 EXTRA_OECMAKE =  " -DCMAKE_BUILD_TYPE=Debug -DBUILD_REFERENCE=${SRCREV}"
