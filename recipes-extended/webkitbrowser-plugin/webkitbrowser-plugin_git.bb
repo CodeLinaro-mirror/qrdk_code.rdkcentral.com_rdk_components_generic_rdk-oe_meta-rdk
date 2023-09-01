@@ -18,8 +18,8 @@ SRC_URI = "git://github.com/rdkcentral/rdkservices.git;protocol=git;branch=main 
   file://0009-Browser-Port-Thunder-R4-Support.patch;patchdir=../ \
 "
 
-# Tip of the main at Nov 13th, 2023
-SRCREV = "2f100381226f9994e37f6171cf39efab84bfaca8"
+# Tip of the main at Dec 21, 2023
+SRCREV = "f2854bade9e5c02a69138b8240869cf4037ad7f9"
 
 inherit cmake pkgconfig python3native
 
@@ -55,6 +55,8 @@ EXTRA_OECMAKE += " \
     -DBUILD_REFERENCE=${SRCREV} \
     -DBUILD_SHARED_LIBS=ON \
     -DPLUGIN_WEBKITBROWSER=ON \
+    -DPLUGIN_WEBKITBROWSER_TESTING=ON \
+    -DPLUGIN_WEBKITBROWSER_TESTING_USE_WESTEROS=ON \
     -DPLUGIN_WEBKITBROWSER_LOGGING_UTILS=ON \
     -DPLUGIN_WEBKITBROWSER_AUTOSTART="${WEBKITBROWSER_AUTOSTART}" \
     -DPLUGIN_WEBKITBROWSER_MEDIADISKCACHE="${WEBKITBROWSER_MEDIADISKCACHE}" \
