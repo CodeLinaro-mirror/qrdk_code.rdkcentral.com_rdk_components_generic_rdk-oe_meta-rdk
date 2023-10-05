@@ -18,6 +18,7 @@ RDEPENDS_packagegroup-rdk-media-common = "\
     devicesettings \
     iarmbus \
     iarmmgrs \
+    lsof \
     rdk-logger \
     gst-plugins-rdk \
     rmfgeneric \
