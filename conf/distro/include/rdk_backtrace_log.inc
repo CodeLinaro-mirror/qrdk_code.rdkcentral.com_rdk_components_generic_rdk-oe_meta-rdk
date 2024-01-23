@@ -67,10 +67,10 @@ BACKTRACE_LDFLAGS_pn-asbluetoothrcu  = " -Wl,--no-as-needed -lbreakpadwrapper -W
 BACKTRACE_LDFLAGS_pn-dnsmasq = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
 BACKTRACE_LDFLAGS_pn-rdkfwupgrader = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
 
-BACKTRACE_DEPENDS_pn-busybox = " crashlog"
+#BACKTRACE_DEPENDS_pn-busybox = " crashlog"
 BACKTRACE_DEPENDS_pn-lighttpd = " crashlog"
 
-BACKTRACE_LDFLAGS_pn-busybox = " -Wl,--no-as-needed -lcrashlog -Wl,--as-needed"
+#BACKTRACE_LDFLAGS_pn-busybox = " -Wl,--no-as-needed -lcrashlog -Wl,--as-needed"
 BACKTRACE_LDFLAGS_pn-lighttpd = " -Wl,--no-as-needed -lcrashlog -Wl,--as-needed"
 BACKTRACE_LDFLAGS_pn-cobaltlauncher = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
 
