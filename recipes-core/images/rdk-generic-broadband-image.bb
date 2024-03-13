@@ -10,6 +10,8 @@ IMAGE_INSTALL_append = " \
     packagegroup-rdk-oss-broadband \
     packagegroup-rdk-ccsp-broadband \
     rdk-logger \
+    openvpn \
+    tcpdump \
     "
 
 IMAGE_INSTALL_append_fwupgrader = " rdkfwupgrader "
