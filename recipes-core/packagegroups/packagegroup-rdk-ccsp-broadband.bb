@@ -64,6 +64,7 @@ RDEPENDS_packagegroup-rdk-ccsp-broadband = "\
     breakpad-wrapper \
     xupnp \
     parodus \
+    openvpn \
     parodus2ccsp \
     dca \
     telemetry \
