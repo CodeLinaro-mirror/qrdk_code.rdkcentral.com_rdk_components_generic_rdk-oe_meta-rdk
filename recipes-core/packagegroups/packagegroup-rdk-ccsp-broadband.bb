@@ -71,6 +71,7 @@ RDEPENDS_packagegroup-rdk-ccsp-broadband = "\
     webconfig-framework \
 	${@bb.utils.contains("DISTRO_FEATURES", "enable_rdkscheduler", "rdk-scheduler", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wifimotion", "wifimotion", "", d)} \
+    simpleiot \
     \
 "
 RDEPENDS_packagegroup-rdk-ccsp-broadband += "\
