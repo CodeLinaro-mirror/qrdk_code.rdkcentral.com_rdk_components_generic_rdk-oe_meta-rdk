@@ -49,8 +49,8 @@ PACKAGECONFIG_append = " ${@bb.utils.contains_any('DISTRO_FEATURES','dunfell kir
 EXTRA_OECONF += " --sysconfdir=${sysconfdir}/xupnp"
 
 inherit autotools systemd pkgconfig coverity
-YOCTO_VER_DUNFELL = "${@ bb.utils.contains('DISTRO_FEATURES', 'dunfell', 1, 0, d) }"
-SAFEC_VER =  "${@ "safec-3.5.1" if ${YOCTO_VER_DUNFELL} else "safec-3.5" }"
+YOCTO_VER = "${@ bb.utils.contains('DISTRO_FEATURES', 'dunfell kirkstone', 1, 0, d) }"
+SAFEC_VER =  "${@ "safec-3.5.1" if ${YOCTO_VER} else "safec-3.5" }"
 
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --cflags libsafec`', ' -fPIC', d)}"
 CXXFLAGS_append = " -fPIC "
