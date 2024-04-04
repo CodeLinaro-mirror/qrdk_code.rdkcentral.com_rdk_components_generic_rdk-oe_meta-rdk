@@ -25,6 +25,8 @@ PREFERRED_VERSION_brotli-native_kirkstone = "1.0.9"
 
 PREFERRED_VERSION_libwebsockets_kirkstone = "4.2.2"
 
+PREFERRED_VERSION_plymouth_kirkstone = "0.9.5"
+
 PREFERRED_VERSION_heaptrack = "${@bb.utils.contains('DISTRO_FEATURES', 'enable_heaptrack', '1.5.0', '', d)}"
 PREFERRED_VERSION_libunwind =  "${@bb.utils.contains('DISTRO_FEATURES', 'enable_heaptrack', '1.7.0', '', d)}"
 
