@@ -8,7 +8,6 @@ IMAGE_ROOTFS_SIZE = "8192"
 
 IMAGE_INSTALL += " \
     packagegroup-rdk-baserootfs \
-    packagegroup-rdk-qt5 \
     packagegroup-rdk-media-common \
     "
 
