@@ -100,6 +100,9 @@ def replace_egl_header_files(d,base_dir,logger):
 
 def copy_egl_req_files_brcm_dnfl(d,base_dir,logger):
     from shutil import copyfile
+
+    #KAON patch : add wayland*.h
+    from glob import glob
     import subprocess
 
     replace_egl_header_files(d,base_dir,logger)
@@ -114,7 +117,7 @@ def copy_egl_req_files_brcm_dnfl(d,base_dir,logger):
     from_dir= os.path.join(d.getVar("COMPONENTS_DIR", True), d.getVar("MACHINE_ARCH", True))
     #Copy package configuration of egl also.
     to_dir= os.path.join(base_dir, "usr/lib/pkgconfig/");
-    comp_dir=os.path.join(from_dir, "broadcom-refsw/usr/lib/pkgconfig/")
+    comp_dir=os.path.join(from_dir, "../armv7vet2hf-neon-vfpv4/lib32-broadcom-refsw/usr/lib/pkgconfig/")
     logger.write("Copying "+ comp_dir + 'egl.pc' +" to "+ to_dir + 'egl.pc\n')
     copyfile(comp_dir + 'egl.pc', to_dir + 'egl.pc')
     copyfile(comp_dir + 'glesv2.pc', to_dir + 'glesv2.pc')
@@ -122,16 +125,31 @@ def copy_egl_req_files_brcm_dnfl(d,base_dir,logger):
     logger.write("Copying "+ from_dir + '../libv3ddriver.so' +" to "+ to_dir + '../libv3ddriver.so\n')
     copyfile(comp_dir + '../libv3ddriver.so', to_dir + '../libv3ddriver.so')
 
+    #simpleshell-client-protocol.h is from westeros-simpleshell
+    from_dir= os.path.join(d.getVar("COMPONENTS_DIR", True), d.getVar("TUNE_PKGARCH", True))
+    comp_dir=os.path.join(from_dir, "lib32-westeros-simpleshell/usr/include/")
+    to_dir= os.path.join(base_dir, "usr/include/");
+
+    #KAON patch : add simpleshell-client-protocol.h
+    logger.write("Copying "+ comp_dir + 'simpleshell-client-protocol.h' +" to "+ to_dir + '\n')
+    for file in glob(comp_dir + 'simpleshell-client-protocol.h'):
+        copyfile(file, os.path.join(to_dir, os.path.basename(file)))
+
     #wayland-egl.h is from wayland-egl-bnxs
     from_dir= os.path.join(d.getVar("COMPONENTS_DIR", True), d.getVar("TUNE_PKGARCH", True))
-    comp_dir=os.path.join(from_dir, "wayland-egl-bnxs/usr/include/")
+    comp_dir=os.path.join(from_dir, "lib32-wayland/usr/include/")
     to_dir= os.path.join(base_dir, "usr/include/");
 
     logger.write("Copying "+ comp_dir + 'wayland-egl.h' +" to "+ to_dir + 'wayland-egl.h\n')
     copyfile(comp_dir + 'wayland-egl.h', to_dir + 'wayland-egl.h')
 
-    logger.write("Copying "+ comp_dir + '../lib/libwayland-egl.so.0.0.0' +" to "+ to_dir + '../lib/libwayland-egl.so.0.0.0\n')
-    copyfile(comp_dir + '../lib/libwayland-egl.so.0.0.0', to_dir + '../lib/libwayland-egl.so.0.0.0')
+    #KAON patch : add wayland*.h
+    logger.write("Copying "+ comp_dir + 'wayland*.h' +" to "+ to_dir + '\n')
+    for file in glob(comp_dir + 'wayland*.h'):
+        copyfile(file, os.path.join(to_dir, os.path.basename(file)))
+
+    logger.write("Copying "+ comp_dir + '../lib/libwayland-egl.so.1.0.0' +" to "+ to_dir + '../lib/libwayland-egl.so.1.0.0\n')
+    copyfile(comp_dir + '../lib/libwayland-egl.so.1.0.0', to_dir + '../lib/libwayland-egl.so.1.0.0')
     
     logger.write("Copying "+comp_dir + '../lib/pkgconfig/wayland-egl.pc '+ to_dir + '../lib/pkgconfig/wayland-egl.pc')
     copyfile(comp_dir + '../lib/pkgconfig/wayland-egl.pc', to_dir + '../lib/pkgconfig/wayland-egl.pc')
@@ -171,8 +189,8 @@ def copy_egl_req_files_brcm(d,base_dir,logger):
 
     logger.write("Copying "+ from_dir + '../lib/libv3ddriver.so' +" to "+ to_dir + '../lib/libv3ddriver.so\n')
     copyfile(from_dir + '../lib/libv3ddriver.so', to_dir + '../lib/libv3ddriver.so')
-    logger.write("Copying "+ from_dir + '../lib/libwayland-egl.so.0.0.0' +" to "+ to_dir + '../lib/libwayland-egl.so.0.0.0\n')
-    copyfile(from_dir + '../lib/libwayland-egl.so.0.0.0', to_dir + '../lib/libwayland-egl.so.0.0.0')
+    logger.write("Copying "+ from_dir + '../lib/libwayland-egl.so.1.0.0' +" to "+ to_dir + '../lib/libwayland-egl.so.1.0.0\n')
+    copyfile(from_dir + '../lib/libwayland-egl.so.1.0.0', to_dir + '../lib/libwayland-egl.so.1.0.0')
 
 
     #Now we need to create symlinks for libEGL.so libGLESV1.so libGLESV2.so libwayland-egl.so libwayland-egl.so.0
