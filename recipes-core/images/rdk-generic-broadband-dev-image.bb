@@ -18,7 +18,9 @@ IMAGE_INSTALL_append += " \
     openvswitch \
     git \
     breakpad-staticdev \
-    perl-module-bin \
+    nftables \
+    libmnl \
+    libnftnl \
     "
 
 ROOTFS_POSTPROCESS_COMMAND += "add_systemd_services; "
