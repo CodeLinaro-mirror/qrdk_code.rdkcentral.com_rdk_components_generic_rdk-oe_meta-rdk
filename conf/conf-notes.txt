@@ -3,8 +3,15 @@ Common targets are:
     core-image-minimal
     rdk-oss-image
     rdk-generic-hybrid-image
+    rdk-generic-hybrid-wpe-image
+    rdk-generic-hybrid-dtv-image
+    rdk-generic-hybrid-refapp-image
+    rdk-generic-hybrid-wpe-lxc-image
     rdk-generic-mediaclient-image
+    rdk-generic-mediaclient-wpe-image
     rdk-generic-broadband-image
+    rdk-generic-extender-image
+    rdk-generic-ipclient-image
     rdk-generic-camera-image
     rdk-generic-broadband-tdk-image
     rdk-generic-broadband-dev-image

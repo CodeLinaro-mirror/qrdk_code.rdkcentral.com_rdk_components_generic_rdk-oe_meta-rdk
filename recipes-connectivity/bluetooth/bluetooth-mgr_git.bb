@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
 
 DEPENDS = "bluetooth-core cjson"
 
-RDEPENDS_${PN}  = " bluetooth-core"
+RDEPENDS_${PN}  = " bluetooth-core pipewire wireplumber"
 RDEPENDS_${PN} += " cjson"
 
 

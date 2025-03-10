@@ -36,6 +36,8 @@ RDEPENDS_packagegroup-rdk-media-common = "\
     ipv6calc-main \
     iptables \
     ${@bb.utils.contains("DISTRO_FEATURES", "bluetooth", "${BLUEZ} bluetooth-core bluetooth-mgr virtual/media-utils", "", d)} \
+    pipewire \
+    wireplumber \
     systemd-usb-support \
     nlmonitor \
     nghttp2-server \
@@ -55,7 +57,7 @@ RDEPENDS_packagegroup-rdk-media-common_append_qemuall = " sysint-conf "
 RDEPENDS_packagegroup-rdk-media-common_append_rpi = " rdkmediaplayer "
 RDEPENDS_packagegroup-rdk-media-common_append_mipsel = " dca "
 RDEPENDS_packagegroup-rdk-media-common_append_arm = " dca "
-
+IMAGE_INSTALL_append = " pipewire wireplumber"
 IMAGE_INSTALL_append_rpi = " e2fsprogs-mke2fs "
 
 #package for firebolt-test-client
