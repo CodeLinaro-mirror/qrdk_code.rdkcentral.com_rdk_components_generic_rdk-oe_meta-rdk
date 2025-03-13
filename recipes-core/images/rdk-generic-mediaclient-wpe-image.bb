@@ -6,6 +6,8 @@ IMAGE_INSTALL += " \
                westeros-init \
                wpe-webkit-init \
                westeros-sink \
+               avahi-daemon \
+               avahi-utils \
                "
 ROOTFS_POSTPROCESS_COMMAND += "disable_systemd_services; "
 
