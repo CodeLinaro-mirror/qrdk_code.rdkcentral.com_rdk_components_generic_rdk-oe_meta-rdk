@@ -80,3 +80,7 @@ RDEPENDS_packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATUR
 RDEPENDS_packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'dac', 'dsm', '', d)}"
 RDEPENDS_packagegroup-rdk-oss-broadband += " ${@bb.utils.contains("DISTRO_FEATURES", "benchmark_enable", "broadcom-bdmfshell", "", d)}"
 
+# If nftables is enabled in DISTRO_FEATURES, includes nftables and exclude iptables related recipes
+# removing miniupnpd for now as it depends on iptables
+RDEPENDS_packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'nftables', 'nftables', '', d)}"
+RDEPENDS_packagegroup-rdk-oss-broadband_remove += " ${@bb.utils.contains('DISTRO_FEATURES', 'nftables', 'iproute2 iptables miniupnpd', '', d)}"
