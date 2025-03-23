@@ -125,6 +125,74 @@ def copy_egl_req_files_brcm_dnfl(d,base_dir,logger):
     logger.write("Copying "+ from_dir + '../libv3ddriver.so' +" to "+ to_dir + '../libv3ddriver.so\n')
     copyfile(comp_dir + '../libv3ddriver.so', to_dir + '../libv3ddriver.so')
 
+    #netsrvmgrIarm.h,wifiSrvMgrIarmIf.h are from lib32-netsrvmgr
+    from_dir= os.path.join(d.getVar("COMPONENTS_DIR", True), d.getVar("TUNE_PKGARCH", True))
+    comp_dir=os.path.join(from_dir, "lib32-netsrvmgr/usr/include/")
+    to_dir= os.path.join(base_dir, "usr/include/");
+
+    logger.write("Copying "+ comp_dir + 'netsrvmgrIarm.h' +" to "+ to_dir + 'netsrvmgrIarm.h\n')
+    copyfile(comp_dir + 'netsrvmgrIarm.h', to_dir + 'netsrvmgrIarm.h')
+
+    logger.write("Copying "+ comp_dir + 'wifiSrvMgrIarmIf.h' +" to "+ to_dir + 'wifiSrvMgrIarmIf.h\n')
+    copyfile(comp_dir + 'wifiSrvMgrIarmIf.h', to_dir + 'wifiSrvMgrIarmIf.h')
+
+    #rdk/ds-hal are from lib32-devicesettings-hal-headers
+    from_dir= os.path.join(d.getVar("COMPONENTS_DIR", True), d.getVar("TUNE_PKGARCH", True))
+    comp_dir=os.path.join(from_dir, "lib32-devicesettings-hal-headers/usr/include/rdk/ds-hal/")
+    to_dir= os.path.join(base_dir, "usr/include/");
+
+    logger.write("Copying "+ comp_dir + 'ds*.h' +" to "+ to_dir + '\n')
+    for file in glob(comp_dir + 'ds*.h'):
+        copyfile(file, os.path.join(to_dir, os.path.basename(file)))	
+		
+    #rdk/ds-hal are from lib32-devicesettings-hal-brcm
+    from_dir= os.path.join(d.getVar("COMPONENTS_DIR", True), d.getVar("TUNE_PKGARCH", True))
+    comp_dir=os.path.join(from_dir, "lib32-devicesettings-hal-brcm/usr/include/rdk/ds-hal/")
+    to_dir= os.path.join(base_dir, "usr/include/");
+
+    logger.write("Copying "+ comp_dir + 'ds*.h' +" to "+ to_dir + '\n')
+    for file in glob(comp_dir + 'ds*.h'):
+        copyfile(file, os.path.join(to_dir, os.path.basename(file)))	
+
+    #rdk/ds-rpc are from lib32-devicesettings
+    from_dir= os.path.join(d.getVar("COMPONENTS_DIR", True), d.getVar("MACHINE_ARCH", True))
+    comp_dir=os.path.join(from_dir, "lib32-devicesettings/usr/include/rdk/ds-rpc/")
+    to_dir= os.path.join(base_dir, "usr/include/");
+
+    logger.write("Copying "+ comp_dir + 'ds*.h' +" to "+ to_dir + '\n')
+    for file in glob(comp_dir + '*.h'):
+        copyfile(file, os.path.join(to_dir, os.path.basename(file)))	
+
+    logger.write("Copying "+ comp_dir + 'exception.hpp' +" to "+ to_dir + 'exception.hpp\n')
+    copyfile(comp_dir + 'exception.hpp', to_dir + 'exception.hpp')
+
+    logger.write("Copying "+ comp_dir + 'hostPersistence.hpp' +" to "+ to_dir + 'hostPersistence.hpp\n')
+    copyfile(comp_dir + 'hostPersistence.hpp', to_dir + 'hostPersistence.hpp')	
+
+    logger.write("Copying "+ comp_dir + 'illegalArgumentException.hpp' +" to "+ to_dir + 'illegalArgumentException.hpp\n')
+    copyfile(comp_dir + 'illegalArgumentException.hpp', to_dir + 'illegalArgumentException.hpp')		
+	
+   #rdk/iarmbus are from lib32-iarmbus
+    from_dir= os.path.join(d.getVar("COMPONENTS_DIR", True), d.getVar("TUNE_PKGARCH", True))
+    comp_dir=os.path.join(from_dir, "lib32-iarmbus/usr/include/rdk/iarmbus/")
+    to_dir= os.path.join(base_dir, "usr/include/");
+
+    logger.write("Copying "+ comp_dir + 'libI*' +" to "+ to_dir + '\n')
+    for file in glob(comp_dir + 'libI*'):
+        copyfile(file, os.path.join(to_dir, os.path.basename(file)))		
+
+    logger.write("Copying "+ comp_dir + 'iarmUtil.h' +" to "+ to_dir + 'iarmUtil.h\n')
+    copyfile(comp_dir + 'iarmUtil.h', to_dir + 'iarmUtil.h')		
+    
+   #libraries are from lib32-iarmbus
+    from_dir= os.path.join(d.getVar("COMPONENTS_DIR", True), d.getVar("TUNE_PKGARCH", True))
+    comp_dir=os.path.join(from_dir, "lib32-iarmbus/usr/lib/")
+    to_dir= os.path.join(base_dir, "usr/lib/");	
+	
+    logger.write("Copying "+ comp_dir + 'libI*' +" to "+ to_dir + '\n')
+    for file in glob(comp_dir + 'libI*'):
+        copyfile(file, os.path.join(to_dir, os.path.basename(file)))	
+
     #simpleshell-client-protocol.h is from westeros-simpleshell
     from_dir= os.path.join(d.getVar("COMPONENTS_DIR", True), d.getVar("TUNE_PKGARCH", True))
     comp_dir=os.path.join(from_dir, "lib32-westeros-simpleshell/usr/include/")
