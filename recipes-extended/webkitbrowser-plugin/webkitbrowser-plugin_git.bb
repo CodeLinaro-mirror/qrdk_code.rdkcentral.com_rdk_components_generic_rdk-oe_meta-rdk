@@ -18,14 +18,14 @@ SRC_URI = "git://github.com/rdkcentral/rdkservices.git;protocol=git;branch=main 
   file://0008-Thunder-upgrade-quirks.patch;patchdir=../ \
 "
 
-# Tip of the main at June 27, 2025
-SRCREV = "857eff8cdcf0a3506683043d0676d541e48dfaa3"
+# Tip of the main at Dec 23, 2025
+SRCREV = "63ea9ad0eb88314b1d7fde9694a01454daaa1f0e"
 
 inherit cmake pkgconfig python3native
 
 TOOLCHAIN = "gcc"
 
-DEPENDS += "wpeframework wpeframework-tools-native ${WPEWEBKIT}"
+DEPENDS += "wpeframework wpeframework-tools-native ${WPEWEBKIT} westeros-simpleshell"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'enable_libsoup3', 'libsoup', 'libsoup-2.4', d)}"
 RRECOMMENDS_${PN} += "webkitbrowser-cache-cleanup"
 
@@ -123,6 +123,8 @@ EXTRA_OECMAKE += " \
     -DPLUGIN_JSPP_DISKCACHE="${JSPP_DISKCACHE}" \
     -DPLUGIN_JSPP_WEBINSPECTOR_ADDRESS="${JSPP_WEBINSPECTOR_ADDRESS}" \
     -DPLUGIN_JSPP_LOCALSTORAGE_ENABLE="${JSPP_LOCALSTORAGE_ENABLE}" \
+    -DPLUGIN_WEBKITBROWSER_GST_QUIRKS="${WEBKITBROWSER_GST_QUIRKS}" \
+    -DPLUGIN_WEBKITBROWSER_GST_HOLE_PUNCH_QUIRK="${WEBKITBROWSER_GST_HOLE_PUNCH_QUIRK}" \
 "
 
 FILES_SOLIBSDEV = ""

@@ -1,17 +1,18 @@
-From 8bfed147aa1418a417e0b6617d8fe2b10125d5ac Mon Sep 17 00:00:00 2001
+From 02767f654e0ed4de949edb52596a5ced388188b0 Mon Sep 17 00:00:00 2001
 From: Filipe Norte <filipe.norte@sky.uk>
 Date: Mon, 20 Feb 2023 17:01:31 +0000
-Subject: [PATCH] Enable mixed content
+Subject: [PATCH 4/7] Enable mixed content
 
+%% original patch: 0005-Enable-mixed-content.patch
 ---
  WebKitBrowser/WebKitImplementation.cpp | 8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/WebKitBrowser/WebKitImplementation.cpp b/WebKitBrowser/WebKitImplementation.cpp
-index b96fb7118..072349bad 100644
+index 2b1cb876c..b29a0f93c 100644
 --- a/WebKitBrowser/WebKitImplementation.cpp
 +++ b/WebKitBrowser/WebKitImplementation.cpp
-@@ -2961,13 +2961,13 @@ static GSourceFuncs _handlerIntervention =
+@@ -2560,13 +2560,13 @@ namespace Plugin {
  #if WEBKIT_CHECK_VERSION(2, 38, 0)
              g_object_set(G_OBJECT(preferences),
                       "disable-web-security", !enableWebSecurity,
@@ -27,8 +28,8 @@ index b96fb7118..072349bad 100644
 +                     "allow-running-of-insecure-content", true,
 +                     "allow-display-of-insecure-content", true, nullptr);
  #endif
-             _view = WEBKIT_WEB_VIEW(g_object_new(WEBKIT_TYPE_WEB_VIEW,
-                 "backend", webkit_web_view_backend_new(wpe_view_backend_create(), nullptr, nullptr),
+             // Service Worker support
+             g_object_set(G_OBJECT(preferences),
 -- 
-2.25.1
+2.48.1
 

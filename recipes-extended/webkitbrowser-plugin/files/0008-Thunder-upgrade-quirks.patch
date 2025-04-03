@@ -1,13 +1,14 @@
-From 443251a39941d6657f59cbd7d3a0b5173d488b26 Mon Sep 17 00:00:00 2001
+From e3314cb2566eca5205e4e37a3e3ebfc845c434bf Mon Sep 17 00:00:00 2001
 From: Eugene Mutavchi <Ievgen_Mutavchi@comcast.com>
 Date: Thu, 21 Mar 2024 21:33:43 +0000
-Subject: [PATCH] Thunder upgrade quirks
+Subject: [PATCH 7/7] Thunder upgrade quirks
 
+%% original patch: 0008-Thunder-upgrade-quirks.patch
 ---
  WebKitBrowser/Extension/Module.h |  1 +
  WebKitBrowser/Module.h           |  1 +
- WebKitBrowser/ThunderQuirks.h    | 31 +++++++++++++++++++++++++++++++
- 3 files changed, 33 insertions(+)
+ WebKitBrowser/ThunderQuirks.h    | 35 ++++++++++++++++++++++++++++++++
+ 3 files changed, 37 insertions(+)
  create mode 100644 WebKitBrowser/ThunderQuirks.h
 
 diff --git a/WebKitBrowser/Extension/Module.h b/WebKitBrowser/Extension/Module.h
@@ -36,7 +37,7 @@ index e04d3bb5f..56c93a0ed 100644
  #define EXTERNAL
 diff --git a/WebKitBrowser/ThunderQuirks.h b/WebKitBrowser/ThunderQuirks.h
 new file mode 100644
-index 000000000..df5213bdb
+index 000000000..17af16ddf
 --- /dev/null
 +++ b/WebKitBrowser/ThunderQuirks.h
 @@ -0,0 +1,35 @@
@@ -76,5 +77,5 @@ index 000000000..df5213bdb
 +#define TRACE(ignore, ...) SYSLOG(Logging::Notification, __VA_ARGS__)
 +
 -- 
-2.25.1
+2.48.1
 
