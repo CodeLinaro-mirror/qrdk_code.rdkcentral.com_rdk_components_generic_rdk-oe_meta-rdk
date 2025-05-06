@@ -104,6 +104,7 @@ def copy_egl_req_files_brcm_dnfl(d,base_dir,logger):
     #KAON patch : add wayland*.h
     from glob import glob
     import subprocess
+    import shutil
 
     replace_egl_header_files(d,base_dir,logger)
 
@@ -124,6 +125,34 @@ def copy_egl_req_files_brcm_dnfl(d,base_dir,logger):
 
     logger.write("Copying "+ from_dir + '../libv3ddriver.so' +" to "+ to_dir + '../libv3ddriver.so\n')
     copyfile(comp_dir + '../libv3ddriver.so', to_dir + '../libv3ddriver.so')
+
+    #usr/lib/cmake are from lib32-wpeframework
+    from_dir= os.path.join(d.getVar("COMPONENTS_DIR", True), d.getVar("TUNE_PKGARCH", True))
+    comp_dir=os.path.join(from_dir, "lib32-wpeframework/usr/lib/cmake/")
+    to_dir= os.path.join(base_dir, "usr/lib/cmake")
+
+    def copy_folder_contents(src, dst):
+       if not os.path.exists(dst):  # Ensure destination exists
+           os.makedirs(dst)
+
+       for item in os.listdir(src):  # Iterate through source items
+           src_path = os.path.join(src, item)
+           dst_path = os.path.join(dst, item)
+
+           if os.path.isdir(src_path):  # If it's a folder, create and copy contents recursively
+               os.makedirs(dst_path)
+               copy_folder_contents(src_path, dst_path)
+           else:  # If it's a file, copy it
+               shutil.copy2(src_path, dst_path)
+
+    copy_folder_contents(comp_dir, to_dir)
+
+    #ConfigGenerator are from wpeframework-tools-native/usr/sbin/ConfigGenerator
+    from_dir= os.path.join(d.getVar("COMPONENTS_DIR", True), d.getVar("MACHINE_ARCH", True))
+    comp_dir=os.path.join(from_dir, "../x86_64/wpeframework-tools-native/usr/sbin/")
+    to_dir= os.path.join(base_dir, "usr/lib/cmake/");
+
+    copy_folder_contents(comp_dir, to_dir)
 
     #netsrvmgrIarm.h,wifiSrvMgrIarmIf.h are from lib32-netsrvmgr
     from_dir= os.path.join(d.getVar("COMPONENTS_DIR", True), d.getVar("TUNE_PKGARCH", True))
