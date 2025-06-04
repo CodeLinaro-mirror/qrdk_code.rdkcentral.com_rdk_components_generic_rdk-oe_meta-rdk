@@ -8,7 +8,7 @@ EnvironmentFile=/etc/device.properties
 ExecStart=/sbin/ip link set dev %i up
 ExecReload=/sbin/ip addr flush dev %i scope global
 ExecStop=-/sbin/ip addr flush dev %i scope global
-StandardOutput=journal+console
+StandardOutput=journal
 
 [Unit]
 BindsTo=%i.device
