@@ -34,9 +34,14 @@ if [ "$(whoami)" = "root" ]; then
     return 1
 fi
 
+OE_LAYER="poky"
+if [ -d "openembedded-core" ];then
+	OE_LAYER="openembedded-core"
+fi
+
 # check that we are where we think we are!
-if [ ! -f "openembedded-core/oe-init-build-env" ]; then
-    echo -e "\nUNABLE TO FIND OPENEMBEDDED !"
+if [ ! -f "$OE_LAYER/oe-init-build-env" ]; then
+    echo -e "\nUNABLE TO FIND oe-init-build-env !"
     return 1
 fi
 
@@ -53,7 +58,7 @@ EOF
 export PATH="`echo ${PATH} | sed 's/\(:.\|:\)*:/:/g;s/^.\?://;s/:.\?$//'`"
 
 # Clean PATH of any previous oe-core bitbake or scripts directories
-export PATH="$(echo $PATH | sed 's!/[^:]\+/openembedded-core/\(bitbake/bin\|scripts\):!!g')"
+export PATH="$(echo $PATH | sed 's!/[^:]\+/$OE_LAYER/\(bitbake/bin\|scripts\):!!g')"
 
 # only 1 parameter max, <build> folder, or default to build-$machine
 _BUILDDIR=
@@ -64,8 +69,10 @@ elif [ $# -eq 1 ]; then
     _BUILDDIR=$1
     # check if this <build> folder was already configured
     _CONFIGS_FOUND=
+    echo "SIPRA config found"
     if [ -f ${_BUILDDIR}/conf/local.conf ] && \
         [ -f ${_BUILDDIR}/conf/bblayers.conf ]; then
+         
         _CONFIGS_FOUND="yes"
     fi
 fi
@@ -109,8 +116,7 @@ fi
 _PWD_PREV=$(pwd)
 
 # Warning: Sourcing the oe-init-build-env script changes the current directory.
-
-TEMPLATECONF=${_PWD_PREV}/meta-rdk/conf source openembedded-core/oe-init-build-env ${_BUILDDIR}
+TEMPLATECONF=${_PWD_PREV}/meta-rdk/conf source $OE_LAYER/oe-init-build-env ${_BUILDDIR}
 
 if [ "$_CONFIGS_FOUND" ]; then
     echo -e "\nConfig files already exist in folder ${_BUILDDIR}/conf/, they were not modified."
@@ -123,9 +129,9 @@ fi
 # Warning: The RDK has historically combined bitbake 1.28 (ie the version of
 # bitbake released with OE 2.0) with OE 1.6. We need to account for that here,
 # ie bitbake version 1.28 needs to map to "daisy", not "jethro".
-
-case "$(sed -n 's/^__version__ = "\(.*\)"/\1/p' ${_PWD_PREV}/openembedded-core/bitbake/bin/bitbake)"
+case "$(sed -n 's/^__version__ = "\(.*\)"/\1/p' ${_PWD_PREV}/$OE_LAYER/bitbake/bin/bitbake)"
 in
+    2.8.*) _DISTRO_CODENAME="scarthgap" ;;
     2.0.*) _DISTRO_CODENAME="kirkstone" ;;
     2.2.*) _DISTRO_CODENAME="kirkstone" ;;
     1.46.*) _DISTRO_CODENAME="dunfell" ;;
