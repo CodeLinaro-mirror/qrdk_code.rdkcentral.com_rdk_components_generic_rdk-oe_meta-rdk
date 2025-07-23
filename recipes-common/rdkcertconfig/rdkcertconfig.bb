@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 S = "${WORKDIR}/git"
 DEPENDS = "mountutils "
-DEPENDS_append_client = " ssacpc libsyswrapper "
+DEPENDS_append_client = " libsyswrapper "
 SRC_URI = "git://github.com/rdkcentral/rdk-cert-config.git;protocol=https;nobranch=1"
 CFLAGS_append = " -DCONFIG_ERROR_ENABLED"
 

@@ -14,11 +14,10 @@ LICENSE = "CLOSED"
 
 SRC_URI = "git://github.com/rdkcentral/common_utilities.git;protocol=git"
 
-# Release version - 1.3.0
-# 14 Jul 2025
-SRCREV = "dcbb1f689079fe3301f0074adfe2a108b8d2d826"
-
-PV = "1.3.0"
+# Release version - 1.4.3
+# 19 Sept 2025
+SRCREV = "071361f284ba9049bf7d8cb9a75b583b9b1e353b"
+PV = "1.4.3"
 
 DEPENDS +=" cjson curl rdk-logger"
 
