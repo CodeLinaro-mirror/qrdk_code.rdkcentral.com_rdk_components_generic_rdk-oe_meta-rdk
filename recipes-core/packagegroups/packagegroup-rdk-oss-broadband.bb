@@ -28,7 +28,7 @@ RDEPENDS_packagegroup-rdk-oss-broadband = "\
     fcgi \
     glib-2.0 \
     gnutls \
-    igmpproxy \
+    ${@bb.utils.contains("DISTRO_FEATURES", "no_utopia_mcast", "", "igmpproxy", d)} \
     iksemel \
     iproute2 \
     iptables \
