@@ -34,6 +34,7 @@ RDEPENDS_packagegroup-rdk-baserootfs = "\
     yajl \
     xupnp \
     procps \
+    ${@bb.utils.contains("DISTRO_FEATURES", "enable_xmeminsight", "meminsight", '', d)} \
     "
 
 RDEPENDS_packagegroup-rdk-baserootfs += " ${@bb.utils.contains('DISTRO_FEATURES', 'gstreamer1', 'gstreamer1.0-plugins-base gstreamer1.0-plugins-good', 'gst-plugins-base gst-plugins-good', d)} "

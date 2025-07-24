@@ -15,6 +15,7 @@ IMAGE_INSTALL += " \
 IMAGE_INSTALL += " \
     ${@bb.utils.contains("DISTRO_FEATURES", "gstreamer1", "gstreamer1.0-plugins-base-meta", "gst-plugins-base-meta", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "gstreamer1", "gstreamer1.0-plugins-good-meta", "gst-plugins-good-meta", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "enable_xmeminsight", "meminsight", '', d)} \
     "
 
 IMAGE_INSTALL_remove_rpi ="gstreamer1.0-plugins-good-meta"

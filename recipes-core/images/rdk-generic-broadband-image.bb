@@ -10,6 +10,7 @@ IMAGE_INSTALL_append = " \
     packagegroup-rdk-oss-broadband \
     packagegroup-rdk-ccsp-broadband \
     rdk-logger \
+    ${@bb.utils.contains("DISTRO_FEATURES", "enable_xmeminsight", "meminsight", '', d)} \
     "
 
 IMAGE_INSTALL_append_fwupgrader = " rdkfwupgrader "

@@ -168,6 +168,8 @@ OPTIMIZE_DEFAULT = "-Os"
 # Disabling MoCA support
 #DISTRO_FEATURES_append = " no_moca_support"
 
+#DISTRO_FEATURES_append = " enable_xmeminsight"
+
 #Masking the below recipes because in kirkstone build recipes pulling older version due to layer priority
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-devtools/jsonrpc/jsonrpc_0.7.0.bb', '', d)}"
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-devtools/jsoncpp/jsoncpp_1.8.4.bb', '', d)}"
