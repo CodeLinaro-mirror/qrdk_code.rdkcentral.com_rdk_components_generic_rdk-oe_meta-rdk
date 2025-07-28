@@ -1,16 +1,6 @@
-#
-# ============================================================================
-# COMCAST C O N F I D E N T I A L AND PROPRIETARY
-# ============================================================================
-# This file and its contents are the intellectual property of Comcast.  It may
-# not be used, copied, distributed or otherwise  disclosed in whole or in part
-# without the express written permission of Comcast.
-# ============================================================================
-# Copyright (c) 2019 Comcast. All rights reserved.
-# ============================================================================
-#
 SUMMARY = "RDK commonutilities"
-LICENSE = "CLOSED"
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=24691c8ce48996ecd1102d29eab1216e"
 
 SRC_URI = "git://github.com/rdkcentral/common_utilities.git;protocol=git"
 
