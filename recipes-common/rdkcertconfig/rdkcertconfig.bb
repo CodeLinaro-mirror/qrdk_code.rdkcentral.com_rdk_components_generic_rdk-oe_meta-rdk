@@ -10,7 +10,7 @@ DEPENDS_append_client = " ssacpc libsyswrapper "
 SRC_URI = "git://github.com/rdkcentral/rdk-cert-config.git;protocol=https;nobranch=1"
 CFLAGS_append = " -DCONFIG_ERROR_ENABLED"
 
-SRCREV = "f428c2abddca9df04d22f2515487f222f061b03e"
+SRCREV = "2d18ef9fe8068f040cbe5639023510a26e6e48bf"
 
 EXTRA_OECONF += "--enable-rdklogger --enable-cspcrdkconfig"
 
