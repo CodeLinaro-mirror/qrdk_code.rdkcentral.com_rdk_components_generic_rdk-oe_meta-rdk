@@ -17,5 +17,5 @@ IMAGE_INSTALL += " \
     ${@bb.utils.contains("DISTRO_FEATURES", "gstreamer1", "gstreamer1.0-plugins-good-meta", "gst-plugins-good-meta", d)} \
     "
 
-IMAGE_INSTALL_remove_rpi ="gstreamer1.0-plugins-good-meta"
+IMAGE_INSTALL:remove_rpi ="gstreamer1.0-plugins-good-meta"
 IMAGE_INSTALL += " ${@bb.utils.contains('DISTRO_FEATURES', 'gstreamer1', 'gstreamer1.0-plugins-bad-ivfparse', 'gst-plugins-bad-ivfparse', d)} "

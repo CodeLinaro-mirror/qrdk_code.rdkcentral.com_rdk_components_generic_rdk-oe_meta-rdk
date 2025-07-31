@@ -1,2 +1,2 @@
 # Build jq statically
-EXTRA_OECONF_append_class-native = " --enable-all-static "
+EXTRA_OECONF:append_class-native = " --enable-all-static "

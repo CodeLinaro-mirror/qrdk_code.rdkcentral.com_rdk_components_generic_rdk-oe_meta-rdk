@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/../meta-rdk/licenses/Apache-2.0;md5=3b83e
 
 SRC_URI = "file://debug-tools_download.sh"
 
-do_install_append () {
+do_install:append () {
         install -d ${D}/${sbindir}/
         install -m 0777 ${WORKDIR}/debug-tools_download.sh ${D}${sbindir}/
 }

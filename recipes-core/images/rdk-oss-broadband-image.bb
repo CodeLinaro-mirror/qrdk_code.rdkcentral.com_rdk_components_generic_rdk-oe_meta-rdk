@@ -24,6 +24,6 @@ IMAGE_INSTALL += "${@bb.utils.contains("DISTRO_FEATURES", "benchmark_enable","pa
                                                                               ","",d)}"
                                                                               
                                                                               
-IMAGE_INSTALL_remove = "${@bb.utils.contains("DISTRO_FEATURES", "benchmark_enable","packagegroup-meshwifi","",d)}"
+IMAGE_INSTALL:remove = "${@bb.utils.contains("DISTRO_FEATURES", "benchmark_enable","packagegroup-meshwifi","",d)}"
 
 

@@ -6,7 +6,7 @@ SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/libunpriv;protocol=${CMF_GIT_P
 "
 SRCREV_libunpriv = "${AUTOREV}"
 SRCREV_FORMAT = "libunpriv"
-CXXFLAGS_append = "\
+CXXFLAGS:append = "\
     -I${STAGING_INCDIR} \
     -I${STAGING_INCDIR}/jsoncpp"
 

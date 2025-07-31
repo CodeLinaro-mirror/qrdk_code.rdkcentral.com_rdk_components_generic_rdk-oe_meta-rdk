@@ -15,7 +15,7 @@ SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/rdk_logger;protocol=${CMF_GIT_
 S = "${WORKDIR}/git"
 
 DEPENDS = "log4c glib-2.0"
-DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
+DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd syslog-helper', '', d)}"
 
 PACKAGECONFIG[systemd-syslog-helper] = "--enable-systemd-syslog-helper,,"
@@ -23,23 +23,23 @@ PACKAGECONFIG[systemd-syslog-helper] = "--enable-systemd-syslog-helper,,"
 #Milestone Support
 EXTRA_OECONF += " --enable-milestone"
 PROVIDES = "getClockUptime"
-CFLAGS_append_hybrid += " -DLOGMILESTONE"
-CFLAGS_append_client += " -DLOGMILESTONE"
+CFLAGS:append_hybrid += " -DLOGMILESTONE"
+CFLAGS:append_client += " -DLOGMILESTONE"
 
 inherit autotools pkgconfig coverity pkgconfig
 
-CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
+CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
 
-CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
-LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
+CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
+LDFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
 
-do_configure_append_broadband () {
+do_configure:append_broadband () {
 		#Use the RDKB Versions of the Files
 		install -m 644 ${S}/rdkb_debug.ini ${S}/debug.ini
 		install -m 644 ${S}/rdkb_log4crc ${S}/log4crc
 }
 
-do_install_append () {
+do_install:append () {
     install -d ${D}${base_libdir}/rdk/
     install -m 0755 ${S}/scripts/logMilestone.sh ${D}${base_libdir}/rdk
 

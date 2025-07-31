@@ -17,5 +17,5 @@ BACKTRACE_LDFLAGS_pn-utopia = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-ne
 BACKTRACE_LDFLAGS_pn-parodus = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
 BACKTRACE_LDFLAGS_pn-mqttcm = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
 
-DEPENDS_append = " ${@LOG_BACKTRACE == "y" and BACKTRACE_DEPENDS or ""}"
-LDFLAGS_append = " ${@LOG_BACKTRACE == "y" and BACKTRACE_LDFLAGS or ""}"
+DEPENDS:append = " ${@LOG_BACKTRACE == "y" and BACKTRACE_DEPENDS or ""}"
+LDFLAGS:append = " ${@LOG_BACKTRACE == "y" and BACKTRACE_LDFLAGS or ""}"

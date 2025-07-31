@@ -6,15 +6,15 @@ IMAGE_FEATURES += "broadband"
 
 IMAGE_ROOTFS_SIZE = "8192"
 
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     packagegroup-rdk-oss-broadband \
     packagegroup-rdk-ccsp-broadband \
     rdk-logger \
     "
 
-IMAGE_INSTALL_append_fwupgrader = " rdkfwupgrader "
+IMAGE_INSTALL:append_fwupgrader = " rdkfwupgrader "
 
-IMAGE_INSTALL_append_container = " \
+IMAGE_INSTALL:append_container = " \
    gzip \
    perl \
    libcap \

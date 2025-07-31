@@ -3,7 +3,7 @@ SUMMARY = "A console-only image for the RDK-B yocto build which supports meta to
 require recipes-core/images/rdk-generic-broadband-image.bb
 include recipes-extended/images/core-image-lsb-sdk.bb
 
-IMAGE_INSTALL_append += " \
+IMAGE_INSTALL:append += " \
     ccsp-webui-csrf \
     ${@bb.utils.contains('DISTRO_FEATURES', 'webui_php', 'ccsp-webui-php', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'webui_jst', 'ccsp-webui-jst', '', d)} \  

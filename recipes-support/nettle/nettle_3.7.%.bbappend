@@ -1,1 +1,1 @@
-EXTRA_OECONF_append = " --enable-mini-gmp"
+EXTRA_OECONF:append = " --enable-mini-gmp"

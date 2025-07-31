@@ -25,14 +25,14 @@ LOGROTATE_ROTATION_cpuprocanalyzer="3"
 LOGROTATE_SIZE_MEM_cpuprocanalyzer="128000"
 LOGROTATE_ROTATION_MEM_cpuprocanalyzer="3"
 
-do_install_append() {
+do_install:append() {
         install -d ${D}${systemd_unitdir}/system ${D}${sysconfdir}
         install -m 0644 ${S}/conf/cpuprocanalyzer.service ${D}${systemd_unitdir}/system
         install -m 0644 ${S}/conf/cpuprocanalyzer.path ${D}${systemd_unitdir}/system
         install -m 0644 ${S}/conf/procanalyzerconfig.ini ${D}/etc
 }
 
-do_install_append_broadband() {
+do_install:append_broadband() {
         install -d ${D}${base_libdir}/rdk ${D}{sysconfdir}
         install -m 0755 ${S}/conf/RunCPUProcAnalyzer.sh ${D}${base_libdir}/rdk
 }
@@ -43,4 +43,4 @@ SYSTEMD_SERVICE_${PN} += "cpuprocanalyzer.path"
 FILES_${PN} += "${systemd_unitdir}/system/cpuprocanalyzer.service"
 FILES_${PN} += "${systemd_unitdir}/system/cpuprocanalyzer.path"
 FILES_${PN} += "/etc/procanalyzerconfig.ini"
-FILES_${PN}_append_broadband = " ${base_libdir}/rdk/RunCPUProcAnalyzer.sh"
+FILES_${PN}:append_broadband = " ${base_libdir}/rdk/RunCPUProcAnalyzer.sh"

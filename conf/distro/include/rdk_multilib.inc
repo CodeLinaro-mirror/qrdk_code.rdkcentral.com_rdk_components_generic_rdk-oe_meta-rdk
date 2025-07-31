@@ -1,1 +1,1 @@
-NON_MULTILIB_RECIPES_append = " rbustools "
+NON_MULTILIB_RECIPES:append = " rbustools "

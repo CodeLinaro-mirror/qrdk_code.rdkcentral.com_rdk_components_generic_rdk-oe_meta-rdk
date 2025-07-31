@@ -16,7 +16,7 @@ disable_systemd_services() {
         fi
 }
 
-sdk_ext_postinst_append() {
+sdk_ext_postinst:append() {
    echo "ln -s $target_sdk_dir/layers/openembedded-core/meta-rdk $target_sdk_dir/layers/openembedded-core/../meta-rdk" >> $env_setup_script 
    echo "ln -s $target_sdk_dir/layers/openembedded-core/meta-rdk-video $target_sdk_dir/layers/openembedded-core/../meta-rdk-video" >> $env_setup_script
 }

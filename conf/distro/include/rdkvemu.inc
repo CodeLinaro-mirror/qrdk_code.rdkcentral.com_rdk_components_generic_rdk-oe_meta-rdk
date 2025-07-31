@@ -10,7 +10,7 @@ BBMASK .= "|.meta-rdk-comcast/recipes-common/nvm-sqlite/nvm-sqlite.bb|.meta-rdk-
 BBMASK .= "|.meta-rdk-comcast/recipes-extended/rdkfwupgrader/rdkfwupgrader.bb"
 
 # Build flags to control default SecAPI engine for netflix component
-DISTRO_FEATURES_append = " netflix_cryptanium"
+DISTRO_FEATURES:append = " netflix_cryptanium"
 
-DISTRO_FEATURES_append = " playreadycdmi_cryptanium"
-DISTRO_FEATURES_append = " NEW_HTTP_SERVER_DISABLE"
+DISTRO_FEATURES:append = " playreadycdmi_cryptanium"
+DISTRO_FEATURES:append = " NEW_HTTP_SERVER_DISABLE"

@@ -6,7 +6,7 @@ require rdk-generic-broadband-image.bb
 
 IMAGE_FEATURES += "tdk"
 
-IMAGE_INSTALL_append = " tdk-b"
+IMAGE_INSTALL:append = " tdk-b"
 
 IMAGE_INSTALL += " \
         packagegroup-tdk-broadband \

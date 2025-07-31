@@ -24,26 +24,26 @@ CFLAGS += " -Wall -Werror -Wextra -Wno-unused-parameter -Wno-pointer-sign -Wno-s
 CFLAGS += " -DRDK_LOGGER "
 
 # Enable SE HW based cert usage
-CFLAGS_append += "${@bb.utils.contains('DISTRO_FEATURES', 'ENABLE_HW_CERT_USAGE',' -DENABLE_HW_CERT_USAGE -DENABLE_CUSTOM_ENGINE ',' ',d)}"
+CFLAGS:append += "${@bb.utils.contains('DISTRO_FEATURES', 'ENABLE_HW_CERT_USAGE',' -DENABLE_HW_CERT_USAGE -DENABLE_CUSTOM_ENGINE ',' ',d)}"
 
 
 inherit pkgconfig autotools systemd ${@bb.utils.contains_any('DISTRO_FEATURES', 'kirkstone scarthgap', 'python3native', 'pythonnative', d)} breakpad-logmapper
 
 CFLAGS += " -DDROP_ROOT_PRIV "
 
-LDFLAGS_append = " \
+LDFLAGS:append = " \
         -lbreakpadwrapper \
         -lpthread \
         -lstdc++ \
         -lsecure_wrapper \
         "
-LDFLAGS_append = " \
+LDFLAGS:append = " \
         -lprivilege \
       "
 
 CXXFLAGS += "-DINCLUDE_BREAKPAD"
 
-do_install_append () {
+do_install:append () {
     install -d ${D}/usr/include/
     install -d ${D}/lib/rdk/
     install -d ${D}${systemd_unitdir}/system

@@ -16,7 +16,7 @@ S = "${WORKDIR}/git"
 
 inherit autotools coverity
 
-CPPFLAGS_append = " \
+CPPFLAGS:append = " \
     -I${STAGING_INCDIR}/breakpad/ \
     "
 
@@ -24,7 +24,7 @@ LDFLAGS_broadband += "-lbreakpad_client -lpthread"
 LDFLAGS_client += "-lbreakpad_client -lpthread"
 LDFLAGS_hybrid += "-lbreakpad_client -lpthread"
 
-do_install_append () {
+do_install:append () {
     # Config files and scripts
     install -d ${D}${includedir}/
     install -D -m 0644 ${S}/*.h ${D}${includedir}/

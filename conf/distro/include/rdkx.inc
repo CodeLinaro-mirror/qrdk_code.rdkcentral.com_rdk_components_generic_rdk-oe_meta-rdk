@@ -1,7 +1,7 @@
 
 OPTIMIZE_DEFAULT = "-O2"
 
-LAYERDEPENDS_rdk_remove = "multimedia-layer"
+LAYERDEPENDS_rdk:remove = "multimedia-layer"
 
 #set platform type (broadband, hybrid, or client)
 MACHINEOVERRIDES .= ":rdkx:voicecontrol"

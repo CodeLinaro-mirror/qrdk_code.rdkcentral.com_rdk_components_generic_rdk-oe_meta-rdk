@@ -4,12 +4,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c466d4ab8a68655eb1edf0bf8c1a8fb8"
 
 include dobby.inc
 
-SRC_URI_append_kirkstone = " file://Fix_compile_gcc11.patch  \
+SRC_URI:append_kirkstone = " file://Fix_compile_gcc11.patch  \
                              file://Add_config_header_kirkstone.patch \
                            "
 
 #Add the patch DELIA-66405
-SRC_URI_append = " file://0001-DELIA-66405-Debug-Log-File-stats-for-minidump.patch "
+SRC_URI:append = " file://0001-DELIA-66405-Debug-Log-File-stats-for-minidump.patch "
 
 DEPENDS = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd ', '', d)} libnl dbus jsoncpp boost yajl python3 breakpad breakpad-wrapper "
 RDEPENDS_${PN} = "crun (>= 0.14.1) ${@bb.utils.contains('DISTRO_FEATURES', 'dac', '', ' dobby-thunderplugin', d)} "
@@ -26,8 +26,8 @@ inherit pkgconfig cmake systemd logrotate
 #dobby logs storage file is decided using device.properties. syslog-ng-config-gen framework decide the log file.
 
 #config.h file generation for kirkstone builds
-DEPENDS_append_kirkstone = " autoconf-native automake-native "
-CFLAGS_append_kirkstone = " --sysroot=${RECIPE_SYSROOT}"
+DEPENDS:append_kirkstone = " autoconf-native automake-native "
+CFLAGS:append_kirkstone = " --sysroot=${RECIPE_SYSROOT}"
 LOGROTATE_NAME="dobby"
 LOGROTATE_LOGNAME_dobby="dobby.log"
 LOGROTATE_SIZE_dobby="1572864"

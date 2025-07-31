@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 inherit systemd  
 SRC_URI += "file://stress-ng-tests.sh \
@@ -17,7 +17,7 @@ SRC_URI += "file://stress-ng-tests.sh \
             
 #SYSTEMD_SERVICE_${PN} = "stress-ng-test.path stress-ng-test.service"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}/lib/rdk
     install -d ${D}${systemd_unitdir}/system
     install -d  ${D}${sysconfdir}

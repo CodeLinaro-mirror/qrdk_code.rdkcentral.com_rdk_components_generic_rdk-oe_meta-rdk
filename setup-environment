@@ -69,7 +69,6 @@ elif [ $# -eq 1 ]; then
     _BUILDDIR=$1
     # check if this <build> folder was already configured
     _CONFIGS_FOUND=
-    echo "SIPRA config found"
     if [ -f ${_BUILDDIR}/conf/local.conf ] && \
         [ -f ${_BUILDDIR}/conf/bblayers.conf ]; then
          

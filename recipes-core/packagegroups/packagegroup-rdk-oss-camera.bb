@@ -53,5 +53,5 @@ RDEPENDS_packagegroup-rdk-oss-camera = "\
     wireless-tools \
     zlib \
     "
-RDEPENDS_packagegroup-rdk-oss-camera_append_qemuall = " sysint "
+RDEPENDS_packagegroup-rdk-oss-camera:append_qemuall = " sysint "
 

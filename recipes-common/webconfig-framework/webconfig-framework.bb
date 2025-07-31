@@ -4,11 +4,11 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bc21fa26f9718980827123b8b80c0ded"
 
 DEPENDS = "rbus"
-DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
+DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 DEPENDS_class-native = ""
 
-RDEPENDS_${PN}_append = " bash"
-RDEPENDS_${PN}_remove_morty = "bash"
+RDEPENDS_${PN}:append = " bash"
+RDEPENDS_${PN}:remove_morty = "bash"
 
 SRC_URI = "${RDK_GENERIC_ROOT_GIT}/WebconfigFramework/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH}"
 
@@ -35,9 +35,9 @@ CFLAGS += " \
 
 CFLAGS += " -Wall -Werror -Wextra "
 
-CFLAGS_append = " -Wno-restrict -Wno-format-truncation -Wno-format-overflow -Wno-cast-function-type -Wno-unused-function -Wno-implicit-fallthrough "
+CFLAGS:append = " -Wno-restrict -Wno-format-truncation -Wno-format-overflow -Wno-cast-function-type -Wno-unused-function -Wno-implicit-fallthrough "
 
-CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig_bin', '-DWEBCONFIG_BIN_SUPPORT', '', d)}"
+CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig_bin', '-DWEBCONFIG_BIN_SUPPORT', '', d)}"
 
 LDFLAGS += " \
     -lrbuscore \
@@ -53,7 +53,7 @@ do_compile_class-native () {
     echo "Compile is skipped"
 }
 
-do_install_append_class-target () {
+do_install:append_class-target () {
     install -d ${D}/usr/include/
     install -m 644 ${S}/include/*.h ${D}/usr/include/
 

@@ -3,15 +3,15 @@ PN = "rbusmirrors"
 
 inherit pkgconfig autotools 
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 DEPENDS += " rbus "
 
 LICENSE = "Apache-2.0"
 LICENSE_LOCATION ?= "LICENSE"
 LIC_FILES_CHKSUM = "file://${LICENSE_LOCATION};md5=ed63516ecab9f06e324238dd2b259549"
 
-LDFLAGS_append += "-L${PKG_CONFIG_SYSROOT_DIR}/${libdir} -lrbus "
-#CXXFLAGS_append += " -I${includedir}/rbus "
+LDFLAGS:append += "-L${PKG_CONFIG_SYSROOT_DIR}/${libdir} -lrbus "
+#CXXFLAGS:append += " -I${includedir}/rbus "
 
 LD_LIBRARY_PATH="${PKG_CONFIG_SYSROOT_DIR}/usr/${libdir}"
 

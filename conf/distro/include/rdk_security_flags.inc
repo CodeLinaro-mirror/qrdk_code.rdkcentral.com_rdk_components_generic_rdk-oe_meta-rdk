@@ -100,30 +100,30 @@ SECURITY_FORTIFY_pn-broadcom-mocadriver = ""
 
 
 # workarounds for various packages
-SECURITY_CFLAGS_append_pn-broadcom-refsw = " ${SECURITY_NOPIE} ${SECURITY_LDFLAGS}"
-SECURITY_CFLAGS_append_pn-broadcom-ursr = " ${SECURITY_NOPIE} ${SECURITY_LDFLAGS}"
-SECURITY_CFLAGS_append_pn-ctrlm-main = " ${SECURITY_NOPIE} ${SECURITY_LDFLAGS}"
+SECURITY_CFLAGS:append_pn-broadcom-refsw = " ${SECURITY_NOPIE} ${SECURITY_LDFLAGS}"
+SECURITY_CFLAGS:append_pn-broadcom-ursr = " ${SECURITY_NOPIE} ${SECURITY_LDFLAGS}"
+SECURITY_CFLAGS:append_pn-ctrlm-main = " ${SECURITY_NOPIE} ${SECURITY_LDFLAGS}"
 
 # don't set eglibc compile flags
 SECURITY_CFLAGS_pn-eglibc = ""
 SECURITY_CFLAGS_pn-eglibc-initial = ""
-SECURITY_LDFLAGS_remove_pn-eglibc = "-fstack-protector"
-SECURITY_LDFLAGS_remove_pn-eglibc-initial = "-fstack-protector"
+SECURITY_LDFLAGS:remove_pn-eglibc = "-fstack-protector"
+SECURITY_LDFLAGS:remove_pn-eglibc-initial = "-fstack-protector"
 
 # don't set glibc compile flags
 SECURITY_CFLAGS_pn-glibc = ""
 SECURITY_CFLAGS_pn-glibc-initial = ""
-SECURITY_LDFLAGS_remove_pn-glibc = "-fstack-protector"
-SECURITY_LDFLAGS_remove_pn-glibc-initial = "-fstack-protector"
+SECURITY_LDFLAGS:remove_pn-glibc = "-fstack-protector"
+SECURITY_LDFLAGS:remove_pn-glibc-initial = "-fstack-protector"
 
 SECURITY_CFLAGS_pn-gcc-runtime = ""
-SECURITY_LDFLAGS_remove_pn-gcc-runtime = "-fstack-protector"
+SECURITY_LDFLAGS:remove_pn-gcc-runtime = "-fstack-protector"
 
 # kernel modules can't be -pie
-TARGET_CC_KERNEL_ARCH_append = " ${SECURITY_NOPIE}"
-MAKE_append_pn-broadcom-refsw = " KCFLAGS=-fno-PIE"
-MAKE_append_pn-broadcom-ursr = " KCFLAGS=-fno-PIE"
-MOD_OPTS_append_pn-broadcom-rgdriver = " KCFLAGS=-fno-PIE"
+TARGET_CC_KERNEL_ARCH:append = " ${SECURITY_NOPIE}"
+MAKE:append_pn-broadcom-refsw = " KCFLAGS=-fno-PIE"
+MAKE:append_pn-broadcom-ursr = " KCFLAGS=-fno-PIE"
+MOD_OPTS:append_pn-broadcom-rgdriver = " KCFLAGS=-fno-PIE"
 
-TARGET_CC_ARCH_append_class-target = " ${@ASLR == "y" and SECURITY_CFLAGS or ""}"
-TARGET_LDFLAGS_append_class-target = " ${@ASLR == "y" and SECURITY_LDFLAGS or ""}"
+TARGET_CC_ARCH:append_class-target = " ${@ASLR == "y" and SECURITY_CFLAGS or ""}"
+TARGET_LDFLAGS:append_class-target = " ${@ASLR == "y" and SECURITY_LDFLAGS or ""}"

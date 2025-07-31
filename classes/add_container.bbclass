@@ -26,7 +26,7 @@
 do_rootfs[depends] += "lxc-container-generator-native:do_populate_sysroot"
 TOOL_DIR="${STAGING_DATADIR_NATIVE}/lxc-container-generator"
 
-ROOTFS_POSTPROCESS_COMMAND_append = "container_to_tar ;"
+ROOTFS_POSTPROCESS_COMMAND:append = "container_to_tar ;"
 
 container_to_tar() {
         #Check if container directory exists

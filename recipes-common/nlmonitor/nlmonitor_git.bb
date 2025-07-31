@@ -17,7 +17,7 @@ CFLAGS += "-DINCLUDE_BREAKPAD"
 CXXFLAGS += "-DINCLUDE_BREAKPAD"
 
 DEPENDS = "libnl breakpad-wrapper"
-BREAKPAD_BIN_append = "nlmon"
+BREAKPAD_BIN:append = "nlmon"
 
 inherit autotools pkgconfig systemd coverity breakpad-logmapper syslog-ng-config-gen logrotate
 SYSLOG-NG_FILTER = "nlmon"
@@ -33,7 +33,7 @@ LOGROTATE_ROTATION_nlmon="3"
 LOGROTATE_SIZE_MEM_nlmon="1572864"
 LOGROTATE_ROTATION_MEM_nlmon="3"
 
-do_install_append () {
+do_install:append () {
    install -d ${D}/lib/rdk
    install -d ${D}${sysconfdir}
    install -d ${D}/${systemd_unitdir}/system
@@ -44,11 +44,11 @@ do_install_append () {
    install ${S}/ipmodechange.sh ${D}/lib/rdk
 }
 
-do_install_append_hybrid () {
+do_install:append_hybrid () {
    install ${S}/nlmon_hybrid.cfg ${D}${sysconfdir}/nlmon.cfg
 }
 
-do_install_append_client () {
+do_install:append_client () {
    install ${S}/ipv6addressChange.sh ${D}/lib/rdk
    install ${S}/nlmon_client.cfg ${D}${sysconfdir}/nlmon.cfg
 }
@@ -60,7 +60,7 @@ FILES_${PN} += "${systemd_unitdir}/system/* \
                /lib/rdk/ipmodechange.sh \
                ${sysconfdir}/nlmon.cfg \
                "
-FILES_${PN}_append_client += "/lib/rdk/ipv6addressChange.sh \
+FILES_${PN}:append_client += "/lib/rdk/ipv6addressChange.sh \
                              "
 SYSTEMD_SERVICE_${PN} = "nlmon.service"
 

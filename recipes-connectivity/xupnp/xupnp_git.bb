@@ -20,11 +20,11 @@ CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-sign-compare -Wno-depre
 DEPENDS = "glib-2.0 gupnp fcgi dbus gnutls rdk-logger libgcrypt libgpg-error "
 RDEPENDS_${PN} += "gnutls"
 
-DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
-DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'telemetry2_0', 'telemetry', '', d)}"
+DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
+DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'telemetry2_0', 'telemetry', '', d)}"
 
-DEPENDS_append = " libgcrypt libgpg-error"
-DEPENDS_remove_morty = " libgcrypt libgpg-error"
+DEPENDS:append = " libgcrypt libgpg-error"
+DEPENDS:remove_morty = " libgcrypt libgpg-error"
 
 PACKAGECONFIG = "gupnp1.2 dbus"
 PACKAGECONFIG[gupnp1.2] = "--enable-version1.2,,,"
@@ -35,16 +35,16 @@ PACKAGECONFIG[dbus] = "--enable-dbus,,,"
 PACKAGECONFIG[client] = "--enable-client-xcal-server,,,"
 PACKAGECONFIG[media-renderer] = "--enable-media-renderer,--disable-media-renderer,rbus,rbus"
 
-PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'dlnasupport', ' media-renderer', '', d)}"
+PACKAGECONFIG:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'dlnasupport', ' media-renderer', '', d)}"
 PROVIDES += "${@bb.utils.contains('DISTRO_FEATURES', 'dlnasupport', '${PN}-rpc', '', d)}"
 FILES_${PN}-rpc = "${@bb.utils.contains('DISTRO_FEATURES', 'dlnasupport', '${libdir}/libmediabrowser.so.*', '', d)}"
 PACKAGE_BEFORE_PN += "${@bb.utils.contains('DISTRO_FEATURES', 'dlnasupport', '${PN}-rpc', '', d)}"
 
-PACKAGECONFIG_append_client = " client"
+PACKAGECONFIG:append_client = " client"
 
-PACKAGECONFIG_append_morty = " gupnp0.2"
-PACKAGECONFIG_remove = "gupnp1.2"
-PACKAGECONFIG_append = " ${@bb.utils.contains_any('DISTRO_FEATURES','dunfell kirkstone scarthgap',' gupnp0.2-dfl','',d)} "
+PACKAGECONFIG:append_morty = " gupnp0.2"
+PACKAGECONFIG:remove = "gupnp1.2"
+PACKAGECONFIG:append = " ${@bb.utils.contains_any('DISTRO_FEATURES','dunfell kirkstone scarthgap',' gupnp0.2-dfl','',d)} "
 
 EXTRA_OECONF += " --sysconfdir=${sysconfdir}/xupnp"
 
@@ -52,15 +52,15 @@ inherit autotools systemd pkgconfig coverity
 YOCTO_VER = "${@ bb.utils.contains('DISTRO_FEATURES', 'dunfell kirkstone scarthgap', 1, 0, d) }"
 SAFEC_VER =  "${@ "safec-3.5.1" if ${YOCTO_VER} else "safec-3.5" }"
 
-CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --cflags libsafec`', ' -fPIC', d)}"
-CXXFLAGS_append = " -fPIC "
-LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
-CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
-CFLAGS_append = " -I${STAGING_INCDIR}/ccsp "
-CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'telemetry2_0', '-DENABLE_FEATURE_TELEMETRY2_0', '', d)} "
-LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'telemetry2_0', ' -ltelemetry_msgsender ', '', d)} "
-CFLAGS_append = " -DLOGMILESTONE"
-LDFLAG_append = " -lrdkloggers"
+CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --cflags libsafec`', ' -fPIC', d)}"
+CXXFLAGS:append = " -fPIC "
+LDFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
+CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
+CFLAGS:append = " -I${STAGING_INCDIR}/ccsp "
+CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'telemetry2_0', '-DENABLE_FEATURE_TELEMETRY2_0', '', d)} "
+LDFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'telemetry2_0', ' -ltelemetry_msgsender ', '', d)} "
+CFLAGS:append = " -DLOGMILESTONE"
+LDFLAG:append = " -lrdkloggers"
 
 PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 FILES_${PN}-gtest = "\

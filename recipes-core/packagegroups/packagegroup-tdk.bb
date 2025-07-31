@@ -19,7 +19,7 @@ RDEPENDS_packagegroup-tdk = "\
 #Removed sysstat as it is not being used from TDK now.
 #Removed bind-utils from RDEPENDS since it is overriding nslookup binary in RDK image and it is causing issue in getting ipv6 address.
 
-RDEPENDS_packagegroup-tdk_append_qemuall = " alsa-conf "
+RDEPENDS_packagegroup-tdk:append_qemuall = " alsa-conf "
 
 
 

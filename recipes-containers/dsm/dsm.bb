@@ -9,7 +9,7 @@ SRC_URI = "${CMF_GITHUB_ROOT}/DSM;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GITH
 
 SRCREV = "c3cfd0a9d1ee1e9c2f2e8db4348b314aa32439bc"
 SRCREV_kirkstone = "863d5e80e726faa62b1a78f0b59fa743eaee7bbc"
-DEPENDS_append_kirkstone = " dobby "
+DEPENDS:append_kirkstone = " dobby "
 
 EXTRA_OECMAKE =  " -DENABLE_RBUS_PROVIDER=ON"
 
@@ -34,7 +34,7 @@ OECMAKE_CXX_FLAGS += "-I${STAGING_INCDIR}"
 SYSTEMD_AUTO_ENABLE_${PN} = "enable"
 SYSTEMD_SERVICE_${PN} = " dsm.service "
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${sysconfdir} 
     install -D -m 644 ${WORKDIR}/dsm.config ${D}${sysconfdir}
     install -d ${D}/${systemd_unitdir}/system

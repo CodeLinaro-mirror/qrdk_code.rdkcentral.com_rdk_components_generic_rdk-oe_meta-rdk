@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 DESCRIPTION = "Network Zero Config"
 LICENSE = "Apache-2.0"
@@ -11,7 +11,7 @@ SRC_URI += "file://iface-setup.service \
             file://board_access.sh \
             file://default-time-setter.sh "
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${systemd_unitdir}/system
     install -d ${D}${base_libdir}/rdk
     install -m 0644 ${WORKDIR}/iface-setup.service ${D}${systemd_unitdir}/system

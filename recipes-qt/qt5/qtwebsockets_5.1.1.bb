@@ -20,10 +20,10 @@ require recipes-qt/qt5/qt5.inc
 
 OE_QMAKE_PATH_HEADERS = "${OE_QMAKE_PATH_QT_HEADERS}"
 
-ERROR_QA_remove_morty = "pkgconfig"
+ERROR_QA:remove_morty = "pkgconfig"
 
-ERROR_QA_remove_krogoth = "pkgconfig"
+ERROR_QA:remove_krogoth = "pkgconfig"
 
-do_configure_prepend () {
+do_configure:prepend () {
 	rm -rf ${S}/examples
 }

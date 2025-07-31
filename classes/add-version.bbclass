@@ -17,7 +17,7 @@ do_add_version_dir () {
 addtask add_version_dir after do_compile before do_add_version
 
 # Remove version file during clean to avoid contamination.
-python do_clean_append () {
+python do_clean:append () {
     extra_versions_path = d.getVar("EXTRA_VERSIONS_PATH", True)
     pn = d.getVar("PN", True) + ".txt"
     version_pn = os.path.join(extra_versions_path, pn)

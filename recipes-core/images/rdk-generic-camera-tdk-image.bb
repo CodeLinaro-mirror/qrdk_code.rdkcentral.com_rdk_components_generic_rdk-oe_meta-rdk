@@ -6,7 +6,7 @@ inherit rdk-image
 
 require rdk-generic-camera-image.bb
 
-IMAGE_INSTALL_append = " tdk-c"
+IMAGE_INSTALL:append = " tdk-c"
 
 IMAGE_INSTALL += " \
         packagegroup-tdk-camera \

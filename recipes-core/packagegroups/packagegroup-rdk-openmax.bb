@@ -96,4 +96,4 @@ RDEPENDS_packagegroup-rdk-openmax = "\
     gstreamer1.0-plugins-good-autodetect  \
     "
 
-RDEPENDS_packagegroup-rdk-openmax_append_qemuall = " alsa-conf "
+RDEPENDS_packagegroup-rdk-openmax:append_qemuall = " alsa-conf "

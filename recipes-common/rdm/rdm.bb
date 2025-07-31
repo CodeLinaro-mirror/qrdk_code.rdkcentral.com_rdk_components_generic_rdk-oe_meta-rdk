@@ -1,6 +1,6 @@
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/rdm;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=rdmgeneric"
 
@@ -23,8 +23,8 @@ LOGROTATE_SIZE_MEM_rdm_status="1572864"
 LOGROTATE_ROTATION_MEM_rdm_status="3"
 
 DEPENDS = "curl openssl"
-RDEPENDS_${PN}_append = " bash"
-RDEPENDS_${PN}_remove_morty = "bash"
+RDEPENDS_${PN}:append = " bash"
+RDEPENDS_${PN}:remove_morty = "bash"
 
 INCLUDE_DIRS = " \
     -I${STAGING_INCDIR} \
@@ -32,7 +32,7 @@ INCLUDE_DIRS = " \
     "
 LDFLAGS += "-ldl -lcrypto -lssl -lcurl -lz"
 
-do_install_append () {
+do_install:append () {
         install -d ${D}${bindir}/
         install -d ${D}${includedir}/rdm/
         install -d ${D}${sysconfdir}

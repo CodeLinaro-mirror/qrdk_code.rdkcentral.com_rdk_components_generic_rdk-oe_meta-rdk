@@ -22,7 +22,7 @@ include add-users-groups-file-owners-and-permissions.inc
 # Use the oe-core version of "setcap" instead of relying on the host version
 do_rootfs[depends] += "libcap-native:do_populate_sysroot"
 
-ROOTFS_POSTPROCESS_COMMAND_append = "chown_chmod_secap; "
+ROOTFS_POSTPROCESS_COMMAND:append = "chown_chmod_secap; "
 
 python chown_chmod_secap() {
     import getopt

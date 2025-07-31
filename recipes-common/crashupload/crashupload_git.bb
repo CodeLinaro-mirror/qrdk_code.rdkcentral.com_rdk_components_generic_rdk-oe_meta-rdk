@@ -44,7 +44,7 @@ do_install() {
         ln -sf ${bindir}/inotify-minidump-watcher ${D}${bindir}/waitForFlag
 }
 
-do_install_append_broadband() {
+do_install:append_broadband() {
         use_sysv="${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'false', 'true', d)}"
         $use_sysv || install -d ${D}${systemd_unitdir}/system
         $use_sysv || install -m 0644 ${S}/coredump-upload.service ${D}${systemd_unitdir}/system/
@@ -55,7 +55,7 @@ do_install_append_broadband() {
         #install -m 0755 ${S}/uploadDumpsUtils.sh ${D}${base_libdir}/rdk
 }
 
-SYSTEMD_SERVICE_${PN}_append_broadband = " coredump-upload.service \
+SYSTEMD_SERVICE_${PN}:append_broadband = " coredump-upload.service \
                                            coredump-upload.path \
                                            minidump-on-bootup-upload.service \
                                            minidump-on-bootup-upload.timer \
@@ -65,7 +65,7 @@ RDEPENDS_${PN} += "busybox"
 PACKAGE_BEFORE_PN += "${PN}-conf"
 
 FILES_${PN} += "${base_libdir}/rdk/uploadDumps.sh"
-#FILES_${PN}_append_broadband = " ${base_libdir}/rdk/uploadDumpsUtils.sh"
+#FILES_${PN}:append_broadband = " ${base_libdir}/rdk/uploadDumpsUtils.sh"
 FILES_${PN} += " ${bindir}/inotify-minidump-watcher"
 FILES_${PN} += "${bindir}/waitForFlag"
 FILES_${PN}-conf = "${sysconfdir}/rfcdefaults/crashupload.ini"

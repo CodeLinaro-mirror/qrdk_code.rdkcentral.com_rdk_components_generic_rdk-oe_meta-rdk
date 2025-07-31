@@ -95,4 +95,4 @@ RDEPENDS_packagegroup-rdk-omx = "\
     gstreamer1.0-plugins-good-audioparsers \
     "
 
-RDEPENDS_packagegroup-rdk-omx_append_qemuall = " alsa-conf "
+RDEPENDS_packagegroup-rdk-omx:append_qemuall = " alsa-conf "

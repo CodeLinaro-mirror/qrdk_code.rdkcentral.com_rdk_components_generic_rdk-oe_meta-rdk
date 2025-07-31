@@ -1,7 +1,7 @@
 do_fetch[postfuncs] += "write_version"
 do_fetch[vardepsexclude] += "write_version"
 
-SSTATEPOSTINSTFUNCS_append = " write_version"
+SSTATEPOSTINSTFUNCS:append = " write_version"
 sstate_install[vardepsexclude] += "write_version"
 SSTATEPOSTINSTFUNCS[vardepvalueexclude] .= "| write_version"
 

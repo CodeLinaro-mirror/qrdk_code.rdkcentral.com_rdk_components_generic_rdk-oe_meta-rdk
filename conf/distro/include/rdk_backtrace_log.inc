@@ -86,5 +86,5 @@ BACKTRACE_LDFLAGS_pn-busybox = " -Wl,--no-as-needed -lcrashlog -Wl,--as-needed"
 BACKTRACE_LDFLAGS_pn-lighttpd = " -Wl,--no-as-needed -lcrashlog -Wl,--as-needed"
 BACKTRACE_LDFLAGS_pn-cobaltlauncher = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
 
-DEPENDS_append = " ${@LOG_BACKTRACE == "y" and BACKTRACE_DEPENDS or ""}"
-LDFLAGS_append = " ${@LOG_BACKTRACE == "y" and BACKTRACE_LDFLAGS or ""}"
+DEPENDS:append = " ${@LOG_BACKTRACE == "y" and BACKTRACE_DEPENDS or ""}"
+LDFLAGS:append = " ${@LOG_BACKTRACE == "y" and BACKTRACE_LDFLAGS or ""}"

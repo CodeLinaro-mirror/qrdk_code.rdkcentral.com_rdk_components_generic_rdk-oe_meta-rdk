@@ -31,7 +31,7 @@ RRECOMMENDS_${PN} += "webkitbrowser-cache-cleanup"
 
 PACKAGECONFIG ??= "residentapp searchanddiscoveryapp htmlapp lightningapp aampjsbindings badgerbridge customprocessinfo"
 
-PACKAGECONFIG_append = " ${@bb.utils.contains("DISTRO_FEATURES", "jspp", "jspp","",d)}"
+PACKAGECONFIG:append = " ${@bb.utils.contains("DISTRO_FEATURES", "jspp", "jspp","",d)}"
 
 PACKAGECONFIG[debug]                 = "-DCMAKE_BUILD_TYPE=Debug,-DCMAKE_BUILD_TYPE=Release,"
 PACKAGECONFIG[residentapp]           = "-DPLUGIN_WEBKITBROWSER_RESIDENT_APP=ON,-DPLUGIN_WEBKITBROWSER_RESIDENT_APP=OFF,"

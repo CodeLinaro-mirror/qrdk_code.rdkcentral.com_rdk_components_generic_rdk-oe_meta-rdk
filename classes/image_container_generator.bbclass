@@ -32,7 +32,7 @@ XML_CONF="${TOOL_DIR}/non_secure"
 XML_CONF_SECURE="${TOOL_DIR}/secure"
 TOOL="${TOOL_DIR}/src/__main__.py"
 
-ROOTFS_POSTPROCESS_COMMAND_append = "generate_containers_environment ;"
+ROOTFS_POSTPROCESS_COMMAND:append = "generate_containers_environment ;"
 
 def get_oe_version(bb, d):
      bb_version = d.getVar('BB_VERSION', True) or ""

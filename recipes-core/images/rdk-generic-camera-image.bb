@@ -6,7 +6,7 @@ IMAGE_FEATURES += "package-management camera"
 
 IMAGE_ROOTFS_SIZE = "8192"
 
-IMAGE_INSTALL_append += " \
+IMAGE_INSTALL:append += " \
     packagegroup-rdk-oss-camera \
     packagegroup-rdk-ccsp-camera \
     rdk-logger \

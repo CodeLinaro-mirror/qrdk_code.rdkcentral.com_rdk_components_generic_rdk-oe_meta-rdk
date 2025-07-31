@@ -23,7 +23,7 @@ inherit autotools pkgconfig coverity
 
 CFLAGS += " -Wall -Werror -Wextra "
 
-do_install_append () {
+do_install:append () {
 	install -d ${D}${base_libdir}/rdk
         install -d ${D}${sysconfdir}
 

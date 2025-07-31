@@ -6,7 +6,7 @@ include recipes-extended/images/core-image-lsb-sdk.bb
 IMAGE_FEATURES += "tools-sdk dev-pkgs tools-debug"
 IMAGE_ROOTFS_SIZE = "3000000"
 
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     network-hotplug \
     php \
     libmcrypt \
@@ -26,7 +26,7 @@ IMAGE_INSTALL += " \
     packagegroup-rdk-media-common \
 "
 
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     network-hotplug \
     php \
     bzip2 \
@@ -38,7 +38,7 @@ IMAGE_INSTALL_append = " \
     keyutil \
     "
 
-IMAGE_INSTALL_append_container = " \
+IMAGE_INSTALL:append_container = " \
    gzip \
    perl \
    libcap \
