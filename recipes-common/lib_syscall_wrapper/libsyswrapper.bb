@@ -15,7 +15,7 @@ CXXFLAGS_append = " -Wall -Werror"
 SRCREV_libsyswrapper = "${@bb.utils.contains('DISTRO_FEATURES', 'oldsyswrapper', 'de0d67d81488c68baf2ab3f91f8a054e153d3b96', '${AUTOREV}', d)}"
 SRCREV_FORMAT = "libsyswrapper"
 
-EXTRA_OECONF += "--enable-testapp"
+#EXTRA_OECONF += "--enable-testapp"
 
 DEBIAN_NOAUTONAME_${PN} = "1"
 
