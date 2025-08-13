@@ -173,11 +173,26 @@ BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-devtools/jsoncpp/jsoncpp_1.8.4.bb', '', d)}"
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-devtools/jsoncpp/jsoncpp_0.6.0-rc2.bb', '', d)}"
 
-# SIPRA - Yocto-5.0 Scarthgap change
+#Yocto-5.0 Scarthgap change
 
-#BBMASK .= "|./meta-rdk-oss-reference/recipes-rdk/breakpad_wrapper/breakpad-wrapper.bb"
-#BBMASK .= "|./meta-rdk-oss-reference/recipes-core/systemd/systemd_250.%.bbappend"
+DISTRO_FEATURES:append = " usrmerge systemd"
+PREFERRED_VERSION_systemd_scarthgap = "255.17"
+PREFERRED_VERSION_openssl_scarthgap = "3.2.4"
+PREFERRED_VERSION_gdbm_scarthgap = "1.23"
+PREFERRED_VERSION_gnutls_scarthgap = "3.8.4"
+PREFERRED_VERSION_nettle_scarthgap = "3.9.1"
+PREFERRED_VERSION_python3-jinja2-native_scarthgap = "3.1.4"
+PREFERRED_VERSION_gettext-native_scarthgap = "0.22*"
+
+BBMASK .= "|.meta-filogic/recipes-kernel/linux/linux-mediatek_5.4.bb"
+BBMASK .= "|.meta-cmf-mesh/recipes-thirdparty/python3-jinja2-native/python3-jinja2-native_2.11.1.bb"
+BBMASK .= "|.meta-rdk-oss-reference/recipes-gplv2/gettext/gettext_0.16.1.bb"
+BBMASK .= "|.meta-rdk-oss-reference/recipes-connectivity/openssl*"
 BBMASK .= "|.meta-rdk-oss-reference/recipes-core/systemd/systemd_230.bb"
+BBMASK .= "|.meta-rdk-oss-reference/recipes-gplv2/gdbm/gdbm_1.8.3.bb"
+BBMASK .= "|.meta-rdk-oss-reference/recipes-devtools/opkg/opkg_%.bbappend"
+BBMASK .= "|.meta-rdk-oss-reference/recipes-gplv2/gnutls/gnutls_3.3.30.bb"
+BBMASK .= "|.meta-rdk-oss-reference/recipes-gplv2/nettle/nettle_2.7.1.bb"
 BBMASK .= "|.meta-rdk-oss-reference/recipes-extended/(?!pam|tar)|.meta-rdk-oss-reference/recipes-multimedia|.meta-rdk-oss-reference/recipes-graphics/"
 #BBMASK .= "|./meta-rdk-oss-reference/recipes-connectivity/wpa-supplicant/wpa-supplicant_%.bbappend"
 BBMASK .= "|./meta-rdk-oss-reference/recipes-kernel/linux-libc-headers/linux-libc-headers_%.bbappend"

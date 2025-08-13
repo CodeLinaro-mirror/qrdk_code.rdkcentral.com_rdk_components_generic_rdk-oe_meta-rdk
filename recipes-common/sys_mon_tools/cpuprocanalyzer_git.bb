@@ -10,7 +10,7 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 DEPENDS = "rdk-logger cimplog"
 RDEPENDS_${PN} = "rdk-logger"
 
-inherit autotools pkgconfig systemd coverity syslog-ng-config-gen logrotate
+inherit autotools pkgconfig systemd coverity syslog-ng-config-gen ${@bb.utils.contains('DISTRO_FEATURES', 'rdkoss', 'logrotate_config', 'logrotate', d)}
 SYSLOG-NG_FILTER = "cpuprocanalyzer"
 SYSLOG-NG_SERVICE_cpuprocanalyzer = "cpuprocanalyzer.service"
 SYSLOG-NG_DESTINATION_cpuprocanalyzer = "cpuprocanalyzer.log"

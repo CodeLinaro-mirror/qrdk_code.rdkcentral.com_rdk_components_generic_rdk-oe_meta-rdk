@@ -16,7 +16,7 @@ S = "${WORKDIR}/git"
 
 DEPENDS = "log4c glib-2.0"
 DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
-DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd syslog-helper', '', d)}"
+DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd syslog-helper', '', d)}"
 
 PACKAGECONFIG[systemd-syslog-helper] = "--enable-systemd-syslog-helper,,"
 
@@ -48,7 +48,7 @@ do_install:append () {
     ln -sf ${bindir}/rdklogctrl ${D}/rdklogctrl
 }
 
-FILES_${PN} += "${base_libdir}/rdk/logMilestone.sh \
+FILES:${PN} += "${base_libdir}/rdk/logMilestone.sh \
                 /rdkLogMileStone \
                 /rdklogctrl \
                 ${base_libdir} \

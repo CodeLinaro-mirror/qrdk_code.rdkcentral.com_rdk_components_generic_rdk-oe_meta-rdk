@@ -13,7 +13,7 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit cmake systemd pkgconfig coverity syslog-ng-config-gen logrotate
+inherit cmake systemd pkgconfig coverity syslog-ng-config-gen ${@bb.utils.contains('DISTRO_FEATURES', 'rdkoss', 'logrotate_config', 'logrotate', d)}
 DEPENDS = "cjson msgpack-c rdk-logger linenoise"
 
 

@@ -19,7 +19,7 @@ CXXFLAGS += "-DINCLUDE_BREAKPAD"
 DEPENDS = "libnl breakpad-wrapper"
 BREAKPAD_BIN:append = "nlmon"
 
-inherit autotools pkgconfig systemd coverity breakpad-logmapper syslog-ng-config-gen logrotate
+inherit autotools pkgconfig systemd coverity breakpad-logmapper syslog-ng-config-gen ${@bb.utils.contains('DISTRO_FEATURES', 'rdkoss', 'logrotate_config', 'logrotate', d)}
 SYSLOG-NG_FILTER = "nlmon"
 SYSLOG-NG_SERVICE_nlmon = "nlmon.service"
 SYSLOG-NG_DESTINATION_nlmon = "nlmon.log"

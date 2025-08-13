@@ -22,7 +22,7 @@ addtask do_patch_new after do_configure before do_compile
 
 S = "${WORKDIR}/git"
 
-inherit pkgconfig cmake systemd logrotate
+inherit pkgconfig cmake systemd ${@bb.utils.contains('DISTRO_FEATURES', 'rdkoss', 'logrotate_config', 'logrotate', d)}
 #dobby logs storage file is decided using device.properties. syslog-ng-config-gen framework decide the log file.
 
 #config.h file generation for kirkstone builds

@@ -9,7 +9,7 @@ SRCREV_rdmgeneric = "${AUTOREV}"
 SRCREV_FORMAT = "rdmgeneric"
 S = "${WORKDIR}/git"
 
-inherit autotools coverity systemd syslog-ng-config-gen logrotate
+inherit autotools coverity systemd syslog-ng-config-gen ${@bb.utils.contains('DISTRO_FEATURES', 'rdkoss', 'logrotate_config', 'logrotate', d)}
 SYSLOG-NG_FILTER = "apps-rdm"
 SYSLOG-NG_SERVICE_apps-rdm = "apps-rdm.service"
 SYSLOG-NG_DESTINATION_apps-rdm = "rdm_status.log"

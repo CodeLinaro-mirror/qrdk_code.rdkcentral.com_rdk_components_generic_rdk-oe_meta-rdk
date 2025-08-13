@@ -47,7 +47,7 @@ RDEPENDS_${PN}:append_hybrid = " virtual/media-utils"
 RDEPENDS_${PN}:append_hybrid = " audiocapturemgr"
 
 
-inherit autotools pkgconfig systemd coverity syslog-ng-config-gen logrotate
+inherit autotools pkgconfig systemd coverity syslog-ng-config-gen ${@bb.utils.contains('DISTRO_FEATURES', 'rdkoss', 'logrotate_config', 'logrotate', d)}
 SYSLOG-NG_FILTER = "btmgr"
 SYSLOG-NG_SERVICE_btmgr = "btmgr.service"
 SYSLOG-NG_DESTINATION_btmgr = "btmgrlog.txt"
