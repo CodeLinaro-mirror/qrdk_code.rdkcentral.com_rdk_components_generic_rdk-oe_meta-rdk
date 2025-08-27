@@ -42,6 +42,7 @@ BACKTRACE_DEPENDS_pn-subttxrend-app = " breakpad-wrapper"
 BACKTRACE_DEPENDS_pn-logrotate = " breakpad-wrapper"
 BACKTRACE_DEPENDS_pn-AmazonPrimeVideoApp = " breakpad-wrapper"
 BACKTRACE_DEPENDS_pn-amazonPrimeVideo = " breakpad-wrapper"
+BACKTRACE_DEPENDS_pn-amazon-prime-library = " breakpad-wrapper"
 BACKTRACE_DEPENDS_pn-skyAirplayPlugin = " breakpad-wrapper"
 BACKTRACE_DEPENDS_pn-rfc = " breakpad-wrapper"
 
@@ -84,6 +85,7 @@ BACKTRACE_LDFLAGS_pn-subttxrend-app = " -Wl,--no-as-needed -lbreakpadwrapper -Wl
 BACKTRACE_LDFLAGS_pn-logrotate = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
 BACKTRACE_LDFLAGS_pn-AmazonPrimeVideoApp = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
 BACKTRACE_LDFLAGS_pn-amazonPrimeVideo = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
+BACKTRACE_LDFLAGS_pn-amazon-prime-library = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
 BACKTRACE_LDFLAGS_pn-skyAirplayPlugin = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
 BACKTRACE_LDFLAGS_pn-rfc = " -Wl,--no-as-needed -lbreakpadwrapper -Wl,--as-needed "
 
