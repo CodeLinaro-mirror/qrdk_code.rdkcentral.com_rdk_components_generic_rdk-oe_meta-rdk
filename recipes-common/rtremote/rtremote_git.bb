@@ -3,7 +3,7 @@ DESCRIPTION = "rtRemote"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=cfbe95dd83ee8f2ea75475ecc20723e5"
 
-DEPENDS = " util-linux rt-headers "
+DEPENDS = " util-linux rtcore "
 
 PV = "2.x+git${SRCPV}"
 
@@ -34,7 +34,7 @@ TARGET_CXXFLAGS += " -Wl,--warn-unresolved-symbols "
 EXTRA_OECMAKE_append_kirkstone = " -DRTREMOTE_GENERATOR_EXPORT=${WORKDIR}/build/rtRemoteConfigGen_export.cmake "
 EXTRA_OECMAKE_append_dunfell = " -DRTREMOTE_GENERATOR_EXPORT=${S}/temp/rtRemoteConfigGen_export.cmake "
 EXTRA_OECMAKE_append_morty = " -DRTREMOTE_GENERATOR_EXPORT=${S}/temp/rtRemoteConfigGen_export.cmake "
-EXTRA_OECMAKE += " -DRT_INCLUDE_DIR=${STAGING_INCDIR}/pxcore "
+EXTRA_OECMAKE += " -DRT_INCLUDE_DIR=${STAGING_INCDIR}/rtcore "
 
 do_configure_prepend_morty() {
     if [ ! -d ${S}/temp ]; then
@@ -86,6 +86,12 @@ do_install () {
    install -m 0644 ${S}/include/*.h ${D}${includedir}/
 
    cp -R ${S}/external/rapidjson/ ${D}${includedir}/pxcore/
+   
+   mkdir -p ${D}${includedir}/rtcore
+   install -m 0644 ${S}/include/rtRemote.h ${D}${includedir}/rtcore/
+   install -m 0644 ${S}/include/*.h ${D}${includedir}/
+
+   cp -R ${S}/external/rapidjson/ ${D}${includedir}/rtcore/
 
    mkdir -p ${D}/etc
    install -m 0644 "${WORKDIR}/rtremote.conf" "${D}/etc/"
