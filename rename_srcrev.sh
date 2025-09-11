@@ -151,7 +151,6 @@ if [ -f ${PWD}/../versions.conf ]; then
         sed -i 's+SRCREV_pn-rdk/components/opensource/qtwebsockets/generic+SRCREV_pn-qtwebsockets+g' ${PWD}/../versions.conf
         sed -i 's+SRCREV_pn-rdk/yocto_oe/layers/iarmmgrs-hal-sample+SRCREV_pn-iarmmgrs-hal-noop+g' ${PWD}/../versions.conf
         sed -i 's+SRCREV_pn-rdk/components/generic/rmf_mediastreamer/generic+SRCREV_pn-rmfstreamer+g' ${PWD}/../versions.conf
-        sed -i 's+SRCREV_pn-rdk/components/generic/crashupload/generic+SRCREV_pn-crashupload+g' ${PWD}/../versions.conf
         sed -i 's+SRCREV_pn-rdk/components/generic/xupnp/generic+SRCREV_pn-xupnp+g' ${PWD}/../versions.conf
         sed -i 's+SRCREV_pn-rdk/components/generic/dtcp/generic+SRCREV_pn-dtcpmgr-noop+g' ${PWD}/../versions.conf
         sed -i 's+SRCREV_pn-rdk/components/generic/sys_mon_tools/sys_utils/generic/+SRCREV_pn-sys-utils+g' ${PWD}/../versions.conf
