@@ -2,10 +2,11 @@ SUMMARY = "libcap wrapper "
 LICENSE = "Apache-2.0"
 DEPENDS = "libcap jsoncpp"
 S = "${WORKDIR}/git"
-SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/libunpriv;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=libunpriv \
+SRC_URI = "git://github.com/rdkcentral/rdk-libunpriv;protocol=https;nobranch=1;name=rdk-libunpriv \
 "
-SRCREV_libunpriv = "${AUTOREV}"
-SRCREV_FORMAT = "libunpriv"
+SRCREV_rdk-libunpriv = "a0dbea7d368a630158abf56ef8bd7f3855910ec5"
+SRCREV_FORMAT = "rdk-libunpriv"
+
 CXXFLAGS_append = "\
     -I${STAGING_INCDIR} \
     -I${STAGING_INCDIR}/jsoncpp"

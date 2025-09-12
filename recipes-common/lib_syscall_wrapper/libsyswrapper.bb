@@ -6,13 +6,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 S = "${WORKDIR}/git"
 DEPENDS += "rdk-logger"
-SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/libSyscallWrapper;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=libsyswrapper"
+SRC_URI = "git://github.com/rdkcentral/libSyscallWrapper;protocol=https;nobranch=1;name=libsyswrapper"
 DEPENDS = "rdk-logger"
 
 CFLAGS_append = " -Wall -Werror"
 CXXFLAGS_append = " -Wall -Werror"
 
-SRCREV_libsyswrapper = "${@bb.utils.contains('DISTRO_FEATURES', 'oldsyswrapper', 'de0d67d81488c68baf2ab3f91f8a054e153d3b96', '${AUTOREV}', d)}"
+SRCREV_libsyswrapper = "128d52f1d3af63a2178bf8522c6353c0d38b1505"
+#SRCREV_libsyswrapper = "${@bb.utils.contains('DISTRO_FEATURES', 'oldsyswrapper', 'de0d67d81488c68baf2ab3f91f8a054e153d3b96', '${AUTOREV}', d)}"
 SRCREV_FORMAT = "libsyswrapper"
 
 #EXTRA_OECONF += "--enable-testapp"
