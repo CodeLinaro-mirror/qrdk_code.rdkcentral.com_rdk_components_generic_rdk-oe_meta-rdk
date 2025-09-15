@@ -14,8 +14,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI = "git://github.com/rdkcentral/rdm-agent;protocol=git;nobranch=1;name=rdmagent"
 
 SRCREV_FORMAT = "rdmagent"
-# Tag 2.1.1 / Aug 12 2025
-SRCREV_rdmagent = "ad72a998000815c4d11b3ab0a7124aac77eb0a4c"
+# Tag 2.1.3 / DEC 05 2025
+SRCREV_rdmagent = "a62743d21c4f582700151fb04a441cd889c97f3f"
 
 # Make sure our source directory (for the build) matches the directory structure in the tarball
 S = "${WORKDIR}/git"
@@ -35,7 +35,7 @@ LOGROTATE_ROTATION_MEM_rdm_status="3"
 
 PARALLEL_MAKE = ""
 
-DEPENDS += "commonutilities rfc"
+DEPENDS += "commonutilities rfc rdkcertconfig mountutils openssl"
 RDEPENDS_${PN}_append = " rfc"
 
 CFLAGS_append = " -std=c11 -fPIC -D_GNU_SOURCE -Wall"
@@ -44,11 +44,21 @@ LDFLAGS_append = " -lsecure_wrapper"
 
 DEPENDS += "libsyswrapper"
 
+EXTRA_OECONF_append = " --enable-mountutils=yes --enable-rdkcertselector=yes"
+
+DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
+LDFLAGS_append_kirkstone = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
+LDFLAGS_append_dunfell = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '-lsafec-3.5.1', '', d)}"
+LDFLAGS_append_morty = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' -Wl,--no-as-needed -lsafec-3.5.1 -Wl,--as-needed', '', d)}"
+
 INCLUDE_DIRS = " \
     -I${STAGING_INCDIR} \
     -I${STAGING_INCDIR}/openssl \
     "
 LDFLAGS += "-ldl -lcrypto -lssl -lcurl -lz"
+LDFLAGS_append_kirkstone += " -lsafec"
 
 oe_runconf_prepend () {
        sed -i -e 's/\-v \-V/\-v/g' ${S}/configure
