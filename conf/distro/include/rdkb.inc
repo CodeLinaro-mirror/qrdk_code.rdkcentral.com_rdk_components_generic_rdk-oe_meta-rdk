@@ -175,3 +175,5 @@ BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-devtools/jsoncpp/jsoncpp_1.8.4.bb', '', d)}"
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-devtools/jsoncpp/jsoncpp_0.6.0-rc2.bb', '', d)}"
 
+#Dev Key should be used for SSH authentication for Devices marked as Test
+DISTRO_FEATURES_append = " dynamic_keying "
