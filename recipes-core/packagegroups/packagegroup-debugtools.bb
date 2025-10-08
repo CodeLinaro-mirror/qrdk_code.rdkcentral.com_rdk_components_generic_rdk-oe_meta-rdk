@@ -9,7 +9,7 @@ PACKAGES = "\
     "
 
 #To install the script for downloading debugtools
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
   debug-tools \
   "
 

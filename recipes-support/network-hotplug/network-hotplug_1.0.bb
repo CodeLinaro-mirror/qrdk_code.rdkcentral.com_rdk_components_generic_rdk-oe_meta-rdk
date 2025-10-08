@@ -8,9 +8,9 @@ SRC_URI = " \
            file://lan-iface@.service \
           "
 
-FILES_${PN} = "${sysconfdir}/udev/rules.d/* ${systemd_unitdir}/system/*"
+FILES:${PN} = "${sysconfdir}/udev/rules.d/* ${systemd_unitdir}/system/*"
 
-RDEPENDS_${PN} = "udev"
+RDEPENDS:${PN} = "udev"
 
 do_install() {
     install -d ${D}${systemd_unitdir}/system

@@ -15,8 +15,8 @@ S = "${WORKDIR}/git"
 
 DEPENDS = "bluetooth-core cjson"
 
-RDEPENDS_${PN}  = " bluetooth-core"
-RDEPENDS_${PN} += " cjson"
+RDEPENDS:${PN}  = " bluetooth-core"
+RDEPENDS:${PN} += " cjson"
 
 
 DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'gstreamer1', 'gstreamer1.0 gstreamer1.0-plugins-base', '', d)}"
@@ -33,18 +33,18 @@ DEPENDS += " fcgi"
 DEPENDS += " rfc"
 
 DEPENDS += " rdk-logger"
-RDEPENDS_${PN} += " rdk-logger"
+RDEPENDS:${PN} += " rdk-logger"
 
 
 DEPENDS:append_client = " virtual/media-utils"
 DEPENDS:append_client = " audiocapturemgr"
-RDEPENDS_${PN}:append_client = " virtual/media-utils"
-RDEPENDS_${PN}:append_client = " audiocapturemgr"
+RDEPENDS:${PN}:append_client = " virtual/media-utils"
+RDEPENDS:${PN}:append_client = " audiocapturemgr"
 
 DEPENDS:append_hybrid = " virtual/media-utils"
 DEPENDS:append_hybrid = " audiocapturemgr"
-RDEPENDS_${PN}:append_hybrid = " virtual/media-utils"
-RDEPENDS_${PN}:append_hybrid = " audiocapturemgr"
+RDEPENDS:${PN}:append_hybrid = " virtual/media-utils"
+RDEPENDS:${PN}:append_hybrid = " audiocapturemgr"
 
 
 inherit autotools pkgconfig systemd coverity syslog-ng-config-gen ${@bb.utils.contains('DISTRO_FEATURES', 'rdkoss', 'logrotate_config', 'logrotate', d)}
@@ -61,14 +61,14 @@ LOGROTATE_SIZE_btmgr    = "512000"
 LOGROTATE_ROTATION_btmgr  = "5"
 
 
-ENABLE_AC_RMF = "--enable-ac_rmf=${@bb.utils.contains('RDEPENDS_${PN}', 'virtual/${MLPREFIX}media-utils', 'yes', 'no', d)}"
-ENABLE_ACM = "--enable-acm=${@bb.utils.contains('RDEPENDS_${PN}', '${MLPREFIX}audiocapturemgr', 'yes', 'no', d)}"
+ENABLE_AC_RMF = "--enable-ac_rmf=${@bb.utils.contains('RDEPENDS:${PN}', 'virtual/${MLPREFIX}media-utils', 'yes', 'no', d)}"
+ENABLE_ACM = "--enable-acm=${@bb.utils.contains('RDEPENDS:${PN}', '${MLPREFIX}audiocapturemgr', 'yes', 'no', d)}"
 EXTRA_OECONF += " ${ENABLE_ACM} ${ENABLE_AC_RMF}"
 
-CFLAGS:append =" ${@bb.utils.contains('RDEPENDS_${PN}', '${MLPREFIX}audiocapturemgr', ' -I${STAGING_INCDIR}/audiocapturemgr', " ", d)}"
-CFLAGS:append =" ${@bb.utils.contains('RDEPENDS_${PN}', 'virtual/${MLPREFIX}media-utils', ' -I${STAGING_INCDIR}/media-utils -I${STAGING_INCDIR}/media-utils/audioCapture', " ", d)}"
+CFLAGS:append =" ${@bb.utils.contains('RDEPENDS:${PN}', '${MLPREFIX}audiocapturemgr', ' -I${STAGING_INCDIR}/audiocapturemgr', " ", d)}"
+CFLAGS:append =" ${@bb.utils.contains('RDEPENDS:${PN}', 'virtual/${MLPREFIX}media-utils', ' -I${STAGING_INCDIR}/media-utils -I${STAGING_INCDIR}/media-utils/audioCapture', " ", d)}"
 
-ENABLE_RDK_LOGGER = "--enable-rdk-logger=${@bb.utils.contains('RDEPENDS_${PN}', '${MLPREFIX}rdk-logger', 'yes', 'no', d)}"
+ENABLE_RDK_LOGGER = "--enable-rdk-logger=${@bb.utils.contains('RDEPENDS:${PN}', '${MLPREFIX}rdk-logger', 'yes', 'no', d)}"
 EXTRA_OECONF += " ${ENABLE_RDK_LOGGER}"
 
 # Autoconnect feature enabled
@@ -86,7 +86,7 @@ do_install:append() {
     install -m 0644 ${S}/conf/btmgr.service ${D}${systemd_unitdir}/system
 }
 
-SYSTEMD_SERVICE_${PN}  = "btmgr.service"
+SYSTEMD_SERVICE:${PN}  = "btmgr.service"
 
-FILES_${PN} += "${systemd_unitdir}/system/btmgr.service"
+FILES:${PN} += "${systemd_unitdir}/system/btmgr.service"
 

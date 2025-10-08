@@ -15,7 +15,7 @@ SRC_URI += "file://stress-ng-tests.sh \
 	    file://stress-ng.conf \
             "
             
-#SYSTEMD_SERVICE_${PN} = "stress-ng-test.path stress-ng-test.service"
+#SYSTEMD_SERVICE:${PN} = "stress-ng-test.path stress-ng-test.service"
 
 do_install:append() {
     install -d ${D}/lib/rdk
@@ -31,11 +31,11 @@ do_install:append() {
     install -m 755 ${WORKDIR}/stress-ng.conf ${D}${sysconfdir}
 }
 
-FILES_${PN} += " /lib/rdk/capture-proc-metrics.sh " 
-FILES_${PN} += " /lib/rdk/stress-ng-tests.sh " 
-FILES_${PN} += " /lib/rdk/rdk_oss_uploadSTBLogs.sh"
-FILES_${PN} += " /lib/rdk/openssl-ptest-stress.sh " 
-FILES_${PN} += " /lib/rdk/openssl-ptest-perf_stats.sh " 
-FILES_${PN} += "${systemd_unitdir}/system/stress-test.service"
-FILES_${PN} += "${systemd_unitdir}/system/openssl-stress.service"
-FILES_${PN} += "${sysconfdir}/stress-ng.conf"
+FILES:${PN} += " /lib/rdk/capture-proc-metrics.sh " 
+FILES:${PN} += " /lib/rdk/stress-ng-tests.sh " 
+FILES:${PN} += " /lib/rdk/rdk_oss_uploadSTBLogs.sh"
+FILES:${PN} += " /lib/rdk/openssl-ptest-stress.sh " 
+FILES:${PN} += " /lib/rdk/openssl-ptest-perf_stats.sh " 
+FILES:${PN} += "${systemd_unitdir}/system/stress-test.service"
+FILES:${PN} += "${systemd_unitdir}/system/openssl-stress.service"
+FILES:${PN} += "${sysconfdir}/stress-ng.conf"

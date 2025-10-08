@@ -10,7 +10,7 @@ PACKAGES = "\
     "
 
 # Generic RDK components
-RDEPENDS_packagegroup-rdk-generic-mediaclient = "\
+RDEPENDS:packagegroup-rdk-generic-mediaclient = "\
     dnsmasq \
     ${@bb.utils.contains("WEBBACKENDS", "rdkbrowser", "rdkbrowser-webserver", "", d)} \
     tr69hostif \
@@ -23,7 +23,7 @@ RDEPENDS_packagegroup-rdk-generic-mediaclient = "\
 # since we compile RDK component within qtwebkit (mediaplayersink) it
 # is no longer a generic component anymore, and we need to make it
 # part of RDK, since it won't compile in stand alone anymore..
-RDEPENDS_packagegroup-rdk-generic-mediaclient += "\
+RDEPENDS:packagegroup-rdk-generic-mediaclient += "\
     ${@bb.utils.contains("DISTRO_FEATURES", "gstreamer1", "gstreamer1.0-plugins-base", "gst-plugins-base", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "gstreamer1", "gstreamer1.0-plugins-good", "gst-plugins-good", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "gstreamer1", "gstreamer1.0-plugins-bad", "gst-plugins-bad", d)} \

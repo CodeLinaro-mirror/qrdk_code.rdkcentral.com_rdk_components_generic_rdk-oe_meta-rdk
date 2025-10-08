@@ -7,7 +7,7 @@ PACKAGES = "\
     packagegroup-wpe-webkit \
 "
 
-RDEPENDS_packagegroup-wpe-webkit = "\
+RDEPENDS:packagegroup-wpe-webkit = "\
     wpe-webkit \
     wpe-backend-rdk-platform-plugin \
     wpe-webkit-web-inspector-plugin \
@@ -15,13 +15,13 @@ RDEPENDS_packagegroup-wpe-webkit = "\
 "
 
 # Additional OSS packages etc, which are only needed for WPE based images.
-RDEPENDS_packagegroup-wpe-webkit += "\
+RDEPENDS:packagegroup-wpe-webkit += "\
     xkeyboard-config \
     shared-mime-info \
 "
 
 # Additional thunder packages, which are only needed for WPE based images.
-RDEPENDS_packagegroup-wpe-webkit += "\
+RDEPENDS:packagegroup-wpe-webkit += "\
     wpeframework \
     thunderjs \
 "

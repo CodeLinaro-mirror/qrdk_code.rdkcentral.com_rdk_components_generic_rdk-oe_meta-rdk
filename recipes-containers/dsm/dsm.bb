@@ -8,8 +8,8 @@ SRC_URI = "${CMF_GITHUB_ROOT}/DSM;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GITH
            file://dsm.service "
 
 SRCREV = "c3cfd0a9d1ee1e9c2f2e8db4348b314aa32439bc"
-SRCREV_kirkstone = "863d5e80e726faa62b1a78f0b59fa743eaee7bbc"
-DEPENDS:append_kirkstone = " dobby "
+SRCREV_scarthgap = "863d5e80e726faa62b1a78f0b59fa743eaee7bbc"
+DEPENDS:append_scarthgap = " dobby "
 
 EXTRA_OECMAKE =  " -DENABLE_RBUS_PROVIDER=ON"
 
@@ -18,13 +18,14 @@ inherit pkgconfig cmake systemd
 DEPENDS += "rbus"
 DEPENDS += "dobby"
 
-RDEPENDS_${PN} += "rbus"
-RDEPENDS_${PN} += "dobby"
+RDEPENDS:${PN} += "rbus"
+RDEPENDS:${PN} += "dobby"
+RDEPENDS:${PN}:remove_broadband = "apparmor"
 
 SYSTEMD_AUTO_ENABLE_${PN} = "enable"
-SYSTEMD_SERVICE_${PN} = "dsm.service"
+SYSTEMD_SERVICE:${PN} = "dsm.service"
 
-FILES_${PN} += " ${systemd_unitdir}/system/dsm.service \
+FILES:${PN} += " ${systemd_unitdir}/system/dsm.service \
                  ${sysconfdir}/dsm.config \
                  /home/root/destination "
 
@@ -32,7 +33,7 @@ OECMAKE_CXX_FLAGS += " -I${STAGING_INCDIR}/rbus "
 OECMAKE_CXX_FLAGS += "-I${STAGING_INCDIR}"
 
 SYSTEMD_AUTO_ENABLE_${PN} = "enable"
-SYSTEMD_SERVICE_${PN} = " dsm.service "
+SYSTEMD_SERVICE:${PN} = " dsm.service "
 
 do_install:append() {
     install -d ${D}${sysconfdir} 

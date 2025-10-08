@@ -13,12 +13,12 @@ SRCREV_default = "${AUTOREV}"
 S = "${WORKDIR}/git"
 
 DEPENDS = "glib-2.0 gupnp fcgi dbus gnutls libgcrypt"
-FILES_${PN} += "${libdir}/"
+FILES:${PN} += "${libdir}/"
 
 CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-sign-compare -Wno-deprecated-declarations -Wno-type-limits -Wno-unused-parameter -Wno-lto-type-mismatch"
 
 DEPENDS = "glib-2.0 gupnp fcgi dbus gnutls rdk-logger libgcrypt libgpg-error "
-RDEPENDS_${PN} += "gnutls"
+RDEPENDS:${PN} += "gnutls"
 
 DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'telemetry2_0', 'telemetry', '', d)}"
@@ -37,7 +37,7 @@ PACKAGECONFIG[media-renderer] = "--enable-media-renderer,--disable-media-rendere
 
 PACKAGECONFIG:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'dlnasupport', ' media-renderer', '', d)}"
 PROVIDES += "${@bb.utils.contains('DISTRO_FEATURES', 'dlnasupport', '${PN}-rpc', '', d)}"
-FILES_${PN}-rpc = "${@bb.utils.contains('DISTRO_FEATURES', 'dlnasupport', '${libdir}/libmediabrowser.so.*', '', d)}"
+FILES:${PN}-rpc = "${@bb.utils.contains('DISTRO_FEATURES', 'dlnasupport', '${libdir}/libmediabrowser.so.*', '', d)}"
 PACKAGE_BEFORE_PN += "${@bb.utils.contains('DISTRO_FEATURES', 'dlnasupport', '${PN}-rpc', '', d)}"
 
 PACKAGECONFIG:append_client = " client"
@@ -63,7 +63,7 @@ CFLAGS:append = " -DLOGMILESTONE"
 LDFLAG:append = " -lrdkloggers"
 
 PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
-FILES_${PN}-gtest = "\
+FILES:${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/xupnp_gtest.bin', '', d)} \
 "
 

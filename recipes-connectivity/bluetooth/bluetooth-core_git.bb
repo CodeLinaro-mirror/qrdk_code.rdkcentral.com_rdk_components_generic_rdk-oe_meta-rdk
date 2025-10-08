@@ -8,7 +8,7 @@ BLUEZ ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', bb.utils.contains
 DEPENDS = "dbus ${BLUEZ} rdk-logger"
 DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'gdbus_bluez5', 'glib-2.0-native', '', d)}"
 
-RDEPENDS_${PN} = "dbus ${BLUEZ} rdk-logger"
+RDEPENDS:${PN} = "dbus ${BLUEZ} rdk-logger"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 
 SRCREV = "${AUTOREV}"
@@ -28,7 +28,7 @@ EXTRA_OECONF += "${ENABLE_BTR_IFCE}"
 ENABLE_STREAMING_IN = "--enable-streaming-in=${@bb.utils.contains('DISTRO_FEATURES', 'btr_disable_streaming_in','no','yes',d)}"
 EXTRA_OECONF += " ${ENABLE_STREAMING_IN} "
 
-ENABLE_RDK_LOGGER = "--enable-rdk-logger=${@bb.utils.contains('RDEPENDS_${PN}', '${MLPREFIX}rdk-logger', 'yes', 'no', d)}"
+ENABLE_RDK_LOGGER = "--enable-rdk-logger=${@bb.utils.contains('RDEPENDS:${PN}', '${MLPREFIX}rdk-logger', 'yes', 'no', d)}"
 EXTRA_OECONF += " ${ENABLE_RDK_LOGGER}"
 
 inherit autotools pkgconfig coverity

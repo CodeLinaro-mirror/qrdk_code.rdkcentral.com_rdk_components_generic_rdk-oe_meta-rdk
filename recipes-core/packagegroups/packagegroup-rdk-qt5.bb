@@ -8,7 +8,7 @@ PACKAGES = "\
     packagegroup-rdk-qt5 \
     "
 
-RDEPENDS_packagegroup-rdk-qt5 = "\
+RDEPENDS:packagegroup-rdk-qt5 = "\
     qtbase \
     ${@bb.utils.contains('DISTRO_FEATURES','build_for_sky', bb.utils.contains('DISTRO_FEATURES', 'comcast_qt5', "qtbase-plugins", "qtbase-examples qtbase-plugins qtdeclarative qtwayland qtwayland-plugins qtremoteobjects", d), ' qtbase-fonts qtbase-plugins', d)} \
     "

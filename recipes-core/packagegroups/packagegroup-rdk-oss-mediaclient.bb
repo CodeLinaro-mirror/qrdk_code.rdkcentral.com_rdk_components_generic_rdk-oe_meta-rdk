@@ -10,10 +10,10 @@ PACKAGES = "\
     "
 
 # Opensource components used in RDK
-RDEPENDS_packagegroup-rdk-oss-mediaclient = "\
+RDEPENDS:packagegroup-rdk-oss-mediaclient = "\
     util-linux-sfdisk \
     "
-RDEPENDS_packagegroup-rdk-oss-mediaclient_rpi += "\
+RDEPENDS:packagegroup-rdk-oss-mediaclient_rpi += "\
     sysint \
     sysint-conf \
     "

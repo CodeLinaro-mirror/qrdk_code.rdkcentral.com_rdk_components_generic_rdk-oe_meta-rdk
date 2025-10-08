@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/rdkcentral/telemetry.git;protocol=git;nobranch=1"
 DEPENDS += "curl cjson glib-2.0 breakpad-wrapper rbus libsyswrapper libunpriv"
 DEPENDS += "rdk-logger"
 
-RDEPENDS_${PN} += "curl cjson glib-2.0 rbus"
+RDEPENDS:${PN} += "curl cjson glib-2.0 rbus libunpriv"
 
 #PV = "${RDK_RELEASE}+git${SRCPV}"
 #SRCREV ?= "${AUTOREV}"
@@ -45,33 +45,37 @@ CXXFLAGS += "-DINCLUDE_BREAKPAD"
 
 do_install:append () {
     install -d ${D}/usr/include/
-    install -d ${D}/lib/rdk/
+    install -d ${D}/${libdir}/rdk/
     install -d ${D}${systemd_unitdir}/system
     install -m 644 ${S}/include/telemetry_busmessage_sender.h ${D}/usr/include/
     install -m 644 ${S}/include/telemetry2_0.h ${D}/usr/include/
-    install -m 0755 ${S}/source/commonlib/t2Shared_api.sh ${D}/lib/rdk
+    install -m 0755 ${S}/source/commonlib/t2Shared_api.sh ${D}/${libdir}/rdk
     rm -fr ${D}/usr/lib/libtelemetry_msgsender.la
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 't2_without_webconfig', 'true', 'false', d)}; then
-        install -m 0755 ${S}/source/commonlib/download_t2_profile.sh ${D}/lib/rdk
+        install -m 0755 ${S}/source/commonlib/download_t2_profile.sh ${D}/${libdir}/rdk
     fi
 }
 
-FILES_${PN} = "\
+FILES:${PN} = "\
     ${bindir}/telemetry2_0 \
     ${bindir}/t2rbusMethodSimulator \
     ${bindir}/telemetry2_0_client \
     ${systemd_unitdir}/system \
 "
-FILES_${PN} += "${libdir}/*.so*"
-FILES_${PN} += "/lib/rdk/*"
+FILES:${PN} += "${libdir}/*.so.*"
+FILES:${PN}-dev += "${libdir}/*.so"
+
+FILES:${PN} += "${libdir}/rdk/*"
+FILES:${PN} += "${systemd_unitdir}/system/"
 
 FILES_SOLIBSDEV = ""
-INSANE_SKIP_${PN} += "dev-so"
+INSANE_SKIP:${PN} += "dev-so"
+INSANE_SKIP:${PN} += "dev-deps dev-rdeps"
 
 PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
-FILES_${PN}-gtest = "\
+FILES:${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/telemetry_gtest.bin ${bindir}/xconfclient_gtest.bin ${bindir}/t2parser_gtest.bin ${bindir}/reportgen_gtest.bin ${bindir}/scheduler_gtest.bin', '', d)} \
 "
 

@@ -8,6 +8,7 @@ SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/breakpad_wrapper;protocol=${CM
 DEPENDS_broadband += "breakpad"
 DEPENDS_client += "breakpad"
 DEPENDS_hybrid += "breakpad"
+DEPENDS += "breakpad"
 
 SRCREV_breakpad_wrapper = "${AUTOREV}"
 PV = "${RDK_RELEASE}+git${SRCPV}"
@@ -31,4 +32,5 @@ do_install:append () {
 }
 
 
-FILES_${PN} += "${libdir}/*.so"
+FILES:${PN} += "${libdir}/*.so.*"
+FILES:${PN}-dev += "${libdir}/*.so"

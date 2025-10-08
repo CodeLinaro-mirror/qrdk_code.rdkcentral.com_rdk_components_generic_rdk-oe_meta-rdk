@@ -10,4 +10,4 @@ PACKAGES = "\
     "
 
 # Generic RDK components
-RDEPENDS_packagegroup-rdk-voicecontrol = ""
+RDEPENDS:packagegroup-rdk-voicecontrol = ""

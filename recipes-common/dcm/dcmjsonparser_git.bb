@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 DEPENDS= "cjson telemetry safec-common-wrapper"
 DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
-RDEPENDS_${PN} = "cjson"
+RDEPENDS:${PN} = "cjson"
 
 SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/dcm;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH}"
 

@@ -7,8 +7,8 @@ DEPENDS = "rbus"
 DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 DEPENDS_class-native = ""
 
-RDEPENDS_${PN}:append = " bash"
-RDEPENDS_${PN}:remove_morty = "bash"
+RDEPENDS:${PN}:append = " bash"
+RDEPENDS:${PN}:remove_morty = "bash"
 
 SRC_URI = "${RDK_GENERIC_ROOT_GIT}/WebconfigFramework/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH}"
 
@@ -63,6 +63,6 @@ do_install_class-native () {
     echo "Compile is skipped"
 }
 
-FILES_${PN} += "${libdir}/*.so"
+FILES:${PN}-dev += "${libdir}/*.so"
 
 BBCLASSEXTEND = "native"

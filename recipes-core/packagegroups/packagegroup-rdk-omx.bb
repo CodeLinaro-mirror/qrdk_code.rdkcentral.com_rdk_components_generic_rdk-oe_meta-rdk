@@ -10,7 +10,7 @@ PACKAGES = "\
     "
 
 # Opensource components used in RDK
-RDEPENDS_packagegroup-rdk-omx = "\
+RDEPENDS:packagegroup-rdk-omx = "\
     curl \
     dropbear \
     e2fsprogs \
@@ -95,4 +95,4 @@ RDEPENDS_packagegroup-rdk-omx = "\
     gstreamer1.0-plugins-good-audioparsers \
     "
 
-RDEPENDS_packagegroup-rdk-omx:append_qemuall = " alsa-conf "
+RDEPENDS:packagegroup-rdk-omx:append_qemuall = " alsa-conf "

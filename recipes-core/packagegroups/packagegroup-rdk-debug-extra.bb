@@ -9,7 +9,7 @@ PACKAGES = "\
     "
 
 # Packages to be included in 'debug-extra' images
-RDEPENDS_packagegroup-rdk-debug-extra = "\
+RDEPENDS:packagegroup-rdk-debug-extra = "\
     strace \
     tcf-agent \
     alsa-utils-amixer \

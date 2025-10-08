@@ -22,4 +22,4 @@ do_install() {
            install -m 0755 RdkConfigApi/src/GetConfigFile ${D}/${bindir}/         
 }
 
-FILES_${PN} += "${bindir}/* "
+FILES:${PN} += "${bindir}/* "

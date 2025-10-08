@@ -7,7 +7,7 @@ SRC_URI = "${RDK_COMPONENTS_ROOT_GIT}/rdkssa/generic;protocol=${RDK_GIT_PROTOCOL
 PV = "${RDK_RELEASE}+git${SRCPV}"
 SRCREV_rdk-oss-ssa = "${AUTOREV}"
 PROVIDES = "rdk-oss-ssa"
-RPROVIDES_${PN} = "rdk-oss-ssa"
+RPROVIDES:${PN} = "rdk-oss-ssa"
 SRCREV_FORMAT = "rdk-oss-ssa"
 S = "${WORKDIR}/git"
 
@@ -46,11 +46,11 @@ do_install:prepend() {
 
 }
 
-SYSTEMD_SERVICE_${PN} = " rdk-oss-ssa-ecfsinit.service"
-FILES_${PN}:append = " ${systemd_unitdir}/system/*"
+SYSTEMD_SERVICE:${PN} = " rdk-oss-ssa-ecfsinit.service"
+FILES:${PN}:append = " ${systemd_unitdir}/system/*"
 
-FILES_${PN} += "${bindir}/*"
-FILES_${PN} += "${base_libdir}/*"
-FILES_${PN} += "${sysconfdir}/*"
+FILES:${PN} += "${bindir}/*"
+FILES:${PN} += "${base_libdir}/*"
+FILES:${PN} += "${sysconfdir}/*"
 
 

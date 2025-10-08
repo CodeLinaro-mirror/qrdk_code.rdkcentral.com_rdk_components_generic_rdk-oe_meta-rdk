@@ -23,8 +23,8 @@ LOGROTATE_SIZE_MEM_rdm_status="1572864"
 LOGROTATE_ROTATION_MEM_rdm_status="3"
 
 DEPENDS = "curl openssl"
-RDEPENDS_${PN}:append = " bash"
-RDEPENDS_${PN}:remove_morty = "bash"
+RDEPENDS:${PN}:append = " bash"
+RDEPENDS:${PN}:remove_morty = "bash"
 
 INCLUDE_DIRS = " \
     -I${STAGING_INCDIR} \
@@ -52,15 +52,15 @@ do_install:append () {
         rm -f ${D}${sysconfdir}/rdm/kmsVerify.sh
 }
 
-SYSTEMD_SERVICE_${PN} = "apps-rdm.service"
-SYSTEMD_SERVICE_${PN} += "apps_rdm.path"
-SYSTEMD_SERVICE_${PN} += "apps-prerdm.service"
+SYSTEMD_SERVICE:${PN} = "apps-rdm.service"
+SYSTEMD_SERVICE:${PN} += "apps_rdm.path"
+SYSTEMD_SERVICE:${PN} += "apps-prerdm.service"
 
-FILES_${PN} += "${systemd_unitdir}/system/apps-rdm.service"
-FILES_${PN} += "${systemd_unitdir}/system/apps_rdm.path"
-FILES_${PN} += "${systemd_unitdir}/system/apps-prerdm.service"
+FILES:${PN} += "${systemd_unitdir}/system/apps-rdm.service"
+FILES:${PN} += "${systemd_unitdir}/system/apps_rdm.path"
+FILES:${PN} += "${systemd_unitdir}/system/apps-prerdm.service"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
                 /etc/rdm/* \
                 /usr/bin/opensslVerify \
 "

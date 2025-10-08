@@ -25,7 +25,7 @@ SYSLOG-NG_SERVICE_nlmon = "nlmon.service"
 SYSLOG-NG_DESTINATION_nlmon = "nlmon.log"
 SYSLOG-NG_LOGRATE_nlmon = "medium"
 
-RDEPENDS_${PN} += "libnl"
+RDEPENDS:${PN} += "libnl"
 LOGROTATE_NAME="nlmon"
 LOGROTATE_LOGNAME_nlmon="nlmon.log"
 LOGROTATE_SIZE_nlmon="1572864"
@@ -53,16 +53,16 @@ do_install:append_client () {
    install ${S}/nlmon_client.cfg ${D}${sysconfdir}/nlmon.cfg
 }
 
-FILES_${PN} += "${systemd_unitdir}/system/* \
+FILES:${PN} += "${systemd_unitdir}/system/* \
                /lib/rdk/checkDefaultRoute.sh \
                /lib/rdk/printaddress.sh \
                /lib/rdk/printroute.sh \
                /lib/rdk/ipmodechange.sh \
                ${sysconfdir}/nlmon.cfg \
                "
-FILES_${PN}:append_client += "/lib/rdk/ipv6addressChange.sh \
+FILES:${PN}:append_client += "/lib/rdk/ipv6addressChange.sh \
                              "
-SYSTEMD_SERVICE_${PN} = "nlmon.service"
+SYSTEMD_SERVICE:${PN} = "nlmon.service"
 
 # Breakpad processname and logfile mapping
 BREAKPAD_LOGMAPPER_PROCLIST = "nlmon"

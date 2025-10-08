@@ -23,5 +23,5 @@ INSANE_SKIP_${PN} += "dev-so"
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
-FILES_${PN} += "${libdir}/plugins/dobby/*.so*"
+FILES:${PN} += "${libdir}/plugins/dobby/*.so*"
 

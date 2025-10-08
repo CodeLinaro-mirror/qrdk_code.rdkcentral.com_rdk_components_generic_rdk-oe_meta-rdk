@@ -14,7 +14,8 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit cmake systemd pkgconfig coverity syslog-ng-config-gen ${@bb.utils.contains('DISTRO_FEATURES', 'rdkoss', 'logrotate_config', 'logrotate', d)}
-DEPENDS = "cjson msgpack-c rdk-logger linenoise"
+DEPENDS = "cjson msgpack-c rdk-logger"
+DEPENDS:append:class-target = " linenoise"
 
 
 #RDK Specific Enablements
@@ -66,19 +67,19 @@ do_install:append_client() {
 
 PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
-FILES_${PN}-gtest += "\
+FILES:${PN}-gtest += "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/rbus_gtest.bin', '', d)} \
 "
 
-FILES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/rbus_src_gcno.tar', '', d)}"
+FILES:${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/rbus_src_gcno.tar', '', d)}"
 
 
-FILES_${PN} += "${systemd_unitdir}/system/*"
-SYSTEMD_SERVICE_${PN} = "rbus.service"
-SYSTEMD_SERVICE_${PN}:append = " rbus_session_mgr.service "
-SYSTEMD_SERVICE_${PN}:append_broadband  = " rbus_monitor.service "
-SYSTEMD_SERVICE_${PN}:append_broadband  = " rbus_monitor.path "
-SYSTEMD_SERVICE_${PN}:append_broadband  = " rbus_log.service "
+FILES:${PN} += "${systemd_unitdir}/system/*"
+SYSTEMD_SERVICE:${PN} = "rbus.service"
+SYSTEMD_SERVICE:${PN}:append = " rbus_session_mgr.service "
+SYSTEMD_SERVICE:${PN}:append_broadband  = " rbus_monitor.service "
+SYSTEMD_SERVICE:${PN}:append_broadband  = " rbus_monitor.path "
+SYSTEMD_SERVICE:${PN}:append_broadband  = " rbus_log.service "
 
 DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-rbus', '', d)}"
 inherit comcast-package-deploy

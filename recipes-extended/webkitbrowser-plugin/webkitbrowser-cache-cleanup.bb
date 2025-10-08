@@ -17,5 +17,5 @@ do_install() {
     sed -e "s|@WEBKIT_CACHE_CLEAN_SERVICE_ORDER_AFTER@|${WEBKIT_CACHE_CLEAN_SERVICE_ORDER_AFTER}|g" < ${WORKDIR}/webkit-browser-cache-cleanup.service.in > ${D}${systemd_unitdir}/system/webkit-browser-cache-cleanup.service
 }
 
-SYSTEMD_SERVICE_${PN} = "webkit-browser-cache-cleanup.service"
-FILES_${PN} = "${base_libdir}/rdk/clearWebkitBrowserCache.sh ${systemd_unitdir}/system/webkit-browser-cache-cleanup.service"
+SYSTEMD_SERVICE:${PN} = "webkit-browser-cache-cleanup.service"
+FILES:${PN} = "${base_libdir}/rdk/clearWebkitBrowserCache.sh ${systemd_unitdir}/system/webkit-browser-cache-cleanup.service"

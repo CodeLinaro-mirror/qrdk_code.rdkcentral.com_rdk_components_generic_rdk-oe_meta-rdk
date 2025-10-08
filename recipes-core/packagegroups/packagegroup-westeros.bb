@@ -9,7 +9,7 @@ PACKAGES = "\
     packagegroup-westeros \
 "
 
-RDEPENDS_packagegroup-westeros = "\
+RDEPENDS:packagegroup-westeros = "\
     westeros \
     westeros-simplebuffer \
     westeros-simpleshell \

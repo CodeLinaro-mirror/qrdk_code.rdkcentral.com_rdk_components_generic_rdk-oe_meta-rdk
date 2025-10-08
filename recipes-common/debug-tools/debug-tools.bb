@@ -9,6 +9,6 @@ do_install:append () {
         install -m 0777 ${WORKDIR}/debug-tools_download.sh ${D}${sbindir}/
 }
 
-FILES_${PN} = "\
+FILES:${PN} = "\
     ${sbindir}/debug-tools_download.sh \
 "

@@ -10,5 +10,5 @@ PACKAGES = "\
 "
 
 # CCSP components used in RDK-C
-RDEPENDS_packagegroup-rdk-ccsp-camera = "\
+RDEPENDS:packagegroup-rdk-ccsp-camera = "\
 "

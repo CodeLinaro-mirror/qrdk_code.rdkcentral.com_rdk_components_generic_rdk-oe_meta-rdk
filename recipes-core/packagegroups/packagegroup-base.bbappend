@@ -1,3 +1,3 @@
-RDEPENDS_packagegroup-base-zeroconf = "\
+RDEPENDS:packagegroup-base-zeroconf = "\
     "
 

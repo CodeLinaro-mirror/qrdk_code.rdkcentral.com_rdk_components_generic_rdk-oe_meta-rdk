@@ -10,7 +10,7 @@ PACKAGES = "\
     "
 
 # Opensource components used in RDK
-RDEPENDS_packagegroup-rdk-oss-mediaserver = "\
+RDEPENDS:packagegroup-rdk-oss-mediaserver = "\
     mongoose \
     libtinyxml \
     gptfdisk \

@@ -9,7 +9,7 @@ PACKAGES = "\
     packagegroup-rdk-oss-camera \
     "
 # Opensource components used in RDK-C
-RDEPENDS_packagegroup-rdk-oss-camera = "\
+RDEPENDS:packagegroup-rdk-oss-camera = "\
     bash \
     cryptsetup \
     curl \
@@ -53,5 +53,5 @@ RDEPENDS_packagegroup-rdk-oss-camera = "\
     wireless-tools \
     zlib \
     "
-RDEPENDS_packagegroup-rdk-oss-camera:append_qemuall = " sysint "
+RDEPENDS:packagegroup-rdk-oss-camera:append_qemuall = " sysint "
 

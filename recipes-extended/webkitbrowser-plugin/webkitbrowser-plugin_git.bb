@@ -126,8 +126,8 @@ EXTRA_OECMAKE += " \
 "
 
 FILES_SOLIBSDEV = ""
-FILES_${PN} += "${libdir}/wpeframework/plugins/*.so ${libdir}/*.so ${datadir}/WPEFramework/*"
-FILES_${PN}-dbg += "${datadir}/WPEFramework/WebKitBrowser/.debug"
+FILES:${PN} += "${libdir}/wpeframework/plugins/*.so ${libdir}/*.so ${datadir}/WPEFramework/*"
+FILES:${PN}-dbg += "${datadir}/WPEFramework/WebKitBrowser/.debug"
 
 INSANE_SKIP_${PN} += "libdir staticdev dev-so"
 INSANE_SKIP_${PN}-dbg += "libdir"

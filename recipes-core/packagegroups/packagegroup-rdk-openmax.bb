@@ -10,7 +10,7 @@ PACKAGES = "\
     "
 
 # Opensource components used in RDK
-RDEPENDS_packagegroup-rdk-openmax = "\
+RDEPENDS:packagegroup-rdk-openmax = "\
     curl \
     dropbear \
     e2fsprogs \
@@ -96,4 +96,4 @@ RDEPENDS_packagegroup-rdk-openmax = "\
     gstreamer1.0-plugins-good-autodetect  \
     "
 
-RDEPENDS_packagegroup-rdk-openmax:append_qemuall = " alsa-conf "
+RDEPENDS:packagegroup-rdk-openmax:append_qemuall = " alsa-conf "

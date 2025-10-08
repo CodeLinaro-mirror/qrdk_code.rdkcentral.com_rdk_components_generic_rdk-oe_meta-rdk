@@ -34,20 +34,22 @@ do_install:append () {
 	install -m 0755 ${S}/RFC_Reboot.sh ${D}${sysconfdir}/RFC_Reboot.sh
 }
 
-RDEPENDS_${PN} += "busybox"
+RDEPENDS:${PN} += "busybox"
 
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', ' gtest gmock', '', d)}"
 PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
-FILES_${PN}-gtest = "\
+FILES:${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/rfc_gtest.bin', '', d)} \
 "
-FILES_${PN} += "${bindir}/rfctool"
-FILES_${PN} += "${base_libdir}/*"
-FILES_${PN} += "${sysconfdir}/*"
+FILES:${PN} += "${bindir}/rfctool"
+FILES:${PN} += "${base_libdir}/*"
+FILES:${PN} += "${sysconfdir}/*"
 
 DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-rfc', '', d)}"
 inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtest', '', d)}"
 SKIP_MAIN_PKG="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
 DOWNLOAD_ON_DEMAND="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
+
+INSANE_SKIP:${PN} += "file-rdeps"

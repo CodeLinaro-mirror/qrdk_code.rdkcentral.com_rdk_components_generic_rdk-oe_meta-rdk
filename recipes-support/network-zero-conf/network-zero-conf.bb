@@ -22,7 +22,7 @@ do_install:append() {
     install -m 0755 ${WORKDIR}/default-time-setter.sh ${D}${base_libdir}/rdk/
 }
 
-SYSTEMD_SERVICE_${PN} = "iface-setup.service board-access.service"
+SYSTEMD_SERVICE:${PN} = "iface-setup.service board-access.service"
 
-FILES_${PN} = " ${base_libdir}/rdk/board_access.sh \
+FILES:${PN} = " ${base_libdir}/rdk/board_access.sh \
                 ${base_libdir}/rdk/default-time-setter.sh "

@@ -91,7 +91,7 @@ do_install () {
    install -m 0644 "${WORKDIR}/rtremote.conf" "${D}/etc/"
 }
 
-FILES_${PN} += "${libdir}/*.so"
+FILES:${PN} += "${libdir}/*.so"
 FILES_SOLIBSDEV = ""
 INSANE_SKIP_${PN} += "dev-so staticdev"
 INSANE_SKIP_${PN}:append_morty = " ldflags"

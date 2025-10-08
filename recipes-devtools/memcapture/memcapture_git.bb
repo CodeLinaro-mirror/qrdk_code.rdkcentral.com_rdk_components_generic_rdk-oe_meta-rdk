@@ -43,9 +43,9 @@ do_install () {
     install -m 0644 ${WORKDIR}/memcapture/memcapture.service ${D}${systemd_unitdir}/system/memcapture.service
 }
 
-SYSTEMD_SERVICE_${PN} += "memcapture.service"
+SYSTEMD_SERVICE:${PN} += "memcapture.service"
 
-FILES_${PN} += "${bindir}/MemCapture \
+FILES:${PN} += "${bindir}/MemCapture \
                 ${sysconfdir}/groups.json \
                 ${base_libdir}/rdk/start_memcapture.sh \ 
                 ${systemd_unitdir}/system/memcapture.service \
