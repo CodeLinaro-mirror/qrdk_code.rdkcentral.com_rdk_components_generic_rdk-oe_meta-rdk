@@ -18,8 +18,8 @@ DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " 
 #Milestone Support
 EXTRA_OECONF += " --enable-milestone"
 PROVIDES = "getClockUptime"
-CFLAGS_append_hybrid += " -DLOGMILESTONE"
-CFLAGS_append_client += " -DLOGMILESTONE"
+CXXFLAGS_append_hybrid += " -DLOGMILESTONE"
+CXXFLAGS_append_client += " -DLOGMILESTONE"
 
 inherit autotools pkgconfig coverity pkgconfig
 
