@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 
 SRC_URI = "git://github.com/rdkcentral/crashupload.git;protocol=https;nobranch=1;name=crashupload"
-# Release version - 1.0.6
-SRCREV_crashupload = "e34335b65bef1a975b15e41a7127ae70df2e4145"
-PV = "1.0.6"
+# Release version - 1.0.7
+SRCREV_crashupload = "8e7e22d2cb988ea58b9ba9d85b8b0812c6dc77d2"
+PV = "1.0.7"
 PR = "r0"
 S = "${WORKDIR}/git"
 SRCREV_FORMAT = "crashupload"
