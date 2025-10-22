@@ -10,11 +10,11 @@ PACKAGECONFIG[tr181set] = "--enable-tr181set=yes"
 
 SRC_URI = "git://github.com/rdkcentral/rfc.git;protocol=https;nobranch=1;name=rfc"
 
-# Release version - 1.1.6
+# Release version - 1.1.8
 
-SRCREV_rfc = "83b232e15e2f5bbd1b3dd9597b7f2e9086bd8c80"
+SRCREV_rfc = "c715ae3dcbc2de0d1e241a1cbdf917a9c0380857"
 
-PV = "1.1.6"
+PV = "1.1.8"
 PR = "r0"
 
 S = "${WORKDIR}/git"
