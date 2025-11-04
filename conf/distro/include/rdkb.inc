@@ -190,7 +190,7 @@ PREFERRED_VERSION_gettext-native_scarthgap = "0.16.1"
 PREFERRED_VERSION_bc_scarthgap = "1.06"
 PREFERRED_VERSION_bc-native_scarthgap = "1.06"
 PREFERRED_VERSION_grep_scarthgap = "2.5.1a"
-PREFERRED_VERSION_quagga_scarthgap = 1.24"
+PREFERRED_VERSION_quagga_scarthgap = "1.24"
 PREFERRED_VERSION_coreutils_scarthgap = "6.9"
 PREFERRED_VERSION_gawk_scarthgap = "3.1.5"
 
