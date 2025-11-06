@@ -5,8 +5,8 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 SRC_URI = "git://github.com/rdkcentral/rdk_logger.git;branch=main;protocol=https"
-SRCREV = "v2.3.0"
-PV = "2.3.0"
+SRCREV = "ed3a3f71b8db836449bde6b7c9dc60438fedf30e"
+PV = "2.4.0"
 PR = "r0"
 
 
@@ -18,8 +18,8 @@ DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " 
 #Milestone Support
 EXTRA_OECONF += " --enable-milestone"
 PROVIDES = "getClockUptime"
-CXXFLAGS_append_hybrid += " -DLOGMILESTONE"
-CXXFLAGS_append_client += " -DLOGMILESTONE"
+CFLAGS_append_hybrid += " -DLOGMILESTONE"
+CFLAGS_append_client += " -DLOGMILESTONE"
 
 inherit autotools pkgconfig coverity pkgconfig
 
