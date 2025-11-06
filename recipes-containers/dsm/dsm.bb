@@ -8,8 +8,8 @@ SRC_URI = "${CMF_GITHUB_ROOT}/DSM;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GITH
            file://dsm.service "
 
 SRCREV = "c3cfd0a9d1ee1e9c2f2e8db4348b314aa32439bc"
-SRCREV_scarthgap = "863d5e80e726faa62b1a78f0b59fa743eaee7bbc"
-DEPENDS:append_scarthgap = " dobby "
+SRCREV:scarthgap = "863d5e80e726faa62b1a78f0b59fa743eaee7bbc"
+DEPENDS:append:scarthgap = " dobby "
 
 EXTRA_OECMAKE =  " -DENABLE_RBUS_PROVIDER=ON"
 
@@ -20,9 +20,9 @@ DEPENDS += "dobby"
 
 RDEPENDS:${PN} += "rbus"
 RDEPENDS:${PN} += "dobby"
-RDEPENDS:${PN}:remove_broadband = "apparmor"
+RDEPENDS:${PN}:remove:broadband = "apparmor"
 
-SYSTEMD_AUTO_ENABLE_${PN} = "enable"
+SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 SYSTEMD_SERVICE:${PN} = "dsm.service"
 
 FILES:${PN} += " ${systemd_unitdir}/system/dsm.service \
@@ -32,7 +32,7 @@ FILES:${PN} += " ${systemd_unitdir}/system/dsm.service \
 OECMAKE_CXX_FLAGS += " -I${STAGING_INCDIR}/rbus "
 OECMAKE_CXX_FLAGS += "-I${STAGING_INCDIR}"
 
-SYSTEMD_AUTO_ENABLE_${PN} = "enable"
+SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 SYSTEMD_SERVICE:${PN} = " dsm.service "
 
 do_install:append() {
