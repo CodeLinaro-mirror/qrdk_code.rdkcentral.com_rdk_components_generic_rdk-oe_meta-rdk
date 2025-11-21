@@ -33,7 +33,7 @@ CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-confi
 CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 LDFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
 
-do_configure:append_broadband () {
+do_configure:append:broadband () {
 		#Use the RDKB Versions of the Files
 		install -m 644 ${S}/rdkb_debug.ini ${S}/debug.ini
 		install -m 644 ${S}/rdkb_log4crc ${S}/log4crc
