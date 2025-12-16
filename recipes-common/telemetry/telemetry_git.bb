@@ -16,10 +16,10 @@ RDEPENDS_${PN} += "curl cjson glib-2.0 rbus"
 #PV = "${RDK_RELEASE}+git${SRCPV}"
 #SRCREV ?= "${AUTOREV}"
 
-#Release date 27th Aug, 2025
+#Release date 27th Nov, 2025
 
-PV = "1.6.8"
-SRCREV = "d29c0fa4881d8a2f6767b27a2416a7da26036441"
+PV = "1.7.1"
+SRCREV = "3827f8819ea45d59a2750b3a80ad6e6c31c8f445"
 
 #For Hub4 we are using older T2 release to avoid libucul 7.62.0 dependency added as part of bbappend
 #PV_ = "1.5.1"
