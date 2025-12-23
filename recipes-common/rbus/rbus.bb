@@ -4,8 +4,8 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ed63516ecab9f06e324238dd2b259549"
 
 SRC_URI = "git://github.com/rdkcentral/rbus.git;branch=release;protocol=https"
-SRCREV = "2f82b00b264673a42a9c878a6d10b82a37cbdfab"
-PV = "2.9.0"
+SRCREV = "45f5d1e40d2596b50634f89a2037aaaedb1291d0"
+PV = "2.11.0"
 PR = "r0"
 
 S = "${WORKDIR}/git"
