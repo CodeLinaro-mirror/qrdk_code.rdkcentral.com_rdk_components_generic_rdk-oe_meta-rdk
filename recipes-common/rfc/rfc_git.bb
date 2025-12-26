@@ -12,9 +12,9 @@ SRC_URI = "git://github.com/rdkcentral/rfc.git;protocol=https;nobranch=1;name=rf
 
 # Release version - 1.1.8
 
-SRCREV_rfc = "382661946c1cb77cfb0e1f96279e1ea74c39871f"
+SRCREV_rfc = "dca43e79aa59ebf1edebe4ae1470ea37f8795879"
 
-PV = "1.1.8"
+PV = "1.1.9"
 PR = "r1"
 
 S = "${WORKDIR}/git"
