@@ -59,3 +59,8 @@ JSPP_WEBINSPECTOR_ADDRESS ?= ":::10000"
 
 HTML_APP_COMPOSITOR ?= "msaa"
 LIGHTNING_APP_COMPOSITOR ?= "msaa"
+
+# All quirks are enabled here, as WebKit (>= 2.38) can filter out those it doesn't need.
+WEBKITBROWSER_GST_QUIRKS ??= "amlogic,broadcom,realtek,westeros"
+WEBKITBROWSER_GST_HOLE_PUNCH_QUIRK ??= "westeros"
+

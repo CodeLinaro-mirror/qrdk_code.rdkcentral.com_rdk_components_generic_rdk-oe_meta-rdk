@@ -1,7 +1,7 @@
-From 56efec1b2d012704ee3592b4f2801f4e43f2a229 Mon Sep 17 00:00:00 2001
+From 4700a5f62c11207c4173326e6920abea2410c4b1 Mon Sep 17 00:00:00 2001
 From: Ievgen Mutavchi <Ievgen_Mutavchi@comcast.com>
 Date: Wed, 7 Apr 2021 14:08:12 -0400
-Subject: [PATCH] Reduce BrowserConsoleLog
+Subject: [PATCH 3/7] Reduce BrowserConsoleLog
 
 ---
  WebKitBrowser/Extension/main.cpp       | 4 ++++
@@ -9,10 +9,10 @@ Subject: [PATCH] Reduce BrowserConsoleLog
  2 files changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/WebKitBrowser/Extension/main.cpp b/WebKitBrowser/Extension/main.cpp
-index 5385eb93a..b234805ab 100644
+index ca13c9b46..24acca0fc 100644
 --- a/WebKitBrowser/Extension/main.cpp
 +++ b/WebKitBrowser/Extension/main.cpp
-@@ -204,6 +204,10 @@ private:
+@@ -212,6 +212,10 @@ private:
          string messageString = Core::ToString(webkit_console_message_get_text(message));
          uint64_t line = static_cast<uint64_t>(webkit_console_message_get_line(message));
  
@@ -24,10 +24,10 @@ index 5385eb93a..b234805ab 100644
      }
      static gboolean userMessageReceivedCallback(WebKitWebPage* page, WebKitUserMessage* message)
 diff --git a/WebKitBrowser/WebKitImplementation.cpp b/WebKitBrowser/WebKitImplementation.cpp
-index 275a7b5de..b96fb7118 100644
+index 564dc26b5..2b1cb876c 100644
 --- a/WebKitBrowser/WebKitImplementation.cpp
 +++ b/WebKitBrowser/WebKitImplementation.cpp
-@@ -610,7 +610,7 @@ static GSourceFuncs _handlerIntervention =
+@@ -326,7 +326,7 @@ namespace Plugin {
                  , TCPKeepAlive(false)
                  , ClientCert()
                  , ClientCertKey()
@@ -37,5 +37,5 @@ index 275a7b5de..b96fb7118 100644
                  , WatchDogHangThresholdInSeconds(0)
                  , LoadBlankPageOnSuspendEnabled(false)
 -- 
-2.25.1
+2.48.1
 

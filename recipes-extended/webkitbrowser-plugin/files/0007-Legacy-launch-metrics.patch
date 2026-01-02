@@ -1,17 +1,18 @@
-From 27c6526729f764bf5104c5a88799010e08856f25 Mon Sep 17 00:00:00 2001
+From b9a980e98c853dd730030c52a1af1234fe7b661d Mon Sep 17 00:00:00 2001
 From: Eugene Mutavchi <Ievgen_Mutavchi@comcast.com>
 Date: Thu, 21 Mar 2024 21:24:30 +0000
-Subject: [PATCH] Legacy launch metrics
+Subject: [PATCH 6/7] Legacy launch metrics
 
+%% original patch: 0007-Legacy-launch-metrics.patch
 ---
- WebKitBrowser/LegacyLaunchMetrics.h    | 314 +++++++++++++++++++++++++
- WebKitBrowser/WebKitImplementation.cpp |   7 +
- 2 files changed, 321 insertions(+)
+ WebKitBrowser/LegacyLaunchMetrics.h    | 325 +++++++++++++++++++++++++
+ WebKitBrowser/WebKitImplementation.cpp |   6 +
+ 2 files changed, 331 insertions(+)
  create mode 100644 WebKitBrowser/LegacyLaunchMetrics.h
 
 diff --git a/WebKitBrowser/LegacyLaunchMetrics.h b/WebKitBrowser/LegacyLaunchMetrics.h
 new file mode 100644
-index 000000000..5b4fef3bb
+index 000000000..82916c7aa
 --- /dev/null
 +++ b/WebKitBrowser/LegacyLaunchMetrics.h
 @@ -0,0 +1,325 @@
@@ -341,10 +342,10 @@ index 000000000..5b4fef3bb
 +
 +}}
 diff --git a/WebKitBrowser/WebKitImplementation.cpp b/WebKitBrowser/WebKitImplementation.cpp
-index 072349bad..073dc9312 100644
+index b29a0f93c..5716f5a03 100644
 --- a/WebKitBrowser/WebKitImplementation.cpp
 +++ b/WebKitBrowser/WebKitImplementation.cpp
-@@ -89,6 +89,8 @@ WK_EXPORT void WKPreferencesSetPageCacheEnabled(WKPreferencesRef preferences, bo
+@@ -55,6 +55,8 @@
  #include <testrunner.h>
  #endif // ENABLE_TESTING
  
@@ -352,8 +353,8 @@ index 072349bad..073dc9312 100644
 +
  namespace WPEFramework {
  namespace Plugin {
- 
-@@ -1674,6 +1676,7 @@ static GSourceFuncs _handlerIntervention =
+     static Exchange::IWebBrowser* implementation = nullptr;
+@@ -1202,6 +1204,7 @@ namespace Plugin {
                          string url = std::get<1>(data);
                          object->_adminLock.Lock();
                          object->_URL = url;
@@ -361,7 +362,7 @@ index 072349bad..073dc9312 100644
                          object->_adminLock.Unlock();
  
                          object->SetResponseHTTPStatusCode(-1);
-@@ -2415,6 +2418,8 @@ static GSourceFuncs _handlerIntervention =
+@@ -1906,6 +1909,8 @@ namespace Plugin {
                  Core::SystemInfo::SetEnvironment(environmentVariable.Name.Value(), environmentVariable.Value.Value());
              }
  
@@ -370,15 +371,14 @@ index 072349bad..073dc9312 100644
              // Oke, so we are good to go.. Release....
              Core::Thread::Run();
  
-@@ -3556,6 +3561,8 @@ static GSourceFuncs _handlerIntervention =
-         uint32_t _unresponsiveReplyNum;
-         unsigned _frameCount;
-         gint64 _lastDumpTime;
-+
+@@ -3037,6 +3042,7 @@ namespace Plugin {
+         Core::ProxyType<Core::IDispatch> _hdrRefreshJob;
+         bool _hdrSupported;
+ #endif // HAS_SCREEN_HDR_API
 +        Core::Sink<LaunchMetrics> _launchMetrics { };
      };
  
      SERVICE_REGISTRATION(WebKitImplementation, 1, 0);
 -- 
-2.25.1
+2.48.1
 
