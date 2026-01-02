@@ -41,6 +41,7 @@ RDEPENDS_packagegroup-rdk-ccsp-broadband = "\
     ccsp-tr069-pa-ccsp \
     sysint-broadband \
     rfc \
+    rdm-agent \
     test-and-diagnostic \
     test-and-diagnostic-ccsp \
     ${WIFI_AGENT} \
