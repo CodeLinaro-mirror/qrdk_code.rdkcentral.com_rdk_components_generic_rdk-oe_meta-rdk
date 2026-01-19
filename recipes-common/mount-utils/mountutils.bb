@@ -16,7 +16,7 @@ inherit pkgconfig autotools coverity
 CFLAGS_append = " -Wall -Werror"
 CXXFLAGS_append = " -Wall -Werror"
 
-do_install() {
+do_install_append() {
            install -d ${D}/${bindir}
            install -d ${D}${libdir}
            install -d ${D}${includedir}
