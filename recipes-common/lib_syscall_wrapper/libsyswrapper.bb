@@ -12,7 +12,7 @@ DEPENDS = "rdk-logger"
 CFLAGS_append = " -Wall -Werror"
 CXXFLAGS_append = " -Wall -Werror"
 
-SRCREV_libsyswrapper = "128d52f1d3af63a2178bf8522c6353c0d38b1505"
+SRCREV_libsyswrapper = "03e31d2e7a197d1be958a1f41b97b5fe3f779b84"
 #SRCREV_libsyswrapper = "${@bb.utils.contains('DISTRO_FEATURES', 'oldsyswrapper', 'de0d67d81488c68baf2ab3f91f8a054e153d3b96', '${AUTOREV}', d)}"
 SRCREV_FORMAT = "libsyswrapper"
 
