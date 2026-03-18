@@ -1,0 +1,36 @@
+Index: telemetry/source/reportgen/reportgen.c
+===================================================================
+--- telemetry.orig/source/reportgen/reportgen.c
++++ telemetry/source/reportgen/reportgen.c
+@@ -39,9 +39,11 @@ static bool checkForEmptyString( char* v
+     {
+         // rbusInterface implementation explicitly adds string as "NULL" for parameters which doesn't exist on device
+         // Consider "NULL" string value as qualified for empty string
+-        if(strlen(valueString) < 1 || !strncmp(valueString, " ", 1) || !strncmp(valueString, "NULL", 4))
++        // If the string has zero value it should be ignored
++        if(strlen(valueString) < 1 || !strncmp(valueString, " ", 1) || !strcmp(valueString, "0") || !strncmp(valueString, "NULL", 4))
+         {
+             isEmpty = true ;
++           T2Debug("Marker Value is empty or zero or NULL\n");
+         }
+     }
+     else
+Index: telemetry/test/functional-tests/tests/test_xconf_communications.py
+===================================================================
+--- telemetry.orig/test/functional-tests/tests/test_xconf_communications.py
++++ telemetry/test/functional-tests/tests/test_xconf_communications.py
+@@ -190,10 +190,14 @@ def test_xconf_datamodel():
+     assert "Test_datamodel_1" in grep_T2logs("cJSON Report")
+     kill_telemetry(29)
+     sleep(5)
++    rbus_set_data("Device.DeviceInfo.X_RDKCENTRAL-COM.IUI.Version", "string", "0.1")
+     kill_telemetry(29)
+     sleep(5)
++    assert "IUI_accum" in grep_T2logs("cJSON Report")
++    rbus_set_data("Device.DeviceInfo.X_RDKCENTRAL-COM.IUI.Version", "string", "0")
+     kill_telemetry(29)
+     sleep(5)
++    assert "IUI_accum" not in grep_T2logs("cJSON Report")
+     assert "Test_datamodel_1" in grep_T2logs("cJSON Report")
+
+ pytest.mark.run(order=15)
