@@ -11,6 +11,7 @@ IMAGE_INSTALL_append = " \
     packagegroup-rdk-ccsp-broadband \
     rdk-logger \
     meminsight \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'stage-tool', 'stage-agent', '', d)} \
     "
 
 IMAGE_INSTALL_append_fwupgrader = " rdkfwupgrader "
