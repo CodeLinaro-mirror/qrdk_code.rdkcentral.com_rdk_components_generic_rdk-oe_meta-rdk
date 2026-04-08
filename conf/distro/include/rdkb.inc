@@ -70,14 +70,6 @@ DISTRO_FEATURES:append = " tigress"
 BBMASK .= " .cpgu-src|.cpgu-pbt|.cpgc-src|.cpgc-pbt"
 
 PREFERRED_VERSION_cjson_kirkstone = "1.7.15"
-PREFERRED_PROVIDER_xfhome ?= "zilker"
-
-# Non-touchstone builds of xfhome may build iksemel that is hosted on
-# rdkgerrithub.stb.r53.xcal.tv, which is not internet accessible at the time
-# of this writing. Prefer iksemel PV 1.4% for touchstone, which does not depend on this host.
-# This may be optionally removed once rdkgerrithub.stb.r53.xcal.tv is internet accesssible.
-# meta-rdk-ext/recipes-support/iksemel at 1.5 is not compatible with xfhome.
-PREFERRED_VERSION_iksemel ?= '${@oe.utils.conditional("PREFERRED_PROVIDER_xfhome", "touchstone", "1.4%", "", d)}'
 
 VOLATILE_BINDS:append = "/usr/ccsp/ccsp_msg.cfg /ccsp_msg.cfg\n"
 

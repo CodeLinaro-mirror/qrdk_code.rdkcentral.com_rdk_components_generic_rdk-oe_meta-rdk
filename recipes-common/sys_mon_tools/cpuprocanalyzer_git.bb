@@ -43,4 +43,5 @@ SYSTEMD_SERVICE:${PN} += "cpuprocanalyzer.path"
 FILES:${PN} += "${systemd_unitdir}/system/cpuprocanalyzer.service"
 FILES:${PN} += "${systemd_unitdir}/system/cpuprocanalyzer.path"
 FILES:${PN} += "/etc/procanalyzerconfig.ini"
+
 FILES:${PN}:append_broadband = " ${base_libdir}/rdk/RunCPUProcAnalyzer.sh"

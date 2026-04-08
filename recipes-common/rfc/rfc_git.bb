@@ -1,7 +1,7 @@
 SUMMARY = "RFC helper applications"
 SECTION = "console/utils"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=bef3b9130aa5d626df3f7171f2dadfe2"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=ab9fb9cce9e613f50442aa48f62301fc"
 
 PACKAGECONFIG ??= "rfctool"
 PACKAGECONFIG[rfctool] = "--enable-rfctool=yes"
@@ -10,11 +10,12 @@ PACKAGECONFIG[tr181set] = "--enable-tr181set=yes"
 
 SRC_URI = "git://github.com/rdkcentral/rfc.git;protocol=https;nobranch=1;name=rfc"
 
-# Release version - 1.2.2
+SRCREV_rfc = "2aab469a9d5cbeefbc44d8c10de5e97a2b8cc866"
 
-SRCREV_rfc = "75608f82bb7fcfcb76ffd510460ac1c6e2829d22"
+# Release version - 1.2.7
 
-PV = "1.2.2"
+PV = "1.2.7+git${SRCPV}"
+
 PR = "r0"
 
 S = "${UNPACKDIR}/${PN}-${PV}"

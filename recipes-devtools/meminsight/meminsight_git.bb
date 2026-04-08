@@ -14,12 +14,17 @@ SRC_URI:append = " file://meminsight-runner.service \
                    file://conf/broadband-path.conf \
                    file://conf/broadband-rdm-path.conf \
                    file://start_meminsight.sh \
+                   file://meminsight-upload.service \
+                   file://meminsight-upload.path \
+                   file://upload_MemReports.sh \
+                   file://package.json \
+
                    "
 
-# Mar 02, 2026
-# v1.0.0
-SRCREV = "a7e1e7375b5eaaa4cffd26fc2a40dbd359bc0b1f"
-PV = "1.0"
+# Apr 24, 2026
+# v1.1.0
+SRCREV = "545cc6fdd954a2f659dccf5c9f09358e54efd00e"
+PV = "1.1.0"
 S = "${UNPACKDIR}/${PN}-${PV}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -28,12 +33,23 @@ inherit autotools systemd
 
 CFLAGS:append_broadband = ' -DDEVICE_IDENTIFIER=\\"erouter0\\" -DDEFAULT_OUT_DIR=\\"/nvram/meminsight\\"'
 
+PACKAGECONFIG ??= "cjson"
+PACKAGECONFIG[cjson] = "--enable-cjson,--disable-cjson"
+
+EXTRA_OECONF += "${@bb.utils.contains('PACKAGECONFIG', 'cjson', '--enable-cjson', '--disable-cjson', d)}"
+RDEPENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'cjson', 'cjson', '', d)}"
+
 do_install() {
     install -d ${D}${bindir}
     install -m 0755 ${B}/meminsight ${D}${bindir}/meminsight
+
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/meminsight-runner.service ${D}${systemd_unitdir}/system/
     install -m 0644 ${WORKDIR}/meminsight-runner.path ${D}${systemd_unitdir}/system/
+
+    install -m 0644 ${WORKDIR}/meminsight-upload.service ${D}${systemd_unitdir}/system/
+    install -m 0644 ${WORKDIR}/meminsight-upload.path ${D}${systemd_unitdir}/system/
+
     install -d ${D}${systemd_unitdir}/system/meminsight-runner.service.d
     install -d ${D}${systemd_unitdir}/system/meminsight-runner.path.d
 }
@@ -45,16 +61,21 @@ do_install:append_client() {
 
 do_install:append_broadband() {
     install -m 0644 ${WORKDIR}/conf/broadband.conf ${D}${systemd_unitdir}/system/meminsight-runner.service.d/
+
     if ${@bb.utils.contains('DISTRO_FEATURES', 'enable_xmeminsight', 'true', 'false', d)}; then
         install -m 0644 ${WORKDIR}/conf/broadband-path.conf ${D}${systemd_unitdir}/system/meminsight-runner.path.d/
     else
         install -m 0644 ${WORKDIR}/conf/broadband-rdm-path.conf ${D}${systemd_unitdir}/system/meminsight-runner.path.d/
+
         install -d ${D}/etc/rdm/post-services
         install -m 0755 ${WORKDIR}/start_meminsight.sh ${D}/etc/rdm/post-services/start_meminsight.sh
     fi
+
+    install -d ${D}/lib/rdk
+    install -m 0755 ${WORKDIR}/upload_MemReports.sh ${D}/lib/rdk/upload_MemReports.sh
 }
 
-SYSTEMD_SERVICE:${PN} = "meminsight-runner.path"
+SYSTEMD_SERVICE:${PN} = "meminsight-runner.path meminsight-upload.path"
 
 FILES:${PN} += "${bindir}/meminsight"
 
@@ -63,3 +84,5 @@ FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.path"
 
 FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.service.d/*.conf"
 FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.path.d/*.conf"
+
+FILES_${PN}_append_broadband = " /lib/rdk/upload_MemReports.sh"

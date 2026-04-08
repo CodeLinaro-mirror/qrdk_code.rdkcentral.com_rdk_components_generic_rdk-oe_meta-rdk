@@ -14,8 +14,9 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI = "git://github.com/rdkcentral/rdm-agent;protocol=git;nobranch=1;name=rdmagent"
 
 SRCREV_FORMAT = "rdmagent"
-# Tag 2.2.0 / MAR 18 2026
-SRCREV_rdmagent = "d5e7372226ec640a4d8fcebba46b6d39ce4d0ff4"
+
+# Tag 2.3.1 / Jul 14 2026
+SRCREV_rdmagent = "8ddda9a49fa442f15feddbbeed591a6701a4bc4c"
 
 # Make sure our source directory (for the build) matches the directory structure in the tarball
 S = "${UNPACKDIR}/${PN}-${PV}"

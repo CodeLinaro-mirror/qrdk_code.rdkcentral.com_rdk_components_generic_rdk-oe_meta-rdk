@@ -1,8 +1,8 @@
 ##########################################################################
-# If not stated otherwise in this file or this component's Licenses.txt
+# If not stated otherwise in this file or this component's LICENSE
 # file the following copyright and licenses apply:
 #
-# Copyright 2021 RDK Management
+# Copyright 2025 RDK Management
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,17 +18,11 @@
 ##########################################################################
 
 [Unit]
-Description=MemInsight Memory Stats Runner
+Description=MemInsight upload path trigger
 
-[Service]
-Type=simple
-RemainAfterExit=yes
-EnvironmentFile=-/tmp/meminsight.env
-ExecStart=/bin/sh -c 'PATH="/run/meminsight/usr/bin:$PATH"; meminsight $ARGS'
-ExecStop=-/bin/rm /tmp/.meminsight_upload /tmp/.meminsight_inprogress
-ExecStopPost=-/bin/rm /tmp/meminsight.env /tmp/.enable_meminsight /nvram/.enable_meminsight
-Restart=on-failure
-RestartSec=30
+[Path]
+PathExists=/tmp/.meminsight_upload
+Unit=meminsight-upload.service
 
 [Install]
 WantedBy=multi-user.target
