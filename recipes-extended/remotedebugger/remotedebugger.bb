@@ -2,10 +2,10 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI = "git://github.com/rdkcentral/remote_debugger.git;protocol=git;nobranch=1"
-# Release version - 1.3.2
-# 9 Apr 2026
-SRCREV = "8f793e69b6b2b91a27c6a8148014207788503efa"
-PV = "1.3.2"
+# Release version - 1.3.4
+# 14 May 2026
+SRCREV = "4941e3899ab9217382788296594cd14350586268"
+PV = "1.3.4"
 S = "${WORKDIR}/git"
 inherit autotools pkgconfig coverity systemd syslog-ng-config-gen breakpad-logmapper
 DEPENDS = "cjson rdk-logger trower-base64 msgpack-c webconfig-framework rbus libsyswrapper"
