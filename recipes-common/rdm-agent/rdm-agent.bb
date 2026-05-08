@@ -14,9 +14,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI = "git://github.com/rdkcentral/rdm-agent;protocol=git;nobranch=1;name=rdmagent"
 
 SRCREV_FORMAT = "rdmagent"
-# Tag 2.2.2 / April 23 2026
-# Using Develop branch SHA for NG builds
-SRCREV_rdmagent = "8baa6e29e1d420bf0a4c305f899444ef949d598a"
+# Tag 2.3.0 / May 21 2026
+SRCREV_rdmagent = "069aaab56ce56cc6c9695c1bab860abfa7162260"
 
 # Make sure our source directory (for the build) matches the directory structure in the tarball
 S = "${WORKDIR}/git"
