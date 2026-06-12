@@ -27,6 +27,8 @@ CFLAGS:remove:wrynose = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `p
 CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 LDFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
 LDFLAGS:remove:wrynose = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
+CPPFLAGS:append:wrynose = " -I${RECIPE_SYSROOT}/usr/include/safeclib"
+LDFLAGS:append:wrynose = " -lsafec"
 
 #By default, RDKSSA Unit Test cases are disabled.
 #Use "RDKSSA_UT_ENABLED=yes" to enable the RDKSSA Unit test cases
@@ -47,6 +49,8 @@ do_install:prepend() {
     install -D -m 0644 ${S}/ssa_top/ssa_oss/ssa_common/providers/Mount/scripts/ecfs-mount-sample-dummy-key ${D}${sysconfdir}/
 
 }
+
+CFLAGS:append:wrynose = " -Wno-error=discarded-qualifiers"
 
 SYSTEMD_SERVICE:${PN} = " rdk-oss-ssa-ecfsinit.service"
 FILES:${PN}:append = " ${systemd_unitdir}/system/*"

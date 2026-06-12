@@ -37,7 +37,7 @@ PACKAGECONFIG ??= "cjson"
 PACKAGECONFIG[cjson] = "--enable-cjson,--disable-cjson"
 
 EXTRA_OECONF += "${@bb.utils.contains('PACKAGECONFIG', 'cjson', '--enable-cjson', '--disable-cjson', d)}"
-RDEPENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'cjson', 'cjson', '', d)}"
+RDEPENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'cjson', 'cjson', '', d)}"
 
 do_install() {
     install -d ${D}${bindir}
@@ -84,5 +84,4 @@ FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.path"
 
 FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.service.d/*.conf"
 FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.path.d/*.conf"
-
-FILES_${PN}_append_broadband = " /lib/rdk/upload_MemReports.sh"
+FILES:${PN}:append:broadband = " /lib/rdk/upload_MemReports.sh"

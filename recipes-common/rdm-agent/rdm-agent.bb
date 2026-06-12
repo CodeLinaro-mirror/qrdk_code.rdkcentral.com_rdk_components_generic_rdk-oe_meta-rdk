@@ -49,7 +49,14 @@ EXTRA_OECONF:append = " --enable-mountutils=yes --enable-rdkcertselector=yes"
 
 DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
+<<<<<<< HEAD
+<<<<<<< HEAD
 CFLAGS:remove:wrynose = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
+=======
+>>>>>>> 4593ef9 (RDKBACCL-1837 : Build core-image-minimal)
+=======
+CFLAGS:remove:wrynose = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
+>>>>>>> 49cfde6 (RDKBACCL-1917: Build packagegroup oss build)
 CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 LDFLAGS:append_kirkstone = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
 LDFLAGS:append_dunfell = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '-lsafec-3.5.1', '', d)}"
@@ -75,11 +82,11 @@ do_install:append() {
     install -D -m755 ${S}/scripts/getRdmDwldPath.sh ${D}${sysconfdir}/rdm/getRdmDwldPath.sh
     install -D -m755 ${S}/scripts/downloadUtils.sh ${D}${sysconfdir}/rdm/downloadUtils.sh
     install -D -m755 ${S}/scripts/loggerUtils.sh ${D}${sysconfdir}/rdm/loggerUtils.sh
-#    install -D -m600 ${S}/rdm-manifest.json ${D}${sysconfdir}/rdm/rdm-manifest.json
-##    install -d ${D}${libdir}
-##    install -m 0644 ${B}/librdmopenssl.la ${D}${libdir}/
-##    install -d ${D}${includedir}/rdm
-#    install -m 0644 ${S}/src/rdm-cpc/rdm/rdm_rsa_signature_verify.h ${D}${includedir}/rdm/
+    install -D -m600 ${S}/rdm-manifest.json ${D}${sysconfdir}/rdm/rdm-manifest.json
+    install -d ${D}${libdir}
+    install -m 0644 ${B}/librdmopenssl.la ${D}${libdir}/
+    install -d ${D}${includedir}/rdm
+    install -m 0644 ${S}/src/rdm-cpc/rdm/rdm_rsa_signature_verify.h ${D}${includedir}/rdm/
 }
 
 SYSTEMD_SERVICE:${PN} = "apps-rdm.service"

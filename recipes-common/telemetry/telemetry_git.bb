@@ -55,15 +55,15 @@ CXXFLAGS += "-DINCLUDE_BREAKPAD"
 
 do_install:append () {
     install -d ${D}/usr/include/
-    install -d ${D}/lib/rdk/
+    install -d ${D}${libdir}/rdk/
     install -d ${D}${systemd_unitdir}/system
     install -m 644 ${S}/include/telemetry_busmessage_sender.h ${D}/usr/include/
     install -m 644 ${S}/include/telemetry2_0.h ${D}/usr/include/
-    install -m 0755 ${S}/source/commonlib/t2Shared_api.sh ${D}/lib/rdk
-    rm -fr ${D}/usr/lib/libtelemetry_msgsender.la
+    install -m 0755 ${S}/source/commonlib/t2Shared_api.sh ${D}${libdir}/rdk
+    rm -fr ${D}${libdir}/libtelemetry_msgsender.la
 
     if ${@bb.utils.contains_any('DISTRO_FEATURES', 't2_without_webconfig', 'true', 'false', d)}; then
-        install -m 0755 ${S}/source/commonlib/download_t2_profile.sh ${D}/lib/rdk
+        install -m 0755 ${S}/source/commonlib/download_t2_profile.sh ${D}${libdir}/rdk
     fi
 }
 
@@ -74,7 +74,7 @@ FILES:${PN} = "\
     ${systemd_unitdir}/system \
 "
 FILES:${PN} += "${libdir}/*.so*"
-FILES:${PN} += "/lib/rdk/*"
+FILES:${PN} += "${libdir}/rdk/*"
 
 FILES_SOLIBSDEV = ""
 INSANE_SKIP:${PN} += "dev-so"

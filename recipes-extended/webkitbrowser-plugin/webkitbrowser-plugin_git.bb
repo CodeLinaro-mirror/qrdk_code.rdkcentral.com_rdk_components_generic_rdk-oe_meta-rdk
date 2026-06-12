@@ -6,7 +6,7 @@ PR = "r1"
 PV = "3.0+git${SRCPV}"
 PATCHTOOL = "git"
 
-S = "${WORKDIR}/git/WebKitBrowser"
+S = "${UNPACKDIR}/git/WebKitBrowser"
 
 SRC_URI = "git://github.com/rdkcentral/rdkservices.git;protocol=git;branch=main \
   file://0001-RDKTV-177-Configure-wpeframework-plugin-startup-orde.patch;patchdir=../ \

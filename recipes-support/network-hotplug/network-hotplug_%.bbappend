@@ -4,5 +4,5 @@ SRC_URI += "file://usb-ethernet.rules"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/udev/rules.d
-    install -m 0644 ${WORKDIR}/usb-ethernet.rules ${D}${sysconfdir}/udev/rules.d/usb-ethernet.rules
+    install -m 0644 ${UNPACKDIR}/usb-ethernet.rules ${D}${sysconfdir}/udev/rules.d/usb-ethernet.rules
 }
