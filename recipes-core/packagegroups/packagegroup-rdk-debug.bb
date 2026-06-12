@@ -10,10 +10,10 @@ PACKAGES = "\
 
 # Packages to be included in 'debug' images
 # NOTE : GPLv3 packages,DO NOT INCLUDE IN PRODUCTION IMAGES
-RDEPENDS_packagegroup-rdk-debug = "\
+RDEPENDS:packagegroup-rdk-debug = "\
     "
 
-RDEPENDS_packagegroup-rdk-debug += " ${@bb.utils.contains('DISTRO_FEATURES', '\
+RDEPENDS:packagegroup-rdk-debug += " ${@bb.utils.contains('DISTRO_FEATURES', '\
                                                                             gstreamer1', '\
                                                                             gstreamer1.0-meta-audio \
                                                                             gstreamer1.0-meta-base \

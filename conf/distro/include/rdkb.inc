@@ -1,7 +1,7 @@
 # Headless disable graphical splash
 SPLASH = ""
 
-DISTRO_FEATURES_append_dunfell = " virtualization"
+DISTRO_FEATURES:append_dunfell = " virtualization"
 
 PREFERRED_VERSION_lighttpd = "1.4.53"
 PREFERRED_VERSION_libupnp = "1.6.22"
@@ -13,8 +13,8 @@ PREFERRED_VERSION_googletest = "1.10.0"
 PREFERRED_PROVIDER_gtest = "googletest"
 PREFERRED_PROVIDER_gmock = "googletest"
 
-DISTRO_FEATURES_append = " bluetooth"
-DISTRO_FEATURES_append = " bluez5"
+DISTRO_FEATURES:append = " bluetooth"
+DISTRO_FEATURES:append = " bluez5"
 PREFERRED_VERSION_bluez5_dunfell ?= "5.66"
 PREFERRED_VERSION_bluez5_kirkstone ?= "5.66"
 
@@ -63,9 +63,9 @@ PREFERRED_VERSION_libmtp = "1.1.5"
 PREFERRED_VERSION_mosquitto_dunfell = "1.6.%"
 PREFERRED_VERSION_mosquitto_kirkstone = "2.0.14"
 PREFERRED_VERSION_gnupg_dunfell = "1.4.7"
-DISTRO_FEATURES_append_dunfell = " logendpoints"
+DISTRO_FEATURES:append_dunfell = " logendpoints"
 
-DISTRO_FEATURES_append = " tigress"
+DISTRO_FEATURES:append = " tigress"
 #Masking cedm multicall implementation in RDK-B
 BBMASK .= " .cpgu-src|.cpgu-pbt|.cpgc-src|.cpgc-pbt"
 
@@ -79,7 +79,7 @@ PREFERRED_PROVIDER_xfhome ?= "zilker"
 # meta-rdk-ext/recipes-support/iksemel at 1.5 is not compatible with xfhome.
 PREFERRED_VERSION_iksemel ?= '${@oe.utils.conditional("PREFERRED_PROVIDER_xfhome", "touchstone", "1.4%", "", d)}'
 
-VOLATILE_BINDS_append = "/usr/ccsp/ccsp_msg.cfg /ccsp_msg.cfg\n"
+VOLATILE_BINDS:append = "/usr/ccsp/ccsp_msg.cfg /ccsp_msg.cfg\n"
 
 BBMASK .= "|.meta-rdk/recipes-core/images/rdk-oss-image.bb|meta-rdk/recipes-core/images/rdk-generic-image.bb"
 BBMASK .= "|.*recipes-extended/mediaframework|.*recipes-qt"
@@ -137,38 +137,38 @@ BBMASK .= "${HUBLINUX_MASK}"
 # add rdkversion_1.0.bb is not supported for broadband devices.
 BBMASK .= "|./meta-rdk/recipes-common/rdkversion/"
 
-DISTRO_FEATURES_append = " rdm-versioning"
-DISTRO_FEATURES_append = " telemetry2_0"
-DISTRO_FEATURES_append = " snmppa"
+DISTRO_FEATURES:append = " rdm-versioning"
+DISTRO_FEATURES:append = " telemetry2_0"
+DISTRO_FEATURES:append = " snmppa"
 
 # add new breakpad framework for RDKB
-DISTRO_FEATURES_append  = " logbacktrace"
+DISTRO_FEATURES:append  = " logbacktrace"
 require conf/distro/include/rdkb_backtrace_log.inc
 
-DISTRO_FEATURES_append = " heaptrack"
-DISTRO_FEATURES_remove_morty = " heaptrack"
+DISTRO_FEATURES:append = " heaptrack"
+DISTRO_FEATURES:remove_morty = " heaptrack"
 PREFERRED_VERSION_heaptrack_kirkstone = "1.2.%"
 
-DISTRO_FEATURES_remove = "alsa"
-DISTRO_FEATURES_remove = "ext2"
-DISTRO_FEATURES_remove = "zeroconf"
-DISTRO_FEATURES_remove = "nfs"
-DISTRO_FEATURES_append = " safec"
-#DISTRO_FEATURES_append = " webui_php"
-DISTRO_FEATURES_append = " webui_jst"
-#DISTRO_FEATURES_append = " gtestapp"
-DISTRO_FEATURES_append = " redrecovery"
+DISTRO_FEATURES:remove = "alsa"
+DISTRO_FEATURES:remove = "ext2"
+DISTRO_FEATURES:remove = "zeroconf"
+DISTRO_FEATURES:remove = "nfs"
+DISTRO_FEATURES:append = " safec"
+#DISTRO_FEATURES:append = " webui_php"
+DISTRO_FEATURES:append = " webui_jst"
+#DISTRO_FEATURES:append = " gtestapp"
+DISTRO_FEATURES:append = " redrecovery"
 # For Apparmor
-DISTRO_FEATURES_append = " apparmor"
+DISTRO_FEATURES:append = " apparmor"
 # Add apparmor_earlypolicy.bbclass
-DISTRO_FEATURES_append = " apparmor_segmented_global"
+DISTRO_FEATURES:append = " apparmor_segmented_global"
 
 OPTIMIZE_DEFAULT = "-Os"
 
 # Disabling MoCA support
-#DISTRO_FEATURES_append = " no_moca_support"
+#DISTRO_FEATURES:append = " no_moca_support"
 
-#DISTRO_FEATURES_append = " enable_xmeminsight"
+#DISTRO_FEATURES:append = " enable_xmeminsight"
 
 #Masking the below recipes because in kirkstone build recipes pulling older version due to layer priority
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-devtools/jsonrpc/jsonrpc_0.7.0.bb', '', d)}"
@@ -176,4 +176,21 @@ BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-devtools/jsoncpp/jsoncpp_0.6.0-rc2.bb', '', d)}"
 
 #Dev Key should be used for SSH authentication for Devices marked as Test
-DISTRO_FEATURES_append = " dynamic_keying "
+DISTRO_FEATURES:append = " dynamic_keying "
+
+#Yocto-6.0 Wrynose Changes
+PREFERRED_VERSION_bluez5_wrynose="5.86"
+PREFERRED_VERSION_openssl_wrynose="3.5.6"
+PREFERRED_VERSION_systemd_wrynose = "259.5"
+PREFERRED_VERSION_dnsmasq_wrynose="2.92"
+PREFERRED_VERSION_jsoncpp_wrynose="1.9.7"
+
+BBMASK .= "|meta-rdk-oss-reference/recipes-protocols/net-snmp/net-snmp_5.9.%.bbappend"
+BBMASK .= "|meta-rdk-oss-reference/recipes-connectivity/openssl*"
+BBMASK .= "|meta-oss-common-config/recipes-connectivity/bluez5/bluez5_5.48.bb"
+BBMASK .= "|meta-rdk-oss-reference/recipes-connectivity/bluez5/bluez5_5.66.bb"
+BBMASK .= "|meta-rdk-oss-reference/recipes-core/systemd/systemd_230.bb"
+BBMASK .= "|meta-rdk-oss-reference/recipes-support/dnsmasq/dnsmasq_2.83.bb"
+BBMASK .= "|meta-rdk-oss-reference/recipes-devtools/jsoncpp/jsoncpp_1.8.4.bb"
+BBMASK .= "|meta-rdk/recipes-connectivity/xupnp/xupnp_git.bb+"
+

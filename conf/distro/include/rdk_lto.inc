@@ -1,3 +1,3 @@
-LTO_pn-libsyswrapper = ""
-LTO_pn-dca = ""
-LTO_pn-gcc-sanitizers =""
+LTO:pn-libsyswrapper = ""
+LTO:pn-dca = ""
+LTO:pn-gcc-sanitizers =""

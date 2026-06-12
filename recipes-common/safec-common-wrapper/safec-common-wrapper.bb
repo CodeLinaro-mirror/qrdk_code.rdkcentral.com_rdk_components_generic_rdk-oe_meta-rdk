@@ -10,4 +10,4 @@ do_install() {
 }
 
 #SDK generation fails if there is no default package
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"

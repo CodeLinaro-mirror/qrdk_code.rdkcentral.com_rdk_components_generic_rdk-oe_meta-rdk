@@ -9,7 +9,7 @@ PACKAGES = "\
     "
 
 #components used in TDK-C
-RDEPENDS_packagegroup-tdk = "\
+RDEPENDS:packagegroup-tdk = "\
   tdk-c \
   sysstat \
   sed \

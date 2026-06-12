@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 DESCRIPTION = "Network Zero Config"
 LICENSE = "Apache-2.0"
@@ -11,7 +11,7 @@ SRC_URI += "file://iface-setup.service \
             file://board_access.sh \
             file://default-time-setter.sh "
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${systemd_unitdir}/system
     install -d ${D}${base_libdir}/rdk
     install -m 0644 ${WORKDIR}/iface-setup.service ${D}${systemd_unitdir}/system
@@ -22,7 +22,7 @@ do_install_append() {
     install -m 0755 ${WORKDIR}/default-time-setter.sh ${D}${base_libdir}/rdk/
 }
 
-SYSTEMD_SERVICE_${PN} = "iface-setup.service board-access.service"
+SYSTEMD_SERVICE:${PN} = "iface-setup.service board-access.service"
 
-FILES_${PN} = " ${base_libdir}/rdk/board_access.sh \
+FILES:${PN} = " ${base_libdir}/rdk/board_access.sh \
                 ${base_libdir}/rdk/default-time-setter.sh "

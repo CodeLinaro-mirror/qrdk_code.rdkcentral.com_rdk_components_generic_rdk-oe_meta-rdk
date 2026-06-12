@@ -17,7 +17,7 @@ IMAGE_INSTALL += " \
         "
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'tdk_benchmark', 'packagegroup-benchmark-tdk', '', d)}"
 
-PACKAGE_EXCLUDE_pn-rdk-generic-mediaclient-tdk-image = "${@bb.utils.contains('DISTRO_FEATURES','ENABLE_IPK','packagegroup-tdk','',d)}"
+PACKAGE_EXCLUDE:pn-rdk-generic-mediaclient-tdk-image = "${@bb.utils.contains('DISTRO_FEATURES','ENABLE_IPK','packagegroup-tdk','',d)}"
 
 python __anonymous () {
     if "client" not in d.getVar('MACHINEOVERRIDES', True):

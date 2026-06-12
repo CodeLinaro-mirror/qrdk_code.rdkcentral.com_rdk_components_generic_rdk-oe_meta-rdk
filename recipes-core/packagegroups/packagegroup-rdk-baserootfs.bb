@@ -10,7 +10,7 @@ PACKAGES = "\
     "
 
 # Opensource components used in RDK
-RDEPENDS_packagegroup-rdk-baserootfs = "\
+RDEPENDS:packagegroup-rdk-baserootfs = "\
     bash \
     curl \
     dropbear \
@@ -37,7 +37,7 @@ RDEPENDS_packagegroup-rdk-baserootfs = "\
     ${@bb.utils.contains("DISTRO_FEATURES", "enable_xmeminsight", "meminsight", '', d)} \
     "
 
-RDEPENDS_packagegroup-rdk-baserootfs += " ${@bb.utils.contains('DISTRO_FEATURES', 'gstreamer1', 'gstreamer1.0-plugins-base gstreamer1.0-plugins-good', 'gst-plugins-base gst-plugins-good', d)} "
+RDEPENDS:packagegroup-rdk-baserootfs += " ${@bb.utils.contains('DISTRO_FEATURES', 'gstreamer1', 'gstreamer1.0-plugins-base gstreamer1.0-plugins-good', 'gst-plugins-base gst-plugins-good', d)} "
 
 #Adding smartmontools only for Hard Disk enabled devices.
-RDEPENDS_packagegroup-rdk-baserootfs += "${@bb.utils.contains('DISTRO_FEATURES', 'storage_hdd','smartmontools', '',d)}"
+RDEPENDS:packagegroup-rdk-baserootfs += "${@bb.utils.contains('DISTRO_FEATURES', 'storage_hdd','smartmontools', '',d)}"

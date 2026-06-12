@@ -12,9 +12,9 @@ PV = "1.4.3"
 DEPENDS +=" cjson curl rdk-logger"
 
 #uncomment the follwoing line to turn on debugging
-#CFLAGS_append = " -DCURL_DEBUG"
+#CFLAGS:append = " -DCURL_DEBUG"
 
-CFLAGS_append = " -DRDK_LOGGER"
+CFLAGS:append = " -DRDK_LOGGER"
 
 S = "${WORKDIR}/git"
 

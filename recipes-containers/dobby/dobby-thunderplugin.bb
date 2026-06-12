@@ -16,12 +16,12 @@ inherit pkgconfig cmake
 EXTRA_OECMAKE =  " -DCMAKE_BUILD_TYPE=Debug -DEXTERNAL_THUNDER_PLUGIN_BUILD=ON"
 
 # Skip harmless QA issue caused by installing but not shipping buildtime cmake files
-INSANE_SKIP_${PN} = "installed-vs-shipped"
+INSANE_SKIP:${PN} = "installed-vs-shipped"
 
 # Ensure that the unversioned symlinks of libraries are kept (and don't generate a QA error)
-INSANE_SKIP_${PN} += "dev-so"
+INSANE_SKIP:${PN} += "dev-so"
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
-FILES_${PN} += "${libdir}/plugins/dobby/*.so*"
+FILES:${PN} += "${libdir}/plugins/dobby/*.so*"
 

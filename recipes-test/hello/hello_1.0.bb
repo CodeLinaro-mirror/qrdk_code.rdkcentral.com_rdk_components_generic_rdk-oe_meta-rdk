@@ -5,7 +5,8 @@ LICENSE = "Apache-2.0"
 SRC_URI = "file://hello.c"
 SRC_URI += "file://run-hello-app.sh"
 
-S = "${WORKDIR}"
+#S = "${WORKDIR}"
+S = "${UNPACKDIR}"
 
 do_compile () {
     ${CC} hello.c -o hello ${CFLAGS} ${LDFLAGS}

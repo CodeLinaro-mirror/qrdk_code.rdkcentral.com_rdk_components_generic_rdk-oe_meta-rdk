@@ -20,7 +20,7 @@ do_install() {
     install -m 0644 ${S}/lxccpid/*.h ${D}/usr/include/lxccpid/
 }
 
-FILES_${PN} += "${bindir}"
-FILES_${PN}-dev += "/usr/share/src/lxccpid/"
-FILES_${PN}-dev += "/usr/include/lxccpid/"
+FILES:${PN} += "${bindir}"
+FILES:${PN}-dev += "/usr/share/src/lxccpid/"
+FILES:${PN}-dev += "/usr/include/lxccpid/"
 

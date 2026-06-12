@@ -1,4 +1,4 @@
-PARALLEL_MAKE_append = " -l ${@int(os.sysconf(os.sysconf_names['SC_NPROCESSORS_ONLN'])) * 150/100}"
+PARALLEL_MAKE:append = " -l ${@int(os.sysconf(os.sysconf_names['SC_NPROCESSORS_ONLN'])) * 150/100}"
 
 PREFERRED_VERSION_jansson = "2.7"
 
@@ -50,7 +50,7 @@ PREFERRED_VERSION_breakpad-native_dunfell = "${@bb.utils.contains('DISTRO_FEATUR
 BBMASK .= "|.*recipes-ccsp|.*recipes-rdkb|.*webpabroadband"
 
 # Build flags to control default SecAPI engine for netflix component
-DISTRO_FEATURES_append = " netflix_cryptanium"
+DISTRO_FEATURES:append = " netflix_cryptanium"
 
 BBMASK .= "|meta-rdk-comcast-video/recipes-extended/mediaframework/emu-podserver_git.bb"
 BBMASK .= "|meta-rdk-comcast-video/recipes-extended/halsnmp/halsnmp-emu_git.bb"
@@ -62,38 +62,38 @@ BBMASK .= "|.meta-rdk-comcast/recipes-common/nvm-sqlite/nvm-sqlite.bb"
 # add webconfig-framework.bb to bbmask till such time that it supports Video devices.
 # BBMASK .= "|.meta-rdk/recipes-common/webconfig-framework/webconfig-framework.bb"
 
-DISTRO_FEATURES_append = " playreadycdmi_cryptanium"
-DISTRO_FEATURES_append = " widevine_hardware"
+DISTRO_FEATURES:append = " playreadycdmi_cryptanium"
+DISTRO_FEATURES:append = " widevine_hardware"
 
-DISTRO_FEATURES_append = " cgroup"
+DISTRO_FEATURES:append = " cgroup"
 
-DISTRO_FEATURES_remove = "nfs"
+DISTRO_FEATURES:remove = "nfs"
 
-DISTRO_FEATURES_append = " xcal_device"
+DISTRO_FEATURES:append = " xcal_device"
 
-DISTRO_FEATURES_append = " lxy"
+DISTRO_FEATURES:append = " lxy"
 
 # Flags to control cedm builds
-DISTRO_FEATURES_remove_rpi = "fkpskdf"
-DISTRO_FEATURES_append_rpi = " enable-cpg"
-#DISTRO_FEATURES_append_rpi = " use-cpg-source"
+DISTRO_FEATURES:remove_rpi = "fkpskdf"
+DISTRO_FEATURES:append_rpi = " enable-cpg"
+#DISTRO_FEATURES:append_rpi = " use-cpg-source"
 
-DISTRO_FEATURES_append  = " cpg-ecfs"
-DISTRO_FEATURES_remove_rpi = "cpg-ecfs"
+DISTRO_FEATURES:append  = " cpg-ecfs"
+DISTRO_FEATURES:remove_rpi = "cpg-ecfs"
 
-DISTRO_FEATURES_append  = " bind"
-DISTRO_FEATURES_append = " safec"
+DISTRO_FEATURES:append  = " bind"
+DISTRO_FEATURES:append = " safec"
 
-DISTRO_FEATURES_append = " webconfig_bin"
+DISTRO_FEATURES:append = " webconfig_bin"
 
-DISTRO_FEATURES_append = " rdm-versioning"
+DISTRO_FEATURES:append = " rdm-versioning"
 
 PREFERRED_VERSION_bluez5_dunfell ?= "5.54"
 PREFERRED_VERSION_bluez5_kirkstone ?= "5.65"
-DISTRO_FEATURES_append = " logendpoints"
-DISTRO_FEATURES_remove_morty = " logendpoints"
+DISTRO_FEATURES:append = " logendpoints"
+DISTRO_FEATURES:remove_morty = " logendpoints"
 
-DISTRO_FEATURES_append = " tigress"
+DISTRO_FEATURES:append = " tigress"
 # Masking recipes for CEDM multicall implementation in RDK-V
 BBMASK .= "|.config-files|.config-service|.cpgu-src|.cpgu-pbt|.cpgc-src|.cpgc-pbt"
 
@@ -106,7 +106,7 @@ PREFERRED_VERSION_cairo_daisy ?= "1.12.16"
 PREFERRED_VERSION_cairo_dunfell ?= "1.16.0"
 PREFERRED_VERSION_cairo_kirkstone ?= "1.16.0"
 #Downgrade the cairo version since 1.16.0 is having compatibility issues in Arm devices.
-PREFERRED_VERSION_cairo_dunfell_arm = "1.14.6"
+PREFERRED_VERSION_cairo_dunfell:arm = "1.14.6"
 #Enable cairo 1.16 just for llama (arm)
 PREFERRED_VERSION_cairo_dunfell_llama = "1.16.0"
 
@@ -118,29 +118,29 @@ PREFERRED_VERSION_mosquitto_kirkstone = "2.0.14"
 PREFERRED_VERSION_nodejs_kirkstone = "16.14.2"
 PREFERRED_VERSION_nodejs-native_kirkstone = "16.14.2"
 
-VOLATILE_BINDS_append = "/tmp/named.conf.options /etc/bind/named.conf.options\n"
-VOLATILE_BINDS_append = "/tmp/bind /var/cache/bind\n"
-VOLATILE_BINDS_append = "/tmp/stunnel.conf /etc/stunnel.conf\n"
+VOLATILE_BINDS:append = "/tmp/named.conf.options /etc/bind/named.conf.options\n"
+VOLATILE_BINDS:append = "/tmp/bind /var/cache/bind\n"
+VOLATILE_BINDS:append = "/tmp/stunnel.conf /etc/stunnel.conf\n"
 
 PREFERRED_VERSION_qtwebsockets = "${@bb.utils.contains('DISTRO_FEATURES', 'build_for_sky', bb.utils.contains('DISTRO_FEATURES', 'comcast_qt5', '5.1.1%', '5.12.3', d), '5.1.1%', d)}"
 
-DISTRO_FEATURES_append  = " logbacktrace"
+DISTRO_FEATURES:append  = " logbacktrace"
 
 require conf/distro/include/rdk_backtrace_log.inc
 
-DISTRO_FEATURES_append  = " certconfig"
-DISTRO_FEATURES_remove_rpi = "certconfig"
+DISTRO_FEATURES:append  = " certconfig"
+DISTRO_FEATURES:remove_rpi = "certconfig"
 
-DISTRO_FEATURES_append  = " rdkssa"
+DISTRO_FEATURES:append  = " rdkssa"
 #RDKPI-429
-DISTRO_FEATURES_remove_rpi = "rdkssa"
+DISTRO_FEATURES:remove_rpi = "rdkssa"
 
 #State Red for RDK-V
-DISTRO_FEATURES_append  = " redrecovery"
-DISTRO_FEATURES_remove_rpi = " redrecovery"
+DISTRO_FEATURES:append  = " redrecovery"
+DISTRO_FEATURES:remove_rpi = " redrecovery"
 
-DISTRO_FEATURES_NATIVE_append = " bpd_symbol_compression"
-DISTRO_FEATURES_NATIVE_remove_daisy = " bpd_symbol_compression"
+DISTRO_FEATURES_NATIVE:append = " bpd_symbol_compression"
+DISTRO_FEATURES_NATIVE:remove_daisy = " bpd_symbol_compression"
 
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'ssl-1.1.1', '|.meta-rdk-ext/recipes-support/stunnel/stunnel_5.56.bbappend|.meta-rdk-video/recipes-support/curl/curl_7.69%.bbappend', '', d)}"
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'ssl-1.1.1', '|.meta-rdk-ext/recipes-connectivity/openssl/openssl-1.0.2o_1.0.2o.bb', '', d)}"
@@ -149,9 +149,9 @@ inherit ${@bb.utils.contains('DISTRO_FEATURES', 'sbom', 'create-spdx', '', d)}
 
 
 # Guarding RDK-40652 with DISTRO
-DISTRO_FEATURES_append_dunfell = " systemd-journal-cache"
+DISTRO_FEATURES:append_dunfell = " systemd-journal-cache"
 #remove following line while upgrading to systemd to 250
-DISTRO_FEATURES_append_kirkstone = " systemd-journal-cache"
+DISTRO_FEATURES:append_kirkstone = " systemd-journal-cache"
 
 #Masking the below recipes because in kirkstone build recipes pulling older version due to layer priority
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-support/fcgi/fcgi_2.4.0.bb', '', d)}"
@@ -163,8 +163,8 @@ BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/recipes-extended/procps/procps_3.3.12.bb', '', d)}"
 
 #removed the Thunder R4.2 and Enabled the R4.4.1
-DISTRO_FEATURES_remove = " wpe_r4"
-DISTRO_FEATURES_append = " wpe_r4_4"
+DISTRO_FEATURES:remove = " wpe_r4"
+DISTRO_FEATURES:append = " wpe_r4_4"
 
 PREFERRED_VERSION_wpeframework = "${@bb.utils.contains('DISTRO_FEATURES', 'wpe_r4_4', '4.4%' , bb.utils.contains('DISTRO_FEATURES', 'wpe_r4', '4.2%', '2.1%', d), d)}"
 PREFERRED_VERSION_wpeframework-clientlibraries = "${@bb.utils.contains('DISTRO_FEATURES', 'wpe_r4_4', '4.4%' , bb.utils.contains('DISTRO_FEATURES', 'wpe_r4', '4.2%', '2.1%', d), d)}"
@@ -172,19 +172,19 @@ PREFERRED_VERSION_wpeframework-interfaces = "${@bb.utils.contains('DISTRO_FEATUR
 PREFERRED_VERSION_wpeframework-tools-native = "${@bb.utils.contains('DISTRO_FEATURES', 'wpe_r4_4', '4.4%' , bb.utils.contains('DISTRO_FEATURES', 'wpe_r4', '4.2%', '2.1%', d), d)}"
 
 # For Apparmor
-DISTRO_FEATURES_append = " apparmor"
+DISTRO_FEATURES:append = " apparmor"
 # Add apparmor_earlypolicy.bbclass
-DISTRO_FEATURES_append = " apparmor_segmented_global"
+DISTRO_FEATURES:append = " apparmor_segmented_global"
 
 # MaintenanceManager Journal Logging
-DISTRO_FEATURES_append = " maintenance_journal_logging"
+DISTRO_FEATURES:append = " maintenance_journal_logging"
 
-#DISTRO_FEATURES_append = " enable_xmeminsight"
+#DISTRO_FEATURES:append = " enable_xmeminsight"
 
 PREFERRED_VERSION_collectd ?= "5.12.0"
 
 PREFERRED_VERSION_dnsmasq_kirkstone = "2.90"
 
-DISTRO_FEATURES_append = " enable_libsoup3"
+DISTRO_FEATURES:append = " enable_libsoup3"
 # yocto2 'morty' doesn't support libsoup3 dependencies
-DISTRO_FEATURES_remove_morty = " enable_libsoup3"
+DISTRO_FEATURES:remove_morty = " enable_libsoup3"

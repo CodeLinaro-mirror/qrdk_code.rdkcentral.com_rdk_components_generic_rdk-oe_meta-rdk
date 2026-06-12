@@ -10,20 +10,20 @@ PACKAGES = "\
     "
 
 # Generic RDK components
-RDEPENDS_packagegroup-rdk-generic = "\
+RDEPENDS:packagegroup-rdk-generic = "\
     devicesettings \
     gst-plugins-rdk \
     iarmbus \
     iarmmgrs \
     "
 
-RDEPENDS_packagegroup-rdk-generic_append_qemuall = " sysint"
-RDEPENDS_packagegroup-rdk-media-common_append_qemuall = " sysint-conf"
+RDEPENDS:packagegroup-rdk-generic:append:qemuall = " sysint"
+RDEPENDS:packagegroup-rdk-media-common:append:qemuall = " sysint-conf"
 
 # since we compile RDK component within qtwebkit (mediaplayersink) it
 # is no longer a generic component anymore, and we need to make it
 # part of RDK, since it won't compile in stand alone anymore..
-RDEPENDS_packagegroup-rdk-generic += "\
+RDEPENDS:packagegroup-rdk-generic += "\
     gst-plugins-base \
     gst-plugins-good \
     "

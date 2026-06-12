@@ -1,5 +1,5 @@
 # enable gstreamer1
-DISTRO_FEATURES_append = " gstreamer1"
+DISTRO_FEATURES:append = " gstreamer1"
 
 # toggle gstreamer 1.4 and 1.10
 

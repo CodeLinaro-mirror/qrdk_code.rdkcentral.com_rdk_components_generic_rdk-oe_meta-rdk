@@ -7,7 +7,7 @@ SRC_URI = "git://github.com/rdkcentral/rdk-libunpriv;protocol=https;nobranch=1;n
 SRCREV_rdk-libunpriv = "2e6c30c88823b7ff9cebde4d7f4d978118510da0"
 SRCREV_FORMAT = "rdk-libunpriv"
 
-CXXFLAGS_append = "\
+CXXFLAGS:append = "\
     -I${STAGING_INCDIR} \
     -I${STAGING_INCDIR}/jsoncpp"
 

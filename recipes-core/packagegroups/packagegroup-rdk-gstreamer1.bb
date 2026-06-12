@@ -4,7 +4,7 @@ LICENSE = "MIT"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     gstreamer1.0-meta-audio \
     gstreamer1.0-meta-base \
     gstreamer1.0-meta-video \

@@ -22,10 +22,10 @@ do_install() {
         cp ${D}/var/www/shared/jquery-1.4.4.min.js ${D}/var/www/htmldiag2/common/js/jquery-1.4.4.min.js
 }
 
-FILES_${PN} += " /var/www/shared \              
+FILES:${PN} += " /var/www/shared \              
                  /var/www/htmldiag/js \
                  /var/www/htmldiag2/js \
                  /var/www/hwselftest/scripts \"
 
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"
 

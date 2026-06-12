@@ -4,15 +4,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c466d4ab8a68655eb1edf0bf8c1a8fb8"
 
 include dobby.inc
 
-SRC_URI_append_kirkstone = " file://Fix_compile_gcc11.patch  \
+SRC_URI:append_kirkstone = " file://Fix_compile_gcc11.patch  \
                              file://Add_config_header_kirkstone.patch \
                            "
 
 #Add the patch DELIA-66405
-SRC_URI_append = " file://0001-DELIA-66405-Debug-Log-File-stats-for-minidump.patch "
+SRC_URI:append = " file://0001-DELIA-66405-Debug-Log-File-stats-for-minidump.patch "
 
 DEPENDS = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd ', '', d)} libnl dbus jsoncpp boost yajl python3 breakpad breakpad-wrapper "
-RDEPENDS_${PN} = "crun (>= 0.14.1) ${@bb.utils.contains('DISTRO_FEATURES', 'dac', '', ' dobby-thunderplugin', d)} "
+RDEPENDS:${PN} = "crun (>= 0.14.1) ${@bb.utils.contains('DISTRO_FEATURES', 'dac', '', ' dobby-thunderplugin', d)} "
 
 python do_patch_new () {
     bb.build.exec_func('patch_do_patch', d)
@@ -26,8 +26,8 @@ inherit pkgconfig cmake systemd logrotate
 #dobby logs storage file is decided using device.properties. syslog-ng-config-gen framework decide the log file.
 
 #config.h file generation for kirkstone builds
-DEPENDS_append_kirkstone = " autoconf-native automake-native "
-CFLAGS_append_kirkstone = " --sysroot=${RECIPE_SYSROOT}"
+DEPENDS:append_kirkstone = " autoconf-native automake-native "
+CFLAGS:append_kirkstone = " --sysroot=${RECIPE_SYSROOT}"
 LOGROTATE_NAME="dobby"
 LOGROTATE_LOGNAME_dobby="dobby.log"
 LOGROTATE_SIZE_dobby="1572864"
@@ -71,22 +71,22 @@ PACKAGECONFIG[legacycomponents] = "-DLEGACY_COMPONENTS=ON,-DLEGACY_COMPONENTS=OF
 EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'RDKTV_APP_HIBERNATE', ' -DDOBBY_HIBERNATE_MEMCR_IMPL=ON -DDOBBY_HIBERNATE_MEMCR_PARAMS_ENABLED=ON','',d)}"
 
 # Add the systemd service
-SYSTEMD_SERVICE_${PN} = "dobby.service"
+SYSTEMD_SERVICE:${PN} = "dobby.service"
 
 # Skip harmless QA issue caused by installing but not shipping buildtime cmake files
-INSANE_SKIP_${PN} = "installed-vs-shipped"
+INSANE_SKIP:${PN} = "installed-vs-shipped"
 
 # Ensure that the unversioned symlinks of libraries are kept (and don't generate a QA error)
-INSANE_SKIP_${PN} += "dev-so"
+INSANE_SKIP:${PN} += "dev-so"
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
-FILES_${PN} += "${systemd_system_unitdir}/dobby.service"
-FILES_${PN} += "${sysconfdir}/systemd/system/multi-user.target.wants/dobby.service"
-FILES_${PN} += "${sysconfdir}/dobby.json"
-FILES_${PN} += "${bindir}/DobbyTool"
-FILES_${PN} += "${sbindir}/DobbyDaemon"
-FILES_${PN} += "${libexecdir}/DobbyInit"
-FILES_${PN} += "${libdir}/plugins/dobby/*.so*"
-FILES_${PN} += "${libdir}/libethanlog.so*"
-FILES_${PN} += "${libdir}/libocispec.so*"
+FILES:${PN} += "${systemd_system_unitdir}/dobby.service"
+FILES:${PN} += "${sysconfdir}/systemd/system/multi-user.target.wants/dobby.service"
+FILES:${PN} += "${sysconfdir}/dobby.json"
+FILES:${PN} += "${bindir}/DobbyTool"
+FILES:${PN} += "${sbindir}/DobbyDaemon"
+FILES:${PN} += "${libexecdir}/DobbyInit"
+FILES:${PN} += "${libdir}/plugins/dobby/*.so*"
+FILES:${PN} += "${libdir}/libethanlog.so*"
+FILES:${PN} += "${libdir}/libocispec.so*"

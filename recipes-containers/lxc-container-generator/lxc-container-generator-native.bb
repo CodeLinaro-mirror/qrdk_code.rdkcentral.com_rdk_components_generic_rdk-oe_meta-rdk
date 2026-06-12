@@ -41,5 +41,5 @@ do_install() {
 	install -m 755 ${S}/src/conf/config.ini ${D}${datadir}/${BPN}/src/conf/config.ini
 
 	#install_lxc_config non_secure lxc_conf_EXAMPLE.xml
-	#install_lxc_config non_secure lxc_conf_EXAMPLE_appendsample.xml
+	#install_lxc_config non_secure lxc_conf_EXAMPLE:appendsample.xml
 }

@@ -10,7 +10,7 @@ PACKAGES = "\
     "
 
 #components used in TDK
-RDEPENDS_packagegroup-tdk = "\
+RDEPENDS:packagegroup-tdk = "\
   tdk \
   ${@bb.utils.contains('DISTRO_FEATURES', 'enable_kernel_testing', 'ltp', '', d)} \
   ${@bb.utils.contains('DISTRO_FEATURES', 'enable_firebolt_compliance_tdk', 'waymetric', '', d)} \
@@ -19,7 +19,7 @@ RDEPENDS_packagegroup-tdk = "\
 #Removed sysstat as it is not being used from TDK now.
 #Removed bind-utils from RDEPENDS since it is overriding nslookup binary in RDK image and it is causing issue in getting ipv6 address.
 
-RDEPENDS_packagegroup-tdk_append_qemuall = " alsa-conf "
+RDEPENDS:packagegroup-tdk:append:qemuall = " alsa-conf "
 
 
 

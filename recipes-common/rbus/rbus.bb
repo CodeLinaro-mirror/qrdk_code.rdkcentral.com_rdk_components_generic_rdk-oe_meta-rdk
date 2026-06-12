@@ -21,11 +21,11 @@ EXTRA_OECMAKE += " -DMSG_ROUNDTRIP_TIME=ON -DENABLE_RDKLOGGER=ON"
 #Gtest Specific Enablements
 EXTRA_OECMAKE += " ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '-DENABLE_UNIT_TESTING=ON -DBUILD_RBUS_BENCHMARK_TEST=ON', '', d)}"
 EXTRA_OECMAKE += " ${@bb.utils.contains('DISTRO_FEATURES', 'RBUS_ENABLE_TESTAPPS', '-DBUILD_RBUS_SAMPLE_APPS=ON -DBUILD_RBUS_TEST_APPS=ON ', '-DBUILD_RBUS_SAMPLE_APPS=OFF -DBUILD_RBUS_TEST_APPS=OFF', d)}"
-DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', ' gtest benchmark ', ' ', d)}"
+DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', ' gtest benchmark ', ' ', d)}"
 
 #Dunfell Specific CFlags
-CFLAGS_append = " -Wno-format-truncation "
-CXXFLAGS_append = " -Wno-format-truncation "
+CFLAGS:append = " -Wno-format-truncation "
+CXXFLAGS:append = " -Wno-format-truncation "
 
 SYSLOG-NG_FILTER = "rbus"
 SYSLOG-NG_SERVICE_rbus = "rbus.service"
@@ -39,13 +39,13 @@ LOGROTATE_ROTATION_rbus="3"
 LOGROTATE_SIZE_MEM_rbus="1572864"
 LOGROTATE_ROTATION_MEM_rbus="3"
 
-do_install_append() {
+do_install:append() {
    install -d ${D}${systemd_unitdir}/system
    install -m 0644 ${S}/conf/rbus.service ${D}${systemd_unitdir}/system
    install -m 0644 ${S}/conf/rbus_session_mgr.service ${D}${systemd_unitdir}/system
 }
 
-do_install_append_broadband() {
+do_install:append_broadband() {
    install -m 0755 ${S}/conf/rbus_log_capture.sh ${D}${bindir}/
    install -m 0644 ${S}/conf/rbus_log.service ${D}${systemd_unitdir}/system
    install -m 0644 ${S}/conf/rbus_monitor.path ${D}${systemd_unitdir}/system
@@ -53,29 +53,29 @@ do_install_append_broadband() {
    install -m 0644 ${S}/conf/rbus_monitor.service ${D}${systemd_unitdir}/system
 }
 
-do_install_append_hybrid() {
+do_install:append_hybrid() {
    install -D -m 0644 ${S}/conf/rbus_rdkv.conf ${D}${systemd_unitdir}/system/rbus.service.d/rbus_rdkv.conf
 }
 
-do_install_append_client() {
+do_install:append_client() {
    install -D -m 0644 ${S}/conf/rbus_rdkv.conf ${D}${systemd_unitdir}/system/rbus.service.d/rbus_rdkv.conf
 }
 
 PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
-FILES_${PN}-gtest += "\
+FILES:${PN}-gtest += "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/rbus_gtest.bin', '', d)} \
 "
 
-FILES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/rbus_src_gcno.tar', '', d)}"
+FILES:${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/rbus_src_gcno.tar', '', d)}"
 
 
-FILES_${PN} += "${systemd_unitdir}/system/*"
-SYSTEMD_SERVICE_${PN} = "rbus.service"
-SYSTEMD_SERVICE_${PN}_append = " rbus_session_mgr.service "
-SYSTEMD_SERVICE_${PN}_append_broadband  = " rbus_monitor.service "
-SYSTEMD_SERVICE_${PN}_append_broadband  = " rbus_monitor.path "
-SYSTEMD_SERVICE_${PN}_append_broadband  = " rbus_log.service "
+FILES:${PN} += "${systemd_unitdir}/system/*"
+SYSTEMD_SERVICE:${PN} = "rbus.service"
+SYSTEMD_SERVICE:${PN}:append = " rbus_session_mgr.service "
+SYSTEMD_SERVICE:${PN}:append_broadband  = " rbus_monitor.service "
+SYSTEMD_SERVICE:${PN}:append_broadband  = " rbus_monitor.path "
+SYSTEMD_SERVICE:${PN}:append_broadband  = " rbus_log.service "
 
 DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-rbus', '', d)}"
 inherit comcast-package-deploy

@@ -13,7 +13,7 @@ PACKAGES = "\
     packagegroup-rdk-oss-broadband \
     "
 # Opensource components used in RDK-B
-RDEPENDS_packagegroup-rdk-oss-broadband = "\
+RDEPENDS:packagegroup-rdk-oss-broadband = "\
     bridge-utils \
     curl \
     dibbler-client \
@@ -72,12 +72,12 @@ RDEPENDS_packagegroup-rdk-oss-broadband = "\
     "
 DEPENDS += " libsyswrapper"
 
-RDEPENDS_packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'btr_hciadv', 'bleadvhci', '', d)}"
-RDEPENDS_packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'snmppa', 'net-snmp-client net-snmp-server net-snmp-mibs net-snmp-server-snmpd', '', d)}"
-RDEPENDS_packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdk-oss-ssa', 'rdk-oss-ssa ecryptfs-utils', '', d)}"
-RDEPENDS_packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'gateway_manager', ' rsync ', '', d)}"
+RDEPENDS:packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'btr_hciadv', 'bleadvhci', '', d)}"
+RDEPENDS:packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'snmppa', 'net-snmp-client net-snmp-server net-snmp-mibs net-snmp-server-snmpd', '', d)}"
+RDEPENDS:packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdk-oss-ssa', 'rdk-oss-ssa ecryptfs-utils', '', d)}"
+RDEPENDS:packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'gateway_manager', ' rsync ', '', d)}"
 
-RDEPENDS_packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'dac', 'dobby', '', d)}"
-RDEPENDS_packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'dac', 'dsm', '', d)}"
-RDEPENDS_packagegroup-rdk-oss-broadband += " ${@bb.utils.contains("DISTRO_FEATURES", "benchmark_enable", "broadcom-bdmfshell", "", d)}"
+RDEPENDS:packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'dac', 'dobby', '', d)}"
+RDEPENDS:packagegroup-rdk-oss-broadband += " ${@bb.utils.contains('DISTRO_FEATURES', 'dac', 'dsm', '', d)}"
+RDEPENDS:packagegroup-rdk-oss-broadband += " ${@bb.utils.contains("DISTRO_FEATURES", "benchmark_enable", "broadcom-bdmfshell", "", d)}"
 

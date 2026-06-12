@@ -10,7 +10,7 @@ PACKAGES = "\
     "
 
 #components used in TDK-B
-RDEPENDS_packagegroup-tdk-broadband = "\
+RDEPENDS:packagegroup-tdk-broadband = "\
   tdk-b \
   sysstat \
   sed \

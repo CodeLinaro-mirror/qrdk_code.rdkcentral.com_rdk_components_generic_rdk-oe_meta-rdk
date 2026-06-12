@@ -11,7 +11,7 @@ PREFERRED_VERSION_glib-2.0-native_kirkstone = "2.72.3"
 
 PREFERRED_VERSION_openssl = "1.1.0g"
 
-VOLATILE_BINDS_append = "/tmp/ccsp_msg.cfg /ccsp_msg.cfg\n"
+VOLATILE_BINDS:append = "/tmp/ccsp_msg.cfg /ccsp_msg.cfg\n"
 
 BBMASK .= "|.meta-rdk/recipes-extended|.*recipes-qt|.meta-rdk-comcast/recipes-extended|meta-rdk/recipes-core/images/rdk-oss-image.bb|meta-rdk/recipes-core/images/rdk-generic-image.bb|.meta-rdk/recipes-multimedia|.meta-rdk/recipes-graphics|.meta-rdk/recipes-oem|.meta-rdk-comcast/recipes-multimedia|.meta-rdk-comcast/recipes-graphics|.meta-rdk/recipes-thirdparty|.meta-rdk-ext/recipes-graphics|.meta-rdk-ext/recipes-utils"
 
@@ -33,9 +33,9 @@ BBMASK .= "|./meta-rdk/recipes-common/rdkversion/"
 # add webconfig-framework.bb to bbmask till such time that it supports Camera devices.
 BBMASK .= "|.meta-rdk/recipes-common/webconfig-framework/webconfig-framework.bb"
 
-DISTRO_FEATURES_remove = "zeroconf"
+DISTRO_FEATURES:remove = "zeroconf"
 # For Apparmor
-DISTRO_FEATURES_append = " apparmor"
+DISTRO_FEATURES:append = " apparmor"
 
 OPTIMIZE_DEFAULT = "-Os"
 

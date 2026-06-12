@@ -10,5 +10,5 @@ PACKAGES = "\
     packagegroup-ap-extender \
     "
 #components used in EasyMesh AP extender
-RDEPENDS_packagegroup-ap-extender = "\
+RDEPENDS:packagegroup-ap-extender = "\
 "

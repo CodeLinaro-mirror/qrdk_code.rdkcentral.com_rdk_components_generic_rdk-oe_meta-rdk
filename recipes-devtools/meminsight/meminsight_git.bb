@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1c020dfe1abb4e684874a44de1244c28"
 
 SRC_URI = "${CMF_GITHUB_ROOT}/${BPN}.git;nobranch=1;protocol=${CMF_GIT_PROTOCOL}"
 
-SRC_URI_append = " file://meminsight-runner.service \
+SRC_URI:append = " file://meminsight-runner.service \
                    file://meminsight-runner.path \
                    file://conf/client.conf \
                    file://conf/broadband.conf \
@@ -26,7 +26,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit autotools systemd
 
-CFLAGS_append_broadband = ' -DDEVICE_IDENTIFIER=\\"erouter0\\" -DDEFAULT_OUT_DIR=\\"/nvram/meminsight\\"'
+CFLAGS:append_broadband = ' -DDEVICE_IDENTIFIER=\\"erouter0\\" -DDEFAULT_OUT_DIR=\\"/nvram/meminsight\\"'
 
 do_install() {
     install -d ${D}${bindir}
@@ -38,12 +38,12 @@ do_install() {
     install -d ${D}${systemd_unitdir}/system/meminsight-runner.path.d
 }
 
-do_install_append_client() {
+do_install:append_client() {
     install -m 0644 ${WORKDIR}/conf/client.conf ${D}${systemd_unitdir}/system/meminsight-runner.service.d/
     install -m 0644 ${WORKDIR}/conf/client-path.conf ${D}${systemd_unitdir}/system/meminsight-runner.path.d/
 }
 
-do_install_append_broadband() {
+do_install:append_broadband() {
     install -m 0644 ${WORKDIR}/conf/broadband.conf ${D}${systemd_unitdir}/system/meminsight-runner.service.d/
     if ${@bb.utils.contains('DISTRO_FEATURES', 'enable_xmeminsight', 'true', 'false', d)}; then
         install -m 0644 ${WORKDIR}/conf/broadband-path.conf ${D}${systemd_unitdir}/system/meminsight-runner.path.d/
@@ -54,12 +54,12 @@ do_install_append_broadband() {
     fi
 }
 
-SYSTEMD_SERVICE_${PN} = "meminsight-runner.path"
+SYSTEMD_SERVICE:${PN} = "meminsight-runner.path"
 
-FILES_${PN} += "${bindir}/meminsight"
+FILES:${PN} += "${bindir}/meminsight"
 
-FILES_${PN} += "${systemd_unitdir}/system/meminsight-runner.service"
-FILES_${PN} += "${systemd_unitdir}/system/meminsight-runner.path"
+FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.service"
+FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.path"
 
-FILES_${PN} += "${systemd_unitdir}/system/meminsight-runner.service.d/*.conf"
-FILES_${PN} += "${systemd_unitdir}/system/meminsight-runner.path.d/*.conf"
+FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.service.d/*.conf"
+FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.path.d/*.conf"

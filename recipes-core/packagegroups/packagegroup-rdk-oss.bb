@@ -9,7 +9,7 @@ PACKAGES = "\
     "
 
 # Opensource components used in RDK
-RDEPENDS_packagegroup-rdk-oss = "\
+RDEPENDS:packagegroup-rdk-oss = "\
     curl \
     dropbear \
     e2fsprogs \
@@ -46,7 +46,7 @@ RDEPENDS_packagegroup-rdk-oss = "\
     "
 GST_ALSA = "${@bb.utils.contains('COMBINED_FEATURES', 'alsa', 'gstreamer1.0-plugins-base-alsa', '',d)}"
 
-RDEPENDS_packagegroup-rdk-oss += "${@bb.utils.contains('DISTRO_FEATURES', 'benchmark_enable', ' \
+RDEPENDS:packagegroup-rdk-oss += "${@bb.utils.contains('DISTRO_FEATURES', 'benchmark_enable', ' \
     gstreamer1.0 \
     gstreamer1.0-plugins-base \ 
     gstreamer1.0-plugins-good \

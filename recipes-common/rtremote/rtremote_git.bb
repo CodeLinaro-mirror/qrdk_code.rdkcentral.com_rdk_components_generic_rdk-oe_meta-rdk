@@ -14,29 +14,29 @@ SRCREV = "7e29a873d9e1a9b0102a71d812ff40a31bac10e0"
 
 inherit cmake
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI += "file://rtremote.conf "
 
-ARCHFLAGS_append_arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--with-arm-float-abi=hard', '--with-arm-float-abi=softfp', d)}"
-ARCHFLAGS_append_mipsel = " --with-mips-arch-variant=r1"
+ARCHFLAGS:append:arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--with-arm-float-abi=hard', '--with-arm-float-abi=softfp', d)}"
+ARCHFLAGS:append:mipsel = " --with-mips-arch-variant=r1"
 ARCHFLAGS ?= ""
-SELECTED_OPTIMIZATION_remove = "-O1"
-SELECTED_OPTIMIZATION_remove = "-O2"
-SELECTED_OPTIMIZATION_remove = "-Os"
-SELECTED_OPTIMIZATION_append = " -O3"
-SELECTED_OPTIMIZATION_append = " -Wno-deprecated-declarations -Wno-maybe-uninitialized -Wno-address"
+SELECTED_OPTIMIZATION:remove = "-O1"
+SELECTED_OPTIMIZATION:remove = "-O2"
+SELECTED_OPTIMIZATION:remove = "-Os"
+SELECTED_OPTIMIZATION:append = " -O3"
+SELECTED_OPTIMIZATION:append = " -Wno-deprecated-declarations -Wno-maybe-uninitialized -Wno-address"
 
 TARGET_CFLAGS += " -fno-delete-null-pointer-checks "
 TARGET_CXXFLAGS += " -fno-delete-null-pointer-checks "
 TARGET_CXXFLAGS += " -Wl,--warn-unresolved-symbols "
 
-EXTRA_OECMAKE_append_kirkstone = " -DRTREMOTE_GENERATOR_EXPORT=${WORKDIR}/build/rtRemoteConfigGen_export.cmake "
-EXTRA_OECMAKE_append_dunfell = " -DRTREMOTE_GENERATOR_EXPORT=${S}/temp/rtRemoteConfigGen_export.cmake "
-EXTRA_OECMAKE_append_morty = " -DRTREMOTE_GENERATOR_EXPORT=${S}/temp/rtRemoteConfigGen_export.cmake "
+EXTRA_OECMAKE:append_kirkstone = " -DRTREMOTE_GENERATOR_EXPORT=${WORKDIR}/build/rtRemoteConfigGen_export.cmake "
+EXTRA_OECMAKE:append_dunfell = " -DRTREMOTE_GENERATOR_EXPORT=${S}/temp/rtRemoteConfigGen_export.cmake "
+EXTRA_OECMAKE:append_morty = " -DRTREMOTE_GENERATOR_EXPORT=${S}/temp/rtRemoteConfigGen_export.cmake "
 EXTRA_OECMAKE += " -DRT_INCLUDE_DIR=${STAGING_INCDIR}/rtcore "
 
-do_configure_prepend_morty() {
+do_configure:prepend_morty() {
     if [ ! -d ${S}/temp ]; then
         mkdir ${S}/temp
     fi
@@ -51,7 +51,7 @@ do_configure_prepend_morty() {
     cd ..
 }
 
-do_configure_prepend_dunfell() {
+do_configure:prepend_dunfell() {
     if [ ! -d ${S}/temp ]; then
         mkdir ${S}/temp
     fi
@@ -66,7 +66,7 @@ do_configure_prepend_dunfell() {
     cd ..
 }
 
-do_configure_prepend_kirkstone() {
+do_configure:prepend_kirkstone() {
 
     cd ${WORKDIR}/build
     cmake -DCMAKE_CROSSCOMPILING=OFF -URTREMOTE_GENERATOR_EXPORT -DCMAKE_C_FLAGS="${BUILD_CFLAGS}" -DCMAKE_C_COMPILER="${BUILD_CC}" -DCMAKE_CXX_COMPILER="${BUILD_CXX}" -DCMAKE_CXX_FLAGS="${BUILD_CXX_FLAGS}" -S ${S}  -B ${WORKDIR}/build ..
@@ -97,11 +97,11 @@ do_install () {
    install -m 0644 "${WORKDIR}/rtremote.conf" "${D}/etc/"
 }
 
-FILES_${PN} += "${libdir}/*.so"
+FILES:${PN} += "${libdir}/*.so"
 FILES_SOLIBSDEV = ""
-INSANE_SKIP_${PN} += "dev-so staticdev"
-INSANE_SKIP_${PN}_append_morty = " ldflags"
-DEBIAN_NOAUTONAME_${PN} = "1"
+INSANE_SKIP:${PN} += "dev-so staticdev"
+INSANE_SKIP:${PN}:append_morty = " ldflags"
+DEBIAN_NOAUTONAME:${PN} = "1"
 
 BBCLASSEXTEND = "native"
 

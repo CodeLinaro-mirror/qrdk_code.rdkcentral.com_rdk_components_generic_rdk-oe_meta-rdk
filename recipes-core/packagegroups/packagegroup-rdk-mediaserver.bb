@@ -10,7 +10,7 @@ PACKAGES = "\
     "
 
 # Generic RDK components
-RDEPENDS_packagegroup-rdk-generic-mediaserver = "\
+RDEPENDS:packagegroup-rdk-generic-mediaserver = "\
     rmfstreamer \
     tenablehdcp \
     tr69hostif \

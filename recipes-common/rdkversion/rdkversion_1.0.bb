@@ -14,7 +14,7 @@ SRC_URI = "${RDK_GENERIC_ROOT_GIT}/rdkversion/generic;protocol=${RDK_GIT_PROTOCO
 S = "${WORKDIR}/git"
 
 PROVIDES = "rdkversion"
-RPROVIDES_${PN} = "librdkversion.so"
+RPROVIDES:${PN} = "librdkversion.so"
 
 DEPENDS = "glib-2.0"
 

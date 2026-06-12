@@ -4,14 +4,14 @@ require recipes-core/images/rdk-generic-mediaclient-image.bb
 include recipes-extended/images/core-image-lsb-sdk.bb
 
 IMAGE_FEATURES += "tools-sdk dev-pkgs tools-debug"
-IMAGE_FEATURES_remove_rpi = " ssh-server-openssh"
+IMAGE_FEATURES:remove_rpi = " ssh-server-openssh"
 
 IMAGE_INSTALL += "sysint"
 IMAGE_INSTALL += "gstreamer1.0-libav"
 IMAGE_INSTALL += "dropbear"
 IMAGE_INSTALL += "96boards-tools"
 
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     network-hotplug \
     libmcrypt \
     bzip2 \
@@ -30,7 +30,7 @@ IMAGE_INSTALL += " \
     packagegroup-rdk-media-common \
 "
 
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     network-hotplug \
     bzip2 \
     nmap \
@@ -38,7 +38,7 @@ IMAGE_INSTALL_append = " \
     zlib \
     "
 
-IMAGE_INSTALL_append_container = " \
+IMAGE_INSTALL:append_container = " \
    gzip \
    perl \
    libcap \

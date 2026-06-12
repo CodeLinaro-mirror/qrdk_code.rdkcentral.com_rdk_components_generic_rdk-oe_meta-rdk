@@ -2,15 +2,15 @@
 #This is imported by both hybrid and mediaclient video devices.
 #So all common code can be moved to this place.
 
-TOOLCHAIN_TARGET_TASK_append  =" ${MLPREFIX}breakpad-staticdev ${MLPREFIX}alsa-dev ${MLPREFIX}egl-headers"
+TOOLCHAIN_TARGET_TASK:append  =" ${MLPREFIX}breakpad-staticdev ${MLPREFIX}alsa-dev ${MLPREFIX}egl-headers"
 USER_PREFERRED_SDK_INSTALL_DIR = "./RNE-3.0"
 #changes made for populating SDK
 TOOLCHAIN_OUTPUTNAME="${MACHINE}-RNE-SDK-${SDK_VERSION}"
-SDKIMAGE_FEATURES_remove ="dbg-pkgs"
-SDKIMAGE_FEATURES_remove ="src-pkgs"
+SDKIMAGE_FEATURES:remove ="dbg-pkgs"
+SDKIMAGE_FEATURES:remove ="src-pkgs"
 POPULATE_SDK_POST_TARGET_COMMAND += 'do_rdk_artifact_customizations; '
 
-TOOLCHAIN_HOST_TASK_append_daisy = "\
+TOOLCHAIN_HOST_TASK:append_daisy = "\
    nativesdk-python-core \
    nativesdk-python-textutils \
    nativesdk-python-sqlite3 \
@@ -39,14 +39,14 @@ TOOLCHAIN_HOST_TASK_append_daisy = "\
    nativesdk-python-git \
    nativesdk-python-pkgutil \
    "
-TOOLCHAIN_HOST_TASK_append = " nativesdk-bison"
-TOOLCHAIN_TARGET_TASK_append  =" ${MLPREFIX}devicesettings-hal-headers ${MLPREFIX}rt-headers"
+TOOLCHAIN_HOST_TASK:append = " nativesdk-bison"
+TOOLCHAIN_TARGET_TASK:append  =" ${MLPREFIX}devicesettings-hal-headers ${MLPREFIX}rt-headers"
 
 #Rust SDK
-TOOLCHAIN_HOST_TASK_append = " ${@'packagegroup-rust-cross-canadian-${MACHINE}' if os.path.isfile('${RDKROOT}/meta-rust/conf/layer.conf') else ''}"
-TOOLCHAIN_HOST_TASK_append = " ${@'packagegroup-rust-cross-canadian-${MACHINE}' if os.path.isfile('${RDKROOT}/meta-lts-mixins/conf/layer.conf') else ''}"
+TOOLCHAIN_HOST_TASK:append = " ${@'packagegroup-rust-cross-canadian-${MACHINE}' if os.path.isfile('${RDKROOT}/meta-rust/conf/layer.conf') else ''}"
+TOOLCHAIN_HOST_TASK:append = " ${@'packagegroup-rust-cross-canadian-${MACHINE}' if os.path.isfile('${RDKROOT}/meta-lts-mixins/conf/layer.conf') else ''}"
 
 #eSDK changes
 include  ${@bb.utils.contains('DISTRO_FEATURES', 'enable_esdk', 'rdk-esdk-override.inc', 'xxx.inc', d)}
-DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'enable_esdk', ' patchelf-native ', '', d)} "
+DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'enable_esdk', ' patchelf-native ', '', d)} "
 

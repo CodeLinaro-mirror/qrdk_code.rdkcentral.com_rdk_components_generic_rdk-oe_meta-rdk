@@ -13,7 +13,7 @@ PACKAGES = "\
 CLOSEDCAPTION ?= "closedcaption"
 
 # Generic RDK components
-RDEPENDS_packagegroup-rdk-media-common = "\
+RDEPENDS:packagegroup-rdk-media-common = "\
     ${CLOSEDCAPTION} \
     devicesettings \
     iarmbus \
@@ -50,16 +50,16 @@ RDEPENDS_packagegroup-rdk-media-common = "\
     webcfg \
     rdm-agent \
     "
-RDEPENDS_packagegroup-rdk-media-common_append_qemuall = " sysint "
-RDEPENDS_packagegroup-rdk-media-common_append_qemuall = " sysint-conf "
-RDEPENDS_packagegroup-rdk-media-common_append_rpi = " rdkmediaplayer "
+RDEPENDS:packagegroup-rdk-media-common:append:qemuall = " sysint "
+RDEPENDS:packagegroup-rdk-media-common:append:qemuall = " sysint-conf "
+RDEPENDS:packagegroup-rdk-media-common:append_rpi = " rdkmediaplayer "
 
-IMAGE_INSTALL_append_rpi = " e2fsprogs-mke2fs "
+IMAGE_INSTALL:append_rpi = " e2fsprogs-mke2fs "
 
 #package for firebolt-test-client
-RDEPENDS_packagegroup-rdk-media-common += " ${@bb.utils.contains('DISTRO_FEATURES', 'firebolt_test_client', 'firebolt-test-client', '', d)}"
+RDEPENDS:packagegroup-rdk-media-common += " ${@bb.utils.contains('DISTRO_FEATURES', 'firebolt_test_client', 'firebolt-test-client', '', d)}"
 
-RDEPENDS_packagegroup-rdk-media-common_remove += "\
+RDEPENDS:packagegroup-rdk-media-common:remove += "\
  ${@bb.utils.contains('DISTRO_FEATURES', 'enable_libsoup3', 'nghttp2-server', '', d)} \
  ${@bb.utils.contains('DISTRO_FEATURES', 'enable_libsoup3', 'nghttp2-common', '', d)} \
 "

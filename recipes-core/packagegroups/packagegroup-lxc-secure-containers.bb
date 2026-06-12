@@ -8,7 +8,7 @@ PACKAGES = "\
     packagegroup-lxc-secure-containers \
     "
 
-RDEPENDS_packagegroup-lxc-secure-containers = "\
+RDEPENDS:packagegroup-lxc-secure-containers = "\
     libcap \
     lxc \
     lxccpid \

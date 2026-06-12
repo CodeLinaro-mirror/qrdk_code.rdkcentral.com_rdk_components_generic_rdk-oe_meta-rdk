@@ -34,8 +34,8 @@ do_install() {
         install -m 0755 ${S}/uploadDumps.sh ${D}${base_libdir}/rdk
 }
 
-RDEPENDS_${PN} += "busybox"
+RDEPENDS:${PN} += "busybox"
 
 PACKAGE_BEFORE_PN += "${PN}-conf"
 
-FILES_${PN} += "${base_libdir}/rdk/uploadDumps.sh"
+FILES:${PN} += "${base_libdir}/rdk/uploadDumps.sh"

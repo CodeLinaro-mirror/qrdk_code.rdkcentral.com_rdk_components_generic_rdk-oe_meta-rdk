@@ -13,26 +13,26 @@ PR = "r0"
 S = "${WORKDIR}/git"
 
 DEPENDS = "log4c glib-2.0"
-DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
+DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
 #Milestone Support
 EXTRA_OECONF += " --enable-milestone"
 PROVIDES = "getClockUptime"
-CFLAGS_append_hybrid += " -DLOGMILESTONE"
-CFLAGS_append_client += " -DLOGMILESTONE"
+CFLAGS:append_hybrid += " -DLOGMILESTONE"
+CFLAGS:append_client += " -DLOGMILESTONE"
 
 inherit autotools pkgconfig coverity pkgconfig
 
-CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
+CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
 
-CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
-LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
+CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
+LDFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
 
-do_install_append () {
+do_install:append () {
     install -d ${D}${base_libdir}/rdk/
     install -m 0755 ${S}/scripts/logMilestone.sh ${D}${base_libdir}/rdk
 }
 
-FILES_${PN} += "${base_libdir}/rdk/logMilestone.sh \
+FILES:${PN} += "${base_libdir}/rdk/logMilestone.sh \
                 ${base_libdir} \
                 ${base_libdir}/rdk"

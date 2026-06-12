@@ -9,11 +9,11 @@ PACKAGES = "\
     packagegroup-rdk-qt4e \
     "
 
-RDEPENDS_packagegroup-rdk-qt-apps = "\
+RDEPENDS:packagegroup-rdk-qt-apps = "\
     libqjson-e \
     "
 
-RDEPENDS_packagegroup-rdk-qt4e = "\
+RDEPENDS:packagegroup-rdk-qt4e = "\
     libqt-embedded3support4 \
     libqt-embeddedclucene4 \
     libqt-embeddedcore4 \

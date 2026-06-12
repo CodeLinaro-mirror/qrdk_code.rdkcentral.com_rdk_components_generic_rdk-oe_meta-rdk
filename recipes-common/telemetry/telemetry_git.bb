@@ -8,12 +8,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 SRC_URI = "git://github.com/rdkcentral/telemetry.git;protocol=git;nobranch=1"
 
 #RDKB-63357
-SRC_URI_append = " file://RDKB-63357-ignore-zero-values-for-datamodel-markers.patch"
+SRC_URI:append = " file://RDKB-63357-ignore-zero-values-for-datamodel-markers.patch"
 
 DEPENDS += "curl cjson glib-2.0 breakpad-wrapper rbus libsyswrapper libunpriv"
 DEPENDS += "rdk-logger"
 
-RDEPENDS_${PN} += "curl cjson glib-2.0 rbus"
+RDEPENDS:${PN} += "curl cjson glib-2.0 rbus"
 
 #Telemetry is federated hence update SRCREV and PV manually for component release
 #PV = "${RDK_RELEASE}+git${SRCPV}"
@@ -34,26 +34,26 @@ CFLAGS += " -Wall -Werror -Wextra -Wno-unused-parameter -Wno-pointer-sign -Wno-s
 CFLAGS += " -DRDK_LOGGER "
 
 # Enable SE HW based cert usage
-CFLAGS_append += "${@bb.utils.contains('DISTRO_FEATURES', 'ENABLE_HW_CERT_USAGE',' -DENABLE_HW_CERT_USAGE -DENABLE_CUSTOM_ENGINE ',' ',d)}"
+CFLAGS:append += "${@bb.utils.contains_any('DISTRO_FEATURES', 'ENABLE_HW_CERT_USAGE',' -DENABLE_HW_CERT_USAGE -DENABLE_CUSTOM_ENGINE ',' ',d)}"
 
 
-inherit pkgconfig autotools systemd ${@bb.utils.contains("DISTRO_FEATURES", "kirkstone", "python3native", "pythonnative", d)} breakpad-logmapper
+inherit pkgconfig autotools systemd ${@bb.utils.contains_any("DISTRO_FEATURES", "kirkstone wrynose", "python3native", "pythonnative", d)} breakpad-logmapper
 
 CFLAGS += " -DDROP_ROOT_PRIV -DENABLE_MTLS"
 
-LDFLAGS_append = " \
+LDFLAGS:append = " \
         -lbreakpadwrapper \
         -lpthread \
         -lstdc++ \
         -lsecure_wrapper \
         "
-LDFLAGS_append = " \
+LDFLAGS:append = " \
         -lprivilege \
       "
 
 CXXFLAGS += "-DINCLUDE_BREAKPAD"
 
-do_install_append () {
+do_install:append () {
     install -d ${D}/usr/include/
     install -d ${D}/lib/rdk/
     install -d ${D}${systemd_unitdir}/system
@@ -62,34 +62,34 @@ do_install_append () {
     install -m 0755 ${S}/source/commonlib/t2Shared_api.sh ${D}/lib/rdk
     rm -fr ${D}/usr/lib/libtelemetry_msgsender.la
 
-    if ${@bb.utils.contains('DISTRO_FEATURES', 't2_without_webconfig', 'true', 'false', d)}; then
+    if ${@bb.utils.contains_any('DISTRO_FEATURES', 't2_without_webconfig', 'true', 'false', d)}; then
         install -m 0755 ${S}/source/commonlib/download_t2_profile.sh ${D}/lib/rdk
     fi
 }
 
-FILES_${PN} = "\
+FILES:${PN} = "\
     ${bindir}/telemetry2_0 \
     ${bindir}/t2rbusMethodSimulator \
     ${bindir}/telemetry2_0_client \
     ${systemd_unitdir}/system \
 "
-FILES_${PN} += "${libdir}/*.so*"
-FILES_${PN} += "/lib/rdk/*"
+FILES:${PN} += "${libdir}/*.so*"
+FILES:${PN} += "/lib/rdk/*"
 
 FILES_SOLIBSDEV = ""
-INSANE_SKIP_${PN} += "dev-so"
+INSANE_SKIP:${PN} += "dev-so"
 
-PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains_any('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
-FILES_${PN}-gtest = "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/telemetry_gtest.bin ${bindir}/xconfclient_gtest.bin ${bindir}/t2parser_gtest.bin ${bindir}/reportgen_gtest.bin ${bindir}/scheduler_gtest.bin', '', d)} \
+FILES:${PN}-gtest = "\
+    ${@bb.utils.contains_any('DISTRO_FEATURES', 'gtestapp', '${bindir}/telemetry_gtest.bin ${bindir}/xconfclient_gtest.bin ${bindir}/t2parser_gtest.bin ${bindir}/reportgen_gtest.bin ${bindir}/scheduler_gtest.bin', '', d)} \
 "
 
-DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-telemetry', '', d)}"
+DOWNLOAD_APPS="${@bb.utils.contains_any('DISTRO_FEATURES', 'gtestapp', 'gtestapp-telemetry', '', d)}"
 inherit comcast-package-deploy
-CUSTOM_PKG_EXTNS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtest', '', d)}"
-SKIP_MAIN_PKG="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
-DOWNLOAD_ON_DEMAND="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
+CUSTOM_PKG_EXTNS="${@bb.utils.contains_any('DISTRO_FEATURES', 'gtestapp', 'gtest', '', d)}"
+SKIP_MAIN_PKG="${@bb.utils.contains_any('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
+DOWNLOAD_ON_DEMAND="${@bb.utils.contains_any('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
 
 # Breakpad processname and logfile mapping
 BREAKPAD_LOGMAPPER_PROCLIST = "telemetry2_0"

@@ -10,7 +10,7 @@ PACKAGES = "\
     "
 
 # Opensource components used in RDK
-RDEPENDS_packagegroup-rdk-dev-test = "\
+RDEPENDS:packagegroup-rdk-dev-test = "\
     comcast-samplemedia \
     gstqamtunersrc \
     gdisplay \

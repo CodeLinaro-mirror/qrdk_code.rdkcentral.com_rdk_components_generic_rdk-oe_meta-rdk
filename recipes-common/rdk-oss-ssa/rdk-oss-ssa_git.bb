@@ -7,12 +7,12 @@ SRC_URI = "${RDK_COMPONENTS_ROOT_GIT}/rdkssa/generic;protocol=${RDK_GIT_PROTOCOL
 PV = "${RDK_RELEASE}+git${SRCPV}"
 SRCREV_rdk-oss-ssa = "${AUTOREV}"
 PROVIDES = "rdk-oss-ssa"
-RPROVIDES_${PN} = "rdk-oss-ssa"
+RPROVIDES:${PN} = "rdk-oss-ssa"
 SRCREV_FORMAT = "rdk-oss-ssa"
 S = "${WORKDIR}/git"
 
 DEPENDS = " ecryptfs-utils keyutils safec-common-wrapper"
-DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
+DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 inherit pkgconfig autotools systemd
 
 INCLUDE_DIRS = " \
@@ -22,15 +22,15 @@ INCLUDE_DIRS = " \
 CFLAGS += "${INCLUDE_DIRS} "
 CPPFLAGS += " ${INCLUDE_DIRS} "
 LDFLAGS += " -pthread -ldl"
-CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
-CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
-LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
+CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
+CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
+LDFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
 
 #By default, RDKSSA Unit Test cases are disabled.
 #Use "RDKSSA_UT_ENABLED=yes" to enable the RDKSSA Unit test cases
 export RDKSSA_UT_ENABLED="no"
 
-do_install_prepend() {
+do_install:prepend() {
 
     install -d ${D}${includedir}
     install -D -m 0644 ${S}/ssa_top/ssa_oss/ssa_common/rdkssa.h ${D}${includedir}/
@@ -46,11 +46,11 @@ do_install_prepend() {
 
 }
 
-SYSTEMD_SERVICE_${PN} = " rdk-oss-ssa-ecfsinit.service"
-FILES_${PN}_append = " ${systemd_unitdir}/system/*"
+SYSTEMD_SERVICE:${PN} = " rdk-oss-ssa-ecfsinit.service"
+FILES:${PN}:append = " ${systemd_unitdir}/system/*"
 
-FILES_${PN} += "${bindir}/*"
-FILES_${PN} += "${base_libdir}/*"
-FILES_${PN} += "${sysconfdir}/*"
+FILES:${PN} += "${bindir}/*"
+FILES:${PN} += "${base_libdir}/*"
+FILES:${PN} += "${sysconfdir}/*"
 
 

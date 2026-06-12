@@ -1,7 +1,7 @@
 do_fetch[postfuncs] += "validate_recipe"
 do_fetch[vardepsexclude] += "validate_recipe"
 
-SSTATEPOSTINSTFUNCS_append = " validate_recipe"
+SSTATEPOSTINSTFUNCS:append = " validate_recipe"
 sstate_install[vardepsexclude] += "validate_recipe"
 SSTATEPOSTINSTFUNCS[vardepvalueexclude] .= "| validate_recipe"
 
