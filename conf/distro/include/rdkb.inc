@@ -147,6 +147,7 @@ require conf/distro/include/rdkb_backtrace_log.inc
 DISTRO_FEATURES:append = " heaptrack"
 DISTRO_FEATURES:remove_morty = " heaptrack"
 PREFERRED_VERSION_heaptrack_kirkstone = "1.2.%"
+PREFERRED_VERSION_dnsmasq_kirkstone = "${@'2.83' if d.getVar('MACHINE') in ['dt-gemini7.2-ow'] else '2.93'}"
 
 DISTRO_FEATURES:remove = "alsa"
 DISTRO_FEATURES:remove = "ext2"
