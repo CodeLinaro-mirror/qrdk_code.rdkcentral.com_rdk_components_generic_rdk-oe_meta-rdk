@@ -26,6 +26,8 @@ inherit pkgconfig cmake systemd logrotate
 #dobby logs storage file is decided using device.properties. syslog-ng-config-gen framework decide the log file.
 
 #config.h file generation for kirkstone builds
+DEPENDS:append_wrynose = " autoconf-native automake-native "
+CFLAGS:append_wrynose = " --sysroot=${RECIPE_SYSROOT}"
 DEPENDS:append_kirkstone = " autoconf-native automake-native "
 CFLAGS:append_kirkstone = " --sysroot=${RECIPE_SYSROOT}"
 LOGROTATE_NAME="dobby"

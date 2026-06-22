@@ -18,9 +18,9 @@ RDEPENDS:packagegroup-rdk-oss-broadband = "\
     curl \
     dibbler-client \
     dibbler-server \
-    ${@bb.utils.contains("DISTRO_FEATURES", "kirkstone", "", "dhcp-client", d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "kirkstone", "", "dhcp-server",  d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "kirkstone", "",  "dhcp-server-config", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "kirkstone wrynose", "", "dhcp-client", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "kirkstone wrynose", "", "dhcp-server",  d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "kirkstone wrynose", "",  "dhcp-server-config", d)} \
     dnsmasq \
     dropbear \
     expat \

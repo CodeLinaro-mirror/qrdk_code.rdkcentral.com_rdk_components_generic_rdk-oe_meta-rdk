@@ -45,12 +45,12 @@ PACKAGECONFIG:append_client = " client"
 
 PACKAGECONFIG:append_morty = " gupnp0.2"
 PACKAGECONFIG:remove = "gupnp1.2"
-PACKAGECONFIG:append = " ${@bb.utils.contains_any('DISTRO_FEATURES','dunfell kirkstone',' gupnp0.2-dfl','',d)} "
+PACKAGECONFIG:append = " ${@bb.utils.contains_any('DISTRO_FEATURES','dunfell kirkstone wrynose',' gupnp0.2-dfl','',d)} "
 
 EXTRA_OECONF += " --sysconfdir=${sysconfdir}/xupnp"
 
 inherit autotools systemd pkgconfig coverity
-YOCTO_VER = "${@ bb.utils.contains('DISTRO_FEATURES', 'dunfell kirkstone', 1, 0, d) }"
+YOCTO_VER = "${@ bb.utils.contains('DISTRO_FEATURES', 'dunfell kirkstone wrynose', 1, 0, d) }"
 SAFEC_VER =  "${@ "safec-3.5.1" if ${YOCTO_VER} else "safec-3.5" }"
 
 CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --cflags libsafec`', ' -fPIC', d)}"
