@@ -6,7 +6,7 @@ SRC_URI = "git://github.com/rdkcentral/remote_debugger.git;protocol=git;nobranch
 # 1 Oct 2025
 SRCREV = "300d29e105f6a7244bff81fa0357dac914dd8913"
 PV = "1.2.9"
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 inherit autotools pkgconfig coverity systemd syslog-ng-config-gen breakpad-logmapper
 DEPENDS = "cjson rdk-logger trower-base64 msgpack-c webconfig-framework rbus libsyswrapper"
 RDEPENDS:${PN}:append = " bash"

@@ -11,7 +11,7 @@ SRCREV_FORMAT = "netmonitor"
 
 PV = "${RDK_RELEASE}+git${SRCPV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 CFLAGS += "-DINCLUDE_BREAKPAD"
 CXXFLAGS += "-DINCLUDE_BREAKPAD"

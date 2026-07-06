@@ -7,7 +7,7 @@ include dobby.inc
 
 DEPENDS = "dobby wpeframework-clientlibraries"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 OECMAKE_SOURCEPATH = "${S}/rdkPlugins/Thunder"
 
 inherit pkgconfig cmake

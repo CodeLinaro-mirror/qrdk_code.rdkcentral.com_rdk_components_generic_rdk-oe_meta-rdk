@@ -28,7 +28,7 @@ SRCREV = "d8bcf7f71dcd9c9c5f7e29c4b7162917105feb08"
 #PV_ = "1.5.1"
 #SRCREV = "4873fe59a586cba794b391eac0812d517b0e567b"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 CFLAGS += " -Wall -Werror -Wextra -Wno-unused-parameter -Wno-pointer-sign -Wno-sign-compare -Wno-enum-compare -Wno-type-limits -Wno-enum-conversion -Wno-format-truncation"
 CFLAGS += " -DRDK_LOGGER "

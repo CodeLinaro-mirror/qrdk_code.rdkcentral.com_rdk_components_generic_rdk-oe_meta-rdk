@@ -20,7 +20,7 @@ python do_patch_new () {
 
 addtask do_patch_new after do_configure before do_compile
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 inherit pkgconfig cmake systemd logrotate
 #dobby logs storage file is decided using device.properties. syslog-ng-config-gen framework decide the log file.

@@ -7,4 +7,4 @@ SRCREV = "${AUTOREV}"
 
 SRC_URI += "${CMF_GIT_ROOT}/rdk/components/generic/sys_mon_tools/sys_resource;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"

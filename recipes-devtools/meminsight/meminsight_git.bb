@@ -20,7 +20,7 @@ SRC_URI:append = " file://meminsight-runner.service \
 # v1.0.0
 SRCREV = "a7e1e7375b5eaaa4cffd26fc2a40dbd359bc0b1f"
 PV = "1.0"
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 

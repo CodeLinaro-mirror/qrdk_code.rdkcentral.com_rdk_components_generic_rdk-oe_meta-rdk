@@ -15,7 +15,7 @@ DEPENDS_hybrid += "breakpad"
 SRCREV = "be8cd679e095cd300f77913863724fa5e39a6182"
 PV = "1.0.0"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 inherit autotools coverity
 

@@ -16,7 +16,7 @@ DEPENDS +=" cjson curl rdk-logger"
 
 CFLAGS:append = " -DRDK_LOGGER"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 inherit autotools pkgconfig coverity
 

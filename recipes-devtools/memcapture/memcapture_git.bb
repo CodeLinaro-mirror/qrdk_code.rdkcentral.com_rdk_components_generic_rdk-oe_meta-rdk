@@ -12,7 +12,7 @@ SRCREV_src = "0cf90e07af97b70fb1f253ebd0f71edd5a9b8225"
 SRCREV_script = "${AUTOREV}"
 SRCREV_FORMAT = "src_script"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 B = "${WORKDIR}/git/build"
 
 DEPENDS = "breakpad-wrapper inja nlohmann-json"

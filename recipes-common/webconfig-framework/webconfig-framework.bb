@@ -16,7 +16,7 @@ SRCREV = "${AUTOREV}"
 SRCREV_FORMAT = "${AUTOREV}"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 inherit autotools systemd pkgconfig
 

@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/rdkcentral/crashupload.git;protocol=https;nobranch=1
 SRCREV_crashupload = "c17ff99e14e5685d37df83cac3bba3cdb478e13b"
 PV = "1.0.7"
 PR = "r1"
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 SRCREV_FORMAT = "crashupload"
 
 DEPENDS = "glib-2.0 libsyswrapper"

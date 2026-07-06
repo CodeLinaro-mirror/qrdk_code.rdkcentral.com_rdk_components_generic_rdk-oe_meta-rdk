@@ -15,7 +15,7 @@ SRCREV = "${AUTOREV}"
 SRCREV_FORMAT = "bluetooth-core"
 
 SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/bluetooth;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH}"
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 CFLAGS:append_morty = " -DMORTY_BUILD"
 CFLAGS:append_daisy = " -DMORTY_BUILD"

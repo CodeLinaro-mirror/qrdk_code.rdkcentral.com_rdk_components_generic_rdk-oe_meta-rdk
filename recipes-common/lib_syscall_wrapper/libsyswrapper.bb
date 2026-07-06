@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 DEPENDS += "rdk-logger"
 SRC_URI = "git://github.com/rdkcentral/libSyscallWrapper;protocol=https;nobranch=1;name=libsyswrapper"
 DEPENDS = "rdk-logger"

@@ -9,5 +9,5 @@ SRCREV = "${AUTOREV}"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/syslog_helper;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=syslog-helper"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 inherit autotools coverity

@@ -7,7 +7,7 @@ DEPENDS = " util-linux rtcore "
 
 PV = "2.x+git${SRCPV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 SRC_URI = "git://github.com/rdkcentral/rtRemote;branch=release;protocol=https"
 SRCREV = "7e29a873d9e1a9b0102a71d812ff40a31bac10e0"

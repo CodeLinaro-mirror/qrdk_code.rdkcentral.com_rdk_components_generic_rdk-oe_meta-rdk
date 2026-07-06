@@ -11,7 +11,7 @@ SRC_URI = "${RDK_COMPONENTS_ROOT_GIT}/opensource/base64/generic;protocol=${RDK_G
 
 SRCREV = "${AUTOREV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 
 inherit cmake

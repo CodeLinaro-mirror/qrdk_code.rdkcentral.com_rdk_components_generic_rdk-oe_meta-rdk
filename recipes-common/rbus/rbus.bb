@@ -8,7 +8,7 @@ SRCREV = "4a25e92112e827f7007de52488666c81c4564b5a"
 PV = "2.11.0"
 PR = "r7"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 inherit cmake systemd pkgconfig coverity syslog-ng-config-gen logrotate
 DEPENDS = "cjson msgpack-c rdk-logger linenoise"

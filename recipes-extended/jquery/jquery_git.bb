@@ -5,7 +5,7 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 
 SRC_URI = "${RDK_COMPONENTS_ROOT_GIT}/opensource/jquery/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 SRCREV = "${AUTOREV}"
 

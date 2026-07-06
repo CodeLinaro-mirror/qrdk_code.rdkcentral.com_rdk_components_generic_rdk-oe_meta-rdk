@@ -1,7 +1,7 @@
 SUMMARY = "libcap wrapper "
 LICENSE = "Apache-2.0"
 DEPENDS = "libcap jsoncpp"
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 SRC_URI = "git://github.com/rdkcentral/rdk-libunpriv;protocol=https;nobranch=1;name=rdk-libunpriv \
 "
 SRCREV_rdk-libunpriv = "2e6c30c88823b7ff9cebde4d7f4d978118510da0"

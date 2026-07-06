@@ -10,7 +10,7 @@ SRCREV = "${AUTOREV}"
 SRCREV_FORMAT = "bluetooth-mgr"
 
 SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/bluetooth_mgr;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH}"
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 
 DEPENDS = "bluetooth-core cjson"

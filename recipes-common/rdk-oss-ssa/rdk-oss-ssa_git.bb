@@ -9,7 +9,7 @@ SRCREV_rdk-oss-ssa = "${AUTOREV}"
 PROVIDES = "rdk-oss-ssa"
 RPROVIDES:${PN} = "rdk-oss-ssa"
 SRCREV_FORMAT = "rdk-oss-ssa"
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 DEPENDS = " ecryptfs-utils keyutils safec-common-wrapper"
 DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"

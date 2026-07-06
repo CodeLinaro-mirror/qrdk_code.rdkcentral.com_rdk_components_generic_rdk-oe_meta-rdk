@@ -11,7 +11,7 @@ PV .= "+git${SRCPV}"
 
 SRC_URI = "git://${RDK_GIT}/rdk/components/opensource/qtwebsockets/generic;module=.;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 # this component doesn't build with -Wl,-as-needed, remove the flag for now
 ASNEEDED = ""

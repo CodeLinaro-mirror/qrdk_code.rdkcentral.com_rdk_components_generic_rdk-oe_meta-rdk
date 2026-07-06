@@ -9,7 +9,7 @@ SRC_URI = "${RDK_GENERIC_ROOT_GIT}/mount-utils/generic;protocol=${RDK_GIT_PROTOC
 PV = "${RDK_RELEASE}+git${SRCPV}"
 SRCREV= "${AUTOREV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 inherit pkgconfig autotools coverity
 

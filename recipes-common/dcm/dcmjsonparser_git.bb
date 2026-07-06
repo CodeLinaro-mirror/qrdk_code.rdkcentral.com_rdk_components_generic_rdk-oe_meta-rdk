@@ -12,7 +12,7 @@ SRC_URI = "${CMF_GIT_ROOT}/rdk/components/generic/dcm;protocol=${CMF_GIT_PROTOCO
 
 PV = "${RDK_RELEASE}+git${SRCPV}"
 SRCREV ?= "${AUTOREV}"
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 CFLAGS:append = " \
     -I${STAGING_INCDIR} \

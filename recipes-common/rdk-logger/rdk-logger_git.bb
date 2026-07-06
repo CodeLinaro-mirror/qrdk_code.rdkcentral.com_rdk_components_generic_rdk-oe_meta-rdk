@@ -10,7 +10,7 @@ PV = "2.4.0"
 PR = "r0"
 
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 DEPENDS = "log4c glib-2.0"
 DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"

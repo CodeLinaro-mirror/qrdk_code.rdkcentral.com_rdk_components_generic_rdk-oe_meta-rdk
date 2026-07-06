@@ -4,14 +4,13 @@ SECTION = "console/utils"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-SRC_URI = "${CMF_GITHUB_ROOT}/secure-upnp;protocol=https;nobranch=1;name=default"
-SRCREV_default = "c1365bea3a4c0da2fd045cb58d08bed107d7f016"
-SRCREV_FORMAT = "default"
+SRC_URI = "${CMF_GITHUB_ROOT}/secure-upnp;protocol=https;branch=main;name=default"
+SRCREV = "c1365bea3a4c0da2fd045cb58d08bed107d7f016"
 PV = "1.0.0"
 PR = "r0"
-SRCPV = "${PV}+${SRCREV_default}"
+SRCPV = "${PV}+${SRCREV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 DEPENDS = "glib-2.0 gupnp fcgi dbus gnutls libgcrypt"
 FILES:${PN} += "${libdir}/"

@@ -11,7 +11,7 @@ SRCREV_FORMAT     = "rdkversion"
 
 SRC_URI = "${RDK_GENERIC_ROOT_GIT}/rdkversion/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH};name=rdkversion"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 PROVIDES = "rdkversion"
 RPROVIDES:${PN} = "librdkversion.so"

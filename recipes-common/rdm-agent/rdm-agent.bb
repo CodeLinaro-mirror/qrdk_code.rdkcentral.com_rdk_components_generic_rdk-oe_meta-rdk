@@ -18,7 +18,7 @@ SRCREV_FORMAT = "rdmagent"
 SRCREV_rdmagent = "d5e7372226ec640a4d8fcebba46b6d39ce4d0ff4"
 
 # Make sure our source directory (for the build) matches the directory structure in the tarball
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/${PN}-${PV}"
 
 inherit autotools coverity systemd syslog-ng-config-gen
 SYSLOG-NG_FILTER = "apps-rdm"
