@@ -2,7 +2,7 @@ SUMMARY = "Memory insight utility and runner service"
 SECTION = "console/utils"
 DESCRIPTION = "meminsight: system/process memory statistics collection tool with systemd runner service."
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=1c020dfe1abb4e684874a44de1244c28"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f733d19cbbedb307f4259a436c151761"
 
 SRC_URI = "${CMF_GITHUB_ROOT}/${BPN}.git;nobranch=1;protocol=${CMF_GIT_PROTOCOL}"
 
@@ -20,17 +20,16 @@ SRC_URI_append = " file://meminsight-runner.service \
                    file://package.json \
                    "
 
-# Apr 24, 2026
-# v1.1.0
-SRCREV = "545cc6fdd954a2f659dccf5c9f09358e54efd00e"
-PV = "1.1.0"
+# Aug 18, 2026
+SRCREV = "cf8c28e0e56fcacf8ccf597bff56e05e8f3f231f"
+PV = "2.0.1"
 S = "${WORKDIR}/git"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit autotools systemd
 
-CFLAGS_append_broadband = ' -DDEVICE_IDENTIFIER=\\"erouter0\\" -DDEFAULT_OUT_DIR=\\"/nvram/meminsight\\"'
+CFLAGS_append_broadband = ' -DDEVICE_INTERFACE_KEY=\\"ARM_INTERFACE\\" -DDEFAULT_OUT_DIR=\\"/nvram/meminsight\\"'
 
 PACKAGECONFIG ??= "cjson"
 PACKAGECONFIG[cjson] = "--enable-cjson,--disable-cjson"

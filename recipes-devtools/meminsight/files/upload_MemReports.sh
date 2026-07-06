@@ -21,7 +21,7 @@
 PATH=/usr/sbin:/usr/bin:/sbin:/bin
 
 SCRIPT_NAME="upload_MemReports.sh"
-CONFIGSTORE_PATH="/tmp/.meminsight_configstore"
+CONFIGSTORE_PATH=""
 UPLOAD_TRIGGER_PATH="/tmp/.meminsight_upload"
 LOCK_DIR="/tmp/.meminsight_upload.lock"
 LOG_TAG="[MemInsight]"
@@ -57,6 +57,9 @@ UPLOAD_ENABLED=false
 UPLOAD_INTERVAL=0
 OUTPUT_DIR="/tmp/meminsight/"
 STAGING_DIR=""
+MARKER_RUN_ID=""
+MARKER_UPLOAD_ENABLED=""
+MARKER_UPLOAD_INTERVAL=""
 
 ##############################################################################
 # Utilities
@@ -132,17 +135,42 @@ get_mac_address() {
 # Configuration
 ##############################################################################
 
-# Parse CONFIGSTORE_PATH and populate global variables.
-# Applies built-in defaults first so the script works even if the file is absent.
-# Sets globals: RUN_ID, UPLOAD_ENABLED, UPLOAD_INTERVAL, OUTPUT_DIR
-# Returns: 0 on success, 1 if configstore file not found (defaults applied)
+# Read the upload handoff marker. It contains only upload-specific settings
+# plus the path needed to locate the persistent configstore.
+load_upload_marker() {
+    CONFIGSTORE_PATH=""
+    MARKER_RUN_ID=""
+    MARKER_UPLOAD_ENABLED=""
+    MARKER_UPLOAD_INTERVAL=""
+
+    [ -s "$UPLOAD_TRIGGER_PATH" ] || return 1
+
+    while IFS='=' read -r key value; do
+        case "$key" in
+            CONFIGSTORE_PATH) CONFIGSTORE_PATH="$value" ;;
+            RUN_ID)           MARKER_RUN_ID="$value" ;;
+            UPLOAD_ENABLED)   MARKER_UPLOAD_ENABLED="$value" ;;
+            UPLOAD_INTERVAL)  MARKER_UPLOAD_INTERVAL="$value" ;;
+        esac
+    done < "$UPLOAD_TRIGGER_PATH"
+
+    return 0
+}
+
+# Load persistent state from the configured output directory. Upload settings
+# are intentionally not read from this file; they come from the marker.
 load_configstore() {
     RUN_ID=""
     UPLOAD_ENABLED=false
     UPLOAD_INTERVAL=0
     OUTPUT_DIR="/tmp/meminsight/"
 
-    if [ ! -f "$CONFIGSTORE_PATH" ]; then
+    if ! load_upload_marker; then
+        log "Upload handoff marker not found; refusing to load upload configuration."
+        return 1
+    fi
+
+    if [ -z "$CONFIGSTORE_PATH" ] || [ ! -f "$CONFIGSTORE_PATH" ]; then
         log "Configstore not found at $CONFIGSTORE_PATH; using built-in defaults."
         return 1
     fi
@@ -151,11 +179,15 @@ load_configstore() {
         case "$key" in \#*|'') continue ;; esac
         case "$key" in
             RUN_ID)          RUN_ID="$value" ;;
-            UPLOAD_ENABLED)  [ "$value" = "1" ] && UPLOAD_ENABLED=true || UPLOAD_ENABLED=false ;;
-            UPLOAD_INTERVAL) UPLOAD_INTERVAL="$value" ;;
             OUTPUT_DIR)      OUTPUT_DIR="$value" ;;
         esac
     done < "$CONFIGSTORE_PATH"
+
+    # Upload-specific values come only from the marker. Persistent values,
+    # including OUTPUT_DIR, come from the configured-directory configstore.
+    [ -n "$MARKER_RUN_ID" ] && RUN_ID="$MARKER_RUN_ID"
+    [ "$MARKER_UPLOAD_ENABLED" = "1" ] && UPLOAD_ENABLED=true
+    [ -n "$MARKER_UPLOAD_INTERVAL" ] && UPLOAD_INTERVAL="$MARKER_UPLOAD_INTERVAL"
 
     log "Configstore loaded: RUN_ID=$RUN_ID UPLOAD_ENABLED=$UPLOAD_ENABLED UPLOAD_INTERVAL=${UPLOAD_INTERVAL}s OUTPUT_DIR=$OUTPUT_DIR"
     return 0
@@ -482,10 +514,14 @@ configstore_hash() {
 # path unit from immediately re-triggering.
 main() {
     acquire_lock
-    load_configstore
+    if ! load_configstore; then
+        log "Upload handoff/configstore could not be loaded; exiting."
+        cleanup_upload_trigger
+        exit 1
+    fi
 
     if ! $UPLOAD_ENABLED; then
-        log "Upload is not enabled in configstore; exiting."
+        log "Upload is not enabled in upload handoff; exiting."
         cleanup_upload_trigger
         exit 0
     fi
