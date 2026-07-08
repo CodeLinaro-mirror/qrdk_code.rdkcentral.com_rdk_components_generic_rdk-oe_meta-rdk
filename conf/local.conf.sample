@@ -146,7 +146,7 @@ PACKAGE_CLASSES ?= "package_ipk"
 # There are other application targets that can be used here too, see
 # meta/classes/image.bbclass and meta/classes/core-image.bbclass for more details.
 # We default to enabling the debugging tweaks.
-EXTRA_IMAGE_FEATURES = "debug-tweaks"
+#EXTRA_IMAGE_FEATURES = "debug-tweaks"
 
 #
 # Additional image features
@@ -263,3 +263,12 @@ CONF_VERSION = "1"
 # This option enables gperftools heap checking for the entire build (for recipes that set ENABLE_GPERFTOOLS_HEAPCHECK_WP_DISTRO = “1”).
 # It can be added on a per-recipe basis by adding ENABLE_GPERFTOOLS_HEAPCHECK_WP_RECIPE = “1” to a recipe.
 #DISTRO_FEATURES_RDK += "comcast-gperftools-heapcheck-wp"
+ASSUME_PROVIDED += "make"
+ASSUME_PROVIDED += "grep"
+EFI_PROVIDER = ""
+WKS_FILE_DEPENDS:remove = "grub-efi"
+WKS_FILE_DEPENDS_BOOTLOADERS:remove = "grub-efi"
+PREFERRED_PROVIDER_virtual/grub-bootconf = ""
+VIRTUAL-RUNTIME_keymaps = ""
+PREFERRED_PROVIDER_console-tools = ""
+
