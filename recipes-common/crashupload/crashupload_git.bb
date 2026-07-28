@@ -2,13 +2,13 @@ SUMMARY = "Crashupload application"
 SECTION = "console/utils"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=377ffe30094aa2a7a3e56ea7aa355abd"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 
 SRC_URI = "git://github.com/rdkcentral/crashupload.git;protocol=https;nobranch=1;name=crashupload"
-# Release version - 2.2.0
-SRCREV_crashupload = "026165b7f29bf1d214130c87083d19e9aeda64fc"
-PV = "2.2.0"
+# Release version - 1.0.7
+SRCREV_crashupload = "c17ff99e14e5685d37df83cac3bba3cdb478e13b"
+PV = "1.0.7"
 PR = "r1"
 S = "${WORKDIR}/git"
 SRCREV_FORMAT = "crashupload"
