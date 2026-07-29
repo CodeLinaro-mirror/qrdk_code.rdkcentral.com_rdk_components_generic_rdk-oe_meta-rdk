@@ -7,8 +7,7 @@ SRC_URI = "git://github.com/rdkcentral/breakpad_wrapper.git;protocol=git;nobranc
 # Release version - 1.0.0
 # 2nd May 2025
 
-
-DEPENDS_broadband += "breakpad"
+DEPENDS:broadband += "breakpad"
 DEPENDS_client += "breakpad"
 DEPENDS_hybrid += "breakpad"
 
@@ -23,7 +22,7 @@ CPPFLAGS:append = " \
     -I${STAGING_INCDIR}/breakpad/ \
     "
 
-LDFLAGS_broadband += "-lbreakpad_client -lpthread"
+LDFLAGS:broadband += "-lbreakpad_client -lpthread"
 LDFLAGS_client += "-lbreakpad_client -lpthread"
 LDFLAGS_hybrid += "-lbreakpad_client -lpthread"
 
