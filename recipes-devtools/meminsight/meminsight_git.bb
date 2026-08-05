@@ -20,9 +20,8 @@ SRC_URI_append = " file://meminsight-runner.service \
                    file://package.json \
                    "
 
-# Aug 18, 2026
-SRCREV = "cf8c28e0e56fcacf8ccf597bff56e05e8f3f231f"
-PV = "2.0.1"
+SRCREV = "eed318d74f56c46c161a44d9f7a93c33ca8bfea6"
+PV = "2.1.1"
 S = "${WORKDIR}/git"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -31,8 +30,9 @@ inherit autotools systemd
 
 CFLAGS_append_broadband = ' -DDEVICE_INTERFACE_KEY=\\"ARM_INTERFACE\\" -DDEFAULT_OUT_DIR=\\"/nvram/meminsight\\"'
 
-PACKAGECONFIG ??= "cjson"
+PACKAGECONFIG ??= "cjson http-upload"
 PACKAGECONFIG[cjson] = "--enable-cjson,--disable-cjson"
+PACKAGECONFIG[http-upload] = "--enable-http-upload,--disable-http-upload"
 
 EXTRA_OECONF += "${@bb.utils.contains('PACKAGECONFIG', 'cjson', '--enable-cjson', '--disable-cjson', d)}"
 RDEPENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'cjson', 'cjson', '', d)}"
