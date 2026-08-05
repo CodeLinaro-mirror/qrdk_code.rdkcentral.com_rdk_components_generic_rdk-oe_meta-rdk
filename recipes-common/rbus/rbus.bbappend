@@ -1,4 +1,5 @@
-
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+SRC_URI:append:wrynose = " file://rbus_compile_issues.patch"
 EXTRA_OECMAKE += '-DCMAKE_POLICY_VERSION_MINIMUM=3.5'
 EXTRA_OECMAKE += "\
     -Dmsgpack_DIR=${RECIPE_SYSROOT}${libdir}/cmake/msgpack-c \

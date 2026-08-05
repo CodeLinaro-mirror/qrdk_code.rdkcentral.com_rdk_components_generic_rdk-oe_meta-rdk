@@ -74,11 +74,11 @@ do_install:append() {
     install -D -m755 ${S}/scripts/getRdmDwldPath.sh ${D}${sysconfdir}/rdm/getRdmDwldPath.sh
     install -D -m755 ${S}/scripts/downloadUtils.sh ${D}${sysconfdir}/rdm/downloadUtils.sh
     install -D -m755 ${S}/scripts/loggerUtils.sh ${D}${sysconfdir}/rdm/loggerUtils.sh
-#    install -D -m600 ${S}/rdm-manifest.json ${D}${sysconfdir}/rdm/rdm-manifest.json
-##    install -d ${D}${libdir}
-##    install -m 0644 ${B}/librdmopenssl.la ${D}${libdir}/
-##    install -d ${D}${includedir}/rdm
-#    install -m 0644 ${S}/src/rdm-cpc/rdm/rdm_rsa_signature_verify.h ${D}${includedir}/rdm/
+    install -D -m600 ${S}/rdm-manifest.json ${D}${sysconfdir}/rdm/rdm-manifest.json
+    install -d ${D}${libdir}
+    install -m 0644 ${B}/librdmopenssl.la ${D}${libdir}/
+    install -d ${D}${includedir}/rdm
+    install -m 0644 ${S}/src/rdm-cpc/rdm/rdm_rsa_signature_verify.h ${D}${includedir}/rdm/
 }
 
 SYSTEMD_SERVICE:${PN} = "apps-rdm.service"
