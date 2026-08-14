@@ -12,10 +12,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8700a1d105cac2a90d4f51290ac6e466"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI = "git://github.com/rdkcentral/rdm-agent;protocol=git;nobranch=1;name=rdmagent"
+SRC_URI += "file://rdmDebugToolCron.sh"
 
 SRCREV_FORMAT = "rdmagent"
-# Tag 2.3.2 / aug 24 2026
-SRCREV_rdmagent = "2254f47e5b42c8b248f48ab11b4071da1ba67a3c"
+# Tag 2.3.3 / sept 11 2026
+SRCREV_rdmagent = "9bd5a2f4ab8587dbc9552d57e1e0310e561ce81f"
 
 # Make sure our source directory (for the build) matches the directory structure in the tarball
 S = "${WORKDIR}/git"
@@ -84,6 +85,7 @@ do_install_append() {
     install -D -m755 ${S}/scripts/downloadUtils.sh ${D}${sysconfdir}/rdm/downloadUtils.sh
     install -D -m755 ${S}/scripts/loggerUtils.sh ${D}${sysconfdir}/rdm/loggerUtils.sh
     install -D -m600 ${S}/rdm-manifest.json ${D}${sysconfdir}/rdm/rdm-manifest.json
+    install -D -m755 ${WORKDIR}/rdmDebugToolCron.sh ${D}/rdklogger/rdmDebugToolCron.sh
     install -d ${D}${libdir}
     install -m 0644 ${B}/librdmopenssl.la ${D}${libdir}/
     install -d ${D}${includedir}/rdm
@@ -95,7 +97,8 @@ SYSTEMD_SERVICE_${PN}_append = " apps_rdm.path"
 FILES_${PN}_append = " ${systemd_unitdir}/system/apps-rdm.service \
                        ${systemd_unitdir}/system/apps_rdm.path \
                        ${sysconfdir}/rdm/* \
-                       ${libdir}/librdmopenssl.la"
+                       ${libdir}/librdmopenssl.la \
+                       /rdklogger/rdmDebugToolCron.sh"
 
 FILES_${PN}-dev += "${includedir}/rdm/rdm_rsa_signature_verify.h"
 BBCLASSEXTEND = "native nativesdk"
