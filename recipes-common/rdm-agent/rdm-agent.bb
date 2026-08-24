@@ -14,8 +14,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI = "git://github.com/rdkcentral/rdm-agent;protocol=git;nobranch=1;name=rdmagent"
 
 SRCREV_FORMAT = "rdmagent"
-# Tag 2.3.1 / Aug 20  2026
-SRCREV_rdmagent = "792e469518e515c738375229b25a7f66b3378bd5"
+# Tag 2.3.2 / aug 24 2026
+SRCREV_rdmagent = "2254f47e5b42c8b248f48ab11b4071da1ba67a3c"
 
 # Make sure our source directory (for the build) matches the directory structure in the tarball
 S = "${WORKDIR}/git"
@@ -64,6 +64,16 @@ oe_runconf_prepend () {
        sed -i -e 's/\-v \-V/\-v/g' ${S}/configure
        sed -i -e 's/\-qversion//g' ${S}/configure
 }
+
+# generating minidumps symbols
+inherit breakpad-wrapper
+DEPENDS += "breakpad breakpad-wrapper"
+BREAKPAD_BIN_append = " rdm"
+PACKAGECONFIG_append = " breakpad"
+PACKAGECONFIG[breakpad] = "--enable-breakpad,,breakpad,"
+
+LDFLAGS += "-lbreakpadwrapper -lpthread -lstdc++"
+CXXFLAGS += "-DINCLUDE_BREAKPAD"
 
 do_install_append() {
     install -d ${D}${sysconfdir}
