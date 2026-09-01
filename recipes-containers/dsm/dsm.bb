@@ -7,11 +7,12 @@ SRC_URI = "${CMF_GITHUB_ROOT}/DSM;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GITH
            file://dsm.config \
            file://dsm.service "
 
+
 SRCREV = "c3cfd0a9d1ee1e9c2f2e8db4348b314aa32439bc"
 SRCREV_kirkstone = "be204cb7f1e46ad6b66489172010eee80967b4be"
-SRCREV_wrynose = "be204cb7f1e46ad6b66489172010eee80967b4be"
+SRCREV:wrynose = "be204cb7f1e46ad6b66489172010eee80967b4be"
 DEPENDS:append_kirkstone = " dobby "
-DEPENDS:append_wrynose = " dobby "
+DEPENDS:append:wrynose = " dobby "
 
 EXTRA_OECMAKE =  " -DENABLE_RBUS_PROVIDER=ON"
 
@@ -38,8 +39,8 @@ SYSTEMD_SERVICE:${PN} = " dsm.service "
 
 do_install:append() {
     install -d ${D}${sysconfdir} 
-    install -D -m 644 ${WORKDIR}/dsm.config ${D}${sysconfdir}
+    install -D -m 644 ${UNPACKDIR}/dsm.config ${D}${sysconfdir}
     install -d ${D}/${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/dsm.service ${D}/${systemd_unitdir}/system/dsm.service
+    install -m 0644 ${UNPACKDIR}/dsm.service ${D}/${systemd_unitdir}/system/dsm.service
     install -d ${D}/home/root/destination
 }

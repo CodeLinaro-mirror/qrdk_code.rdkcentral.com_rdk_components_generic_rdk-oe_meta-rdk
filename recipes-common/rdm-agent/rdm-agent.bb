@@ -58,6 +58,8 @@ INCLUDE_DIRS = " \
     -I${STAGING_INCDIR} \
     -I${STAGING_INCDIR}/openssl \
     "
+
+EXTRA_OEMAKE:append:wrynose = " PKG_CONFIG_SYSROOT_DIR=${STAGING_DIR_TARGET}"
 LDFLAGS += "-ldl -lcrypto -lssl -lcurl -lz"
 LDFLAGS:append_kirkstone += " -lsafec"
 
@@ -75,10 +77,10 @@ do_install:append() {
     install -D -m755 ${S}/scripts/downloadUtils.sh ${D}${sysconfdir}/rdm/downloadUtils.sh
     install -D -m755 ${S}/scripts/loggerUtils.sh ${D}${sysconfdir}/rdm/loggerUtils.sh
     install -D -m600 ${S}/rdm-manifest.json ${D}${sysconfdir}/rdm/rdm-manifest.json
-    install -d ${D}${libdir}
-    install -m 0644 ${B}/librdmopenssl.la ${D}${libdir}/
-    install -d ${D}${includedir}/rdm
-    install -m 0644 ${S}/src/rdm-cpc/rdm/rdm_rsa_signature_verify.h ${D}${includedir}/rdm/
+    if [ -f ${S}/src/rdm-cpc/rdm/rdm_rsa_signature_verify.h ]; then
+        install -d ${D}${includedir}/rdm
+        install -m 0644 ${S}/src/rdm-cpc/rdm/rdm_rsa_signature_verify.h ${D}${includedir}/rdm/
+    fi
 }
 
 SYSTEMD_SERVICE:${PN} = "apps-rdm.service"

@@ -21,14 +21,14 @@ do_install:append() {
     install -d ${D}/lib/rdk
     install -d ${D}${systemd_unitdir}/system
     install -d  ${D}${sysconfdir}
-    install -m 0755 ${WORKDIR}/capture-proc-metrics.sh ${D}/lib/rdk
-    install -m 0755 ${WORKDIR}/stress-ng-tests.sh ${D}/lib/rdk
-    install -m 0755 ${WORKDIR}/openssl-ptest-stress.sh ${D}/lib/rdk
-    install -m 0755 ${WORKDIR}/openssl-ptest-perf_stats.sh ${D}/lib/rdk
-    install -m 0755 ${WORKDIR}/rdk_oss_uploadSTBLogs.sh ${D}/lib/rdk
-    install -m 0644 ${WORKDIR}/stress-test.service ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/openssl-stress.service ${D}${systemd_unitdir}/system
-    install -m 755 ${WORKDIR}/stress-ng.conf ${D}${sysconfdir}
+    install -m 0755 ${UNPACKDIR}/capture-proc-metrics.sh ${D}/lib/rdk
+    install -m 0755 ${UNPACKDIR}/stress-ng-tests.sh ${D}/lib/rdk
+    install -m 0755 ${UNPACKDIR}/openssl-ptest-stress.sh ${D}/lib/rdk
+    install -m 0755 ${UNPACKDIR}/openssl-ptest-perf_stats.sh ${D}/lib/rdk
+    install -m 0755 ${UNPACKDIR}/rdk_oss_uploadSTBLogs.sh ${D}/lib/rdk
+    install -m 0644 ${UNPACKDIR}/stress-test.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${UNPACKDIR}/openssl-stress.service ${D}${systemd_unitdir}/system
+    install -m 755 ${UNPACKDIR}/stress-ng.conf ${D}${sysconfdir}
 }
 
 FILES:${PN} += " /lib/rdk/capture-proc-metrics.sh " 

@@ -26,8 +26,9 @@ inherit pkgconfig cmake systemd logrotate
 #dobby logs storage file is decided using device.properties. syslog-ng-config-gen framework decide the log file.
 
 #config.h file generation for kirkstone builds
-DEPENDS:append_wrynose = " autoconf-native automake-native "
-CFLAGS:append_wrynose = " --sysroot=${RECIPE_SYSROOT}"
+DEPENDS:append:wrynose = " autoconf-native automake-native libtool-native "
+
+CFLAGS:append:wrynose = " --sysroot=${RECIPE_SYSROOT} "
 DEPENDS:append_kirkstone = " autoconf-native automake-native "
 CFLAGS:append_kirkstone = " --sysroot=${RECIPE_SYSROOT}"
 LOGROTATE_NAME="dobby"
@@ -80,10 +81,20 @@ INSANE_SKIP:${PN} = "installed-vs-shipped"
 
 # Ensure that the unversioned symlinks of libraries are kept (and don't generate a QA error)
 INSANE_SKIP:${PN} += "dev-so"
+INSANE_SKIP:${PN}-dev:wrynose += "buildpaths"
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
 FILES:${PN} += "${systemd_system_unitdir}/dobby.service"
+
+do_install:append:wrynose() {
+    if [ -f ${D}/lib/systemd/system/dobby.service ] && \
+       [ "${D}/lib/systemd/system" != "${D}${systemd_system_unitdir}" ]; then
+        install -d ${D}${systemd_system_unitdir}
+        mv ${D}/lib/systemd/system/dobby.service ${D}${systemd_system_unitdir}/dobby.service
+        rmdir -p --ignore-fail-on-non-empty ${D}/lib/systemd/system 2>/dev/null || true
+    fi
+}
 FILES:${PN} += "${sysconfdir}/systemd/system/multi-user.target.wants/dobby.service"
 FILES:${PN} += "${sysconfdir}/dobby.json"
 FILES:${PN} += "${bindir}/DobbyTool"

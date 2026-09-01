@@ -9,5 +9,5 @@ SRC_URI = "file://gtest_apps_download.sh"
 
 do_install:append () {
     install -d ${D}/${sbindir}/
-    install -m 0777 ${WORKDIR}/gtest_apps_download.sh ${D}${sbindir}/
+    install -m 0777 ${UNPACKDIR}/gtest_apps_download.sh ${D}${sbindir}/
 }

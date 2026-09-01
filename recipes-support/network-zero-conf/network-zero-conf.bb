@@ -14,12 +14,12 @@ SRC_URI += "file://iface-setup.service \
 do_install:append() {
     install -d ${D}${systemd_unitdir}/system
     install -d ${D}${base_libdir}/rdk
-    install -m 0644 ${WORKDIR}/iface-setup.service ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/board-access.service ${D}${systemd_unitdir}/system
-    install -m 0755 ${WORKDIR}/board_access.sh ${D}${base_libdir}/rdk/
+    install -m 0644 ${UNPACKDIR}/iface-setup.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${UNPACKDIR}/board-access.service ${D}${systemd_unitdir}/system
+    install -m 0755 ${UNPACKDIR}/board_access.sh ${D}${base_libdir}/rdk/
 
     # Override the default time setter script which is too dependent on configs and entries from sysint
-    install -m 0755 ${WORKDIR}/default-time-setter.sh ${D}${base_libdir}/rdk/
+    install -m 0755 ${UNPACKDIR}/default-time-setter.sh ${D}${base_libdir}/rdk/
 }
 
 SYSTEMD_SERVICE:${PN} = "iface-setup.service board-access.service"

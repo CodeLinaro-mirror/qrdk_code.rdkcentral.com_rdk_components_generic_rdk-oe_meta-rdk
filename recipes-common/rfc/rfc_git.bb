@@ -24,14 +24,14 @@ export cjson_CFLAGS = "-I$(PKG_CONFIG_SYSROOT_DIR)${includedir}/cjson"
 export cjson_LIBS = "-lcjson"
 
 DEPENDS="cjson curl rdk-logger libsyswrapper commonutilities rdkcertconfig mountutils"
-DEPENDS:append_broadband += " rbus"
+DEPENDS:append:broadband = " rbus"
 export rbus_CFLAGS = "-I$(PKG_CONFIG_SYSROOT_DIR)${includedir}/rbus"
 export rbus_LIBS = "-lrbus"
 
 EXTRA_OEMAKE += "-e MAKEFLAGS="
 
-EXTRA_OECONF:append_client = " --enable-iarmbus=yes --enable-tr69hostif=yes"
-EXTRA_OECONF:append_broadband = " --enable-rdkb=yes --enable-tr181set=yes"
+EXTRA_OECONF:append:client = " --enable-iarmbus=yes --enable-tr69hostif=yes"
+EXTRA_OECONF:append:broadband = " --enable-rdkb=yes --enable-tr181set=yes"
 EXTRA_OECONF += " --enable-mountutils=yes --enable-rdkcertselector=yes"
 
 DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
@@ -45,7 +45,7 @@ LDFLAGS:append_morty = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' -Wl,
 inherit autotools pkgconfig coverity
 
 CFLAGS += " -Wall -Werror -Wextra "
-CFLAGS:append_client += "${@bb.utils.contains('DISTRO_FEATURES', 'enable_maintenance_manager', '-DEN_MAINTENANCE_MANAGER -I${STAGING_INCDIR}/rdk/iarmmgrs-hal ', '', d)}"
+CFLAGS:append:client += "${@bb.utils.contains('DISTRO_FEATURES', 'enable_maintenance_manager', '-DEN_MAINTENANCE_MANAGER -I${STAGING_INCDIR}/rdk/iarmmgrs-hal ', '', d)}"
 CXXFLAGS += " -Wall -Werror"
 
 do_install:append () {
