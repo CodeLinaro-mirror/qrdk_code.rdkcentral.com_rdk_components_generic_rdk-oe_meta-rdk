@@ -94,7 +94,7 @@ do_install () {
    cp -R ${S}/external/rapidjson/ ${D}${includedir}/rtcore/
 
    mkdir -p ${D}/etc
-   install -m 0644 "${WORKDIR}/rtremote.conf" "${D}/etc/"
+   install -m 0644 "${UNPACKDIR}/rtremote.conf" "${D}/etc/"
 }
 
 FILES:${PN} += "${libdir}/*.so"

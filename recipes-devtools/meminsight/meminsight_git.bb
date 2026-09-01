@@ -44,35 +44,34 @@ do_install() {
     install -m 0755 ${B}/meminsight ${D}${bindir}/meminsight
 
     install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/meminsight-runner.service ${D}${systemd_unitdir}/system/
-    install -m 0644 ${WORKDIR}/meminsight-runner.path ${D}${systemd_unitdir}/system/
+    install -m 0644 ${UNPACKDIR}/meminsight-runner.service ${D}${systemd_unitdir}/system/
+    install -m 0644 ${UNPACKDIR}/meminsight-runner.path ${D}${systemd_unitdir}/system/
 
-    install -m 0644 ${WORKDIR}/meminsight-upload.service ${D}${systemd_unitdir}/system/
-    install -m 0644 ${WORKDIR}/meminsight-upload.path ${D}${systemd_unitdir}/system/
+    install -m 0644 ${UNPACKDIR}/meminsight-upload.service ${D}${systemd_unitdir}/system/
+    install -m 0644 ${UNPACKDIR}/meminsight-upload.path ${D}${systemd_unitdir}/system/
 
     install -d ${D}${systemd_unitdir}/system/meminsight-runner.service.d
     install -d ${D}${systemd_unitdir}/system/meminsight-runner.path.d
 }
 
-do_install:append_client() {
-    install -m 0644 ${WORKDIR}/conf/client.conf ${D}${systemd_unitdir}/system/meminsight-runner.service.d/
-    install -m 0644 ${WORKDIR}/conf/client-path.conf ${D}${systemd_unitdir}/system/meminsight-runner.path.d/
+do_install:append:client() {
+    install -m 0644 ${UNPACKDIR}/conf/client.conf ${D}${systemd_unitdir}/system/meminsight-runner.service.d/
+    install -m 0644 ${UNPACKDIR}/conf/client-path.conf ${D}${systemd_unitdir}/system/meminsight-runner.path.d/
 }
 
-do_install:append_broadband() {
-    install -m 0644 ${WORKDIR}/conf/broadband.conf ${D}${systemd_unitdir}/system/meminsight-runner.service.d/
-
+do_install:append:broadband() {
+    install -m 0644 ${UNPACKDIR}/conf/broadband.conf ${D}${systemd_unitdir}/system/meminsight-runner.service.d/
     if ${@bb.utils.contains('DISTRO_FEATURES', 'enable_xmeminsight', 'true', 'false', d)}; then
-        install -m 0644 ${WORKDIR}/conf/broadband-path.conf ${D}${systemd_unitdir}/system/meminsight-runner.path.d/
+        install -m 0644 ${UNPACKDIR}/conf/broadband-path.conf ${D}${systemd_unitdir}/system/meminsight-runner.path.d/
     else
-        install -m 0644 ${WORKDIR}/conf/broadband-rdm-path.conf ${D}${systemd_unitdir}/system/meminsight-runner.path.d/
+        install -m 0644 ${UNPACKDIR}/conf/broadband-rdm-path.conf ${D}${systemd_unitdir}/system/meminsight-runner.path.d/
 
         install -d ${D}/etc/rdm/post-services
-        install -m 0755 ${WORKDIR}/start_meminsight.sh ${D}/etc/rdm/post-services/start_meminsight.sh
+        install -m 0755 ${UNPACKDIR}/start_meminsight.sh ${D}/etc/rdm/post-services/start_meminsight.sh
     fi
 
     install -d ${D}/lib/rdk
-    install -m 0755 ${WORKDIR}/upload_MemReports.sh ${D}/lib/rdk/upload_MemReports.sh
+    install -m 0755 ${UNPACKDIR}/upload_MemReports.sh ${D}/lib/rdk/upload_MemReports.sh
 }
 
 SYSTEMD_SERVICE:${PN} = "meminsight-runner.path meminsight-upload.path"

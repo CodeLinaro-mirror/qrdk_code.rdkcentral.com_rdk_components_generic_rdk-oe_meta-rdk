@@ -224,6 +224,12 @@ PREFERRED_VERSION_cargo:wrynose = "1.94.1"
 PREFERRED_VERSION_cargo-native:wrynose = "1.94.1"
 PREFERRED_VERSION_libseccomp:wrynose = "2.6.0"
 
+EXTRA_OECMAKE:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'wrynose', ' -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ', '', d)}"
+
+CFLAGS:append:pn-perl = " ${@bb.utils.contains('DISTRO_FEATURES', 'wrynose', ' -std=gnu17 ', '', d)}"
+
+CFLAGS:append = " ${@(' -I%s/safeclib ' % d.getVar('STAGING_INCDIR')) if (bb.utils.contains('DISTRO_FEATURES', 'wrynose', True, False, d) and 'safec' in (d.getVar('DEPENDS') or '').split()) else ''}"
+
 BBMASK .= "|meta-rdk-oss-reference/recipes-devtools/elfutils/elfutils_0.148.bb"
 BBMASK .= "|meta-rdk-oss-reference/recipes-devtools/elfutils/elfutils_0.148.bbappend"
 

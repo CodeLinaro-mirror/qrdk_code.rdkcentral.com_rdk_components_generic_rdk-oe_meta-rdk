@@ -34,6 +34,10 @@ do_install() {
         install -m 0755 ${S}/uploadDumps.sh ${D}${base_libdir}/rdk
 }
 
+do_install:append:wrynose() {
+        sed -i '1s|^#!/bin/busybox|#!/usr/bin/busybox|' ${D}${base_libdir}/rdk/uploadDumps.sh
+}
+
 RDEPENDS:${PN} += "busybox"
 
 PACKAGE_BEFORE_PN += "${PN}-conf"

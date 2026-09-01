@@ -13,8 +13,8 @@ WEBKIT_CACHE_CLEAN_SERVICE_ORDER_AFTER ?= "local-fs.target storagemgrmain.servic
 do_install() {
     install -d ${D}${base_libdir}/rdk
     install -d ${D}${systemd_unitdir}/system
-    install -m 0755 ${WORKDIR}/clearWebkitBrowserCache.sh ${D}${base_libdir}/rdk/clearWebkitBrowserCache.sh
-    sed -e "s|@WEBKIT_CACHE_CLEAN_SERVICE_ORDER_AFTER@|${WEBKIT_CACHE_CLEAN_SERVICE_ORDER_AFTER}|g" < ${WORKDIR}/webkit-browser-cache-cleanup.service.in > ${D}${systemd_unitdir}/system/webkit-browser-cache-cleanup.service
+    install -m 0755 ${UNPACKDIR}/clearWebkitBrowserCache.sh ${D}${base_libdir}/rdk/clearWebkitBrowserCache.sh
+    sed -e "s|@WEBKIT_CACHE_CLEAN_SERVICE_ORDER_AFTER@|${WEBKIT_CACHE_CLEAN_SERVICE_ORDER_AFTER}|g" < ${UNPACKDIR}/webkit-browser-cache-cleanup.service.in > ${D}${systemd_unitdir}/system/webkit-browser-cache-cleanup.service
 }
 
 SYSTEMD_SERVICE:${PN} = "webkit-browser-cache-cleanup.service"

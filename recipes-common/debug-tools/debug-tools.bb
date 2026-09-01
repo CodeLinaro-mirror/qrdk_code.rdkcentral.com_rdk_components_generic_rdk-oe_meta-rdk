@@ -6,7 +6,7 @@ SRC_URI = "file://debug-tools_download.sh"
 
 do_install:append () {
         install -d ${D}/${sbindir}/
-        install -m 0777 ${WORKDIR}/debug-tools_download.sh ${D}${sbindir}/
+        install -m 0777 ${UNPACKDIR}/debug-tools_download.sh ${D}${sbindir}/
 }
 
 FILES:${PN} = "\
