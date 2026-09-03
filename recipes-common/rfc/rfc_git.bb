@@ -47,6 +47,7 @@ inherit autotools pkgconfig coverity
 CFLAGS += " -Wall -Werror -Wextra "
 CFLAGS:append:client += "${@bb.utils.contains('DISTRO_FEATURES', 'enable_maintenance_manager', '-DEN_MAINTENANCE_MANAGER -I${STAGING_INCDIR}/rdk/iarmmgrs-hal ', '', d)}"
 CXXFLAGS += " -Wall -Werror"
+CXXFLAGS:append = " -include array"
 
 do_install:append () {
 	install -d ${D}${base_libdir}/rdk
