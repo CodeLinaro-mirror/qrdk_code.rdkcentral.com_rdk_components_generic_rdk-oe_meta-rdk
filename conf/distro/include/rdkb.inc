@@ -223,6 +223,7 @@ PREFERRED_VERSION_rust-native:wrynose = "1.94.1"
 PREFERRED_VERSION_cargo:wrynose = "1.94.1"
 PREFERRED_VERSION_cargo-native:wrynose = "1.94.1"
 PREFERRED_VERSION_libseccomp:wrynose = "2.6.0"
+PREFERRED_VERSION_libseccomp-native:wrynose = "2.6.0"
 
 EXTRA_OECMAKE:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'wrynose', ' -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ', '', d)}"
 

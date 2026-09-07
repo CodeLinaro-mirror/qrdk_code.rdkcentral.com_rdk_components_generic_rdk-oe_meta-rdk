@@ -1,7 +1,7 @@
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
-SRC_URI = "git://github.com/rdkcentral/remote_debugger.git;protocol=git;nobranch=1"
+SRC_URI = "git://github.com/rdkcentral/remote_debugger.git;protocol=${CMF_GIT_PROTOCOL};nobranch=1"
 S = "${UNPACKDIR}/${PN}-${PV}"
 
 # Release version - 1.3.4
