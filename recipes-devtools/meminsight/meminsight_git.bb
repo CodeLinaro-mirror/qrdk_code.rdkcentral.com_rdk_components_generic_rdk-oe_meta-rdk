@@ -20,8 +20,8 @@ SRC_URI_append = " file://meminsight-runner.service \
                    file://package.json \
                    "
 
-SRCREV = "eed318d74f56c46c161a44d9f7a93c33ca8bfea6"
-PV = "2.1.1"
+SRCREV = "2a9208919ca349e91fc7d828063150331cd2b220"
+PV = "2.1.2"
 S = "${WORKDIR}/git"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
