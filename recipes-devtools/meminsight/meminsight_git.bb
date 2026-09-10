@@ -69,17 +69,18 @@ do_install:append:broadband() {
         install -m 0755 ${UNPACKDIR}/start_meminsight.sh ${D}/etc/rdm/post-services/start_meminsight.sh
     fi
 
-    install -d ${D}/lib/rdk
-    install -m 0755 ${UNPACKDIR}/upload_MemReports.sh ${D}/lib/rdk/upload_MemReports.sh
+    install -d ${D}${libdir}/rdk
+    install -m 0755 ${UNPACKDIR}/upload_MemReports.sh ${D}${libdir}/rdk/upload_MemReports.sh
 }
 
 SYSTEMD_SERVICE:${PN} = "meminsight-runner.path meminsight-upload.path"
 
 FILES:${PN} += "${bindir}/meminsight"
+FILES:${PN} += "${systemd_unitdir}/system/"
 
 FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.service"
 FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.path"
 
 FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.service.d/*.conf"
 FILES:${PN} += "${systemd_unitdir}/system/meminsight-runner.path.d/*.conf"
-FILES:${PN}:append:broadband = " /lib/rdk/upload_MemReports.sh"
+FILES:${PN}:append:broadband = " ${libdir}/rdk/upload_MemReports.sh"

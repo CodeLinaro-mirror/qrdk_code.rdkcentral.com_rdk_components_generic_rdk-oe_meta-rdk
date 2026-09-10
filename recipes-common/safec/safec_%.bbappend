@@ -3,10 +3,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 S = "${UNPACKDIR}/${PN}-${PV}"
 
-SRC_URI += " \
-    file://configure_ac.patch \
-    file://hotspot.patch \
-    "
 SRC_URI:append = " file://safe_compile_h.patch"
 SRC_URI:remove_kirkstone = " file://safe_compile_h.patch"
 SRC_URI:remove:wrynose = " file://safe_compile_h.patch"
