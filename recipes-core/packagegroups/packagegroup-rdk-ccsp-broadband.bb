@@ -68,7 +68,7 @@ RDEPENDS:packagegroup-rdk-ccsp-broadband = "\
     parodus2ccsp \
     dca \
     telemetry \
-    cpuprocanalyzer \
+    chrony \
     ${@bb.utils.contains("DISTRO_FEATURES", "gtestapp", "rdkbgmock", "", d)} \
     webconfig-framework \
 	${@bb.utils.contains("DISTRO_FEATURES", "enable_rdkscheduler", "rdk-scheduler", "", d)} \
