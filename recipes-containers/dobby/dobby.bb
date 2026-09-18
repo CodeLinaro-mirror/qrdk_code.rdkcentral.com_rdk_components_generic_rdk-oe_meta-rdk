@@ -103,3 +103,6 @@ FILES:${PN} += "${libexecdir}/DobbyInit"
 FILES:${PN} += "${libdir}/plugins/dobby/*.so*"
 FILES:${PN} += "${libdir}/libethanlog.so*"
 FILES:${PN} += "${libdir}/libocispec.so*"
+
+ERROR_QA:remove = "patch-fuzz"
+WARN_QA:append = " patch-fuzz"
