@@ -45,7 +45,7 @@ do_install:append() {
    install -m 0644 ${S}/conf/rbus_session_mgr.service ${D}${systemd_unitdir}/system
 }
 
-do_install:append_broadband() {
+do_install:append:broadband() {
    install -m 0755 ${S}/conf/rbus_log_capture.sh ${D}${bindir}/
    install -m 0644 ${S}/conf/rbus_log.service ${D}${systemd_unitdir}/system
    install -m 0644 ${S}/conf/rbus_monitor.path ${D}${systemd_unitdir}/system
@@ -73,9 +73,9 @@ FILES:${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/r
 FILES:${PN} += "${systemd_unitdir}/system/*"
 SYSTEMD_SERVICE:${PN} = "rbus.service"
 SYSTEMD_SERVICE:${PN}:append = " rbus_session_mgr.service "
-SYSTEMD_SERVICE:${PN}:append_broadband  = " rbus_monitor.service "
-SYSTEMD_SERVICE:${PN}:append_broadband  = " rbus_monitor.path "
-SYSTEMD_SERVICE:${PN}:append_broadband  = " rbus_log.service "
+SYSTEMD_SERVICE:${PN}:append:broadband  = " rbus_monitor.service "
+SYSTEMD_SERVICE:${PN}:append:broadband  = " rbus_monitor.path "
+SYSTEMD_SERVICE:${PN}:append:broadband  = " rbus_log.service "
 
 DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-rbus', '', d)}"
 inherit comcast-package-deploy

@@ -32,7 +32,7 @@ do_install:append() {
         install -m 0644 ${S}/conf/procanalyzerconfig.ini ${D}/etc
 }
 
-do_install:append_broadband() {
+do_install:append:broadband() {
         install -d ${D}${base_libdir}/rdk ${D}{sysconfdir}
         install -m 0755 ${S}/conf/RunCPUProcAnalyzer.sh ${D}${base_libdir}/rdk
 }
@@ -44,4 +44,4 @@ FILES:${PN} += "${systemd_unitdir}/system/cpuprocanalyzer.service"
 FILES:${PN} += "${systemd_unitdir}/system/cpuprocanalyzer.path"
 FILES:${PN} += "/etc/procanalyzerconfig.ini"
 
-FILES:${PN}:append_broadband = " ${base_libdir}/rdk/RunCPUProcAnalyzer.sh"
+FILES:${PN}:append:broadband = " ${base_libdir}/rdk/RunCPUProcAnalyzer.sh"

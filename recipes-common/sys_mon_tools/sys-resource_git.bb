@@ -25,8 +25,8 @@ PACKAGECONFIG[cmas-it] = "--enable-cmas-it,,,"
 PACKAGECONFIG[mlt-bt] = "--enable-mlt-bt,,,"
 PACKAGECONFIG[cmat-sstats] = "--enable-cmat-sstats,,,"
 
-CFLAGS:append_broadband = " -DRDK_BROADBAND"
-CXXFLAGS:append_broadband = " -DRDK_BROADBAND"
+CFLAGS:append:broadband = " -DRDK_BROADBAND"
+CXXFLAGS:append:broadband = " -DRDK_BROADBAND"
 
 
 inherit autotools pkgconfig coverity

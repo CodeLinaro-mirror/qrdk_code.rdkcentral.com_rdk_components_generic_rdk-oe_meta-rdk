@@ -30,7 +30,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit autotools systemd
 
-CFLAGS:append_broadband = ' -DDEVICE_IDENTIFIER=\\"erouter0\\" -DDEFAULT_OUT_DIR=\\"/nvram/meminsight\\"'
+CFLAGS:append:broadband = ' -DDEVICE_IDENTIFIER=\\"erouter0\\" -DDEFAULT_OUT_DIR=\\"/nvram/meminsight\\"'
 
 PACKAGECONFIG ??= "cjson"
 PACKAGECONFIG[cjson] = "--enable-cjson,--disable-cjson"
