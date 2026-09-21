@@ -2,7 +2,7 @@ SUMMARY = "Memory insight utility and runner service"
 SECTION = "console/utils"
 DESCRIPTION = "meminsight: system/process memory statistics collection tool with systemd runner service."
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=1c020dfe1abb4e684874a44de1244c28"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f733d19cbbedb307f4259a436c151761"
 
 SRC_URI = "${CMF_GITHUB_ROOT}/${BPN}.git;nobranch=1;protocol=${CMF_GIT_PROTOCOL}"
 
@@ -20,20 +20,19 @@ SRC_URI:append = " file://meminsight-runner.service \
                    file://package.json \
                    "
 
-# Apr 24, 2026
-# v1.1.0
-SRCREV = "545cc6fdd954a2f659dccf5c9f09358e54efd00e"
-PV = "1.1.0"
-S = "${UNPACKDIR}/${PN}-${PV}"
+SRCREV = "eed318d74f56c46c161a44d9f7a93c33ca8bfea6"
+PV = "2.1.1"
+S = "${WORKDIR}/git"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit autotools systemd
 
-CFLAGS:append:broadband = ' -DDEVICE_IDENTIFIER=\\"erouter0\\" -DDEFAULT_OUT_DIR=\\"/nvram/meminsight\\"'
+CFLAGS:append:broadband = ' -DDEVICE_INTERFACE_KEY=\\"ARM_INTERFACE\\" -DDEFAULT_OUT_DIR=\\"/nvram/meminsight\\"'
 
-PACKAGECONFIG ??= "cjson"
+PACKAGECONFIG ??= "cjson http-upload"
 PACKAGECONFIG[cjson] = "--enable-cjson,--disable-cjson"
+PACKAGECONFIG[http-upload] = "--enable-http-upload,--disable-http-upload"
 
 EXTRA_OECONF += "${@bb.utils.contains('PACKAGECONFIG', 'cjson', '--enable-cjson', '--disable-cjson', d)}"
 RDEPENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'cjson', 'cjson', '', d)}"

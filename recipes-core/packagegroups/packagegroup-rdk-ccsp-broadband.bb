@@ -51,6 +51,7 @@ RDEPENDS:packagegroup-rdk-ccsp-broadband = "\
     ${@bb.utils.contains("DISTRO_FEATURES", "webui_php", "ccsp-webui-csrf", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "bci", "ccsp-webui-csrf", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "bridgeUtilsBin", "hal-bridgeutil", "", d)} \
+    wei \
     ccsp-xconf \
     hal-cm \
     hal-dhcpv4c \

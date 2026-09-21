@@ -10,11 +10,10 @@ DEPENDS:class-native = ""
 RDEPENDS:${PN}:append = " bash"
 RDEPENDS:${PN}:remove_morty = "bash"
 
-SRC_URI = "${RDK_GENERIC_ROOT_GIT}/WebconfigFramework/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH}"
+SRC_URI = "${CMF_GITHUB_ROOT}/WebconfigFramework;protocol=https;nobranch=1"
 
-SRCREV = "${AUTOREV}"
-SRCREV_FORMAT = "${AUTOREV}"
-PV = "${RDK_RELEASE}+git${SRCPV}"
+SRCREV = "fc788e8ec5a2273c5b0af7800c56d4e822976da8"
+PV = "1.1.0"
 
 S = "${UNPACKDIR}/${PN}-${PV}"
 

@@ -12,11 +12,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8700a1d105cac2a90d4f51290ac6e466"
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI = "git://github.com/rdkcentral/rdm-agent;protocol=git;nobranch=1;name=rdmagent"
+SRC_URI += "file://rdmDebugToolCron.sh"
 
 SRCREV_FORMAT = "rdmagent"
-
-# Tag 2.3.1 / Jul 14 2026
-SRCREV_rdmagent = "8ddda9a49fa442f15feddbbeed591a6701a4bc4c"
+# Tag 2.3.3 / sept 11 2026
+SRCREV_rdmagent = "9bd5a2f4ab8587dbc9552d57e1e0310e561ce81f"
 
 # Make sure our source directory (for the build) matches the directory structure in the tarball
 S = "${UNPACKDIR}/${PN}-${PV}"
@@ -69,6 +69,16 @@ oe_runconf:prepend () {
        sed -i -e 's/\-qversion//g' ${S}/configure
 }
 
+# generating minidumps symbols
+inherit breakpad-wrapper
+DEPENDS += "breakpad breakpad-wrapper"
+BREAKPAD_BIN:append = " rdm"
+PACKAGECONFIG:append = " breakpad"
+PACKAGECONFIG[breakpad] = "--enable-breakpad,,breakpad,"
+
+LDFLAGS += "-lbreakpadwrapper -lpthread -lstdc++"
+CXXFLAGS += "-DINCLUDE_BREAKPAD"
+
 do_install:append() {
     install -d ${D}${sysconfdir}
     install -d ${D}${sysconfdir}/rdm/
@@ -78,6 +88,7 @@ do_install:append() {
     install -D -m755 ${S}/scripts/downloadUtils.sh ${D}${sysconfdir}/rdm/downloadUtils.sh
     install -D -m755 ${S}/scripts/loggerUtils.sh ${D}${sysconfdir}/rdm/loggerUtils.sh
     install -D -m600 ${S}/rdm-manifest.json ${D}${sysconfdir}/rdm/rdm-manifest.json
+    install -D -m755 ${WORKDIR}/rdmDebugToolCron.sh ${D}/rdklogger/rdmDebugToolCron.sh
     install -d ${D}${libdir}
     install -m 0644 ${B}/librdmopenssl.la ${D}${libdir}/
     install -d ${D}${includedir}/rdm
@@ -89,7 +100,8 @@ SYSTEMD_SERVICE:${PN}:append = " apps_rdm.path"
 FILES:${PN}:append = " ${systemd_unitdir}/system/apps-rdm.service \
                        ${systemd_unitdir}/system/apps_rdm.path \
                        ${sysconfdir}/rdm/* \
-                       ${libdir}/librdmopenssl.la"
+                       ${libdir}/librdmopenssl.la \
+                       /rdklogger/rdmDebugToolCron.sh"
 
 FILES:${PN}-dev += "${includedir}/rdm/rdm_rsa_signature_verify.h"
 BBCLASSEXTEND = "native nativesdk"
