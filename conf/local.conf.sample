@@ -272,3 +272,5 @@ PREFERRED_PROVIDER_virtual/grub-bootconf = ""
 VIRTUAL-RUNTIME_keymaps = ""
 PREFERRED_PROVIDER_console-tools = ""
 
+#wrynose override $ROOT_HOME dir
+ROOT_HOME:wrynose = "/home/root"
