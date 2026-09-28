@@ -178,8 +178,9 @@ BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'kirkstone', '|.meta-rdk-ext/
 DISTRO_FEATURES:append = " dynamic_keying "
 
 #Yocto-6.0 Wrynose Changes
+PREFERRED_VERSION_bluez5:wrynose = "5.82"
 #PREFERRED_VERSION_bluez5:wrynose = "5.86"
-PREFERRED_VERSION_bluez5:wrynose = "5.72"
+#PREFERRED_VERSION_bluez5:wrynose = "5.72"
 PREFERRED_VERSION_openssl:wrynose = "3.5.6"
 PREFERRED_VERSION_systemd:wrynose = "259.5"
 PREFERRED_VERSION_dnsmasq:wrynose = "2.83"
@@ -232,6 +233,10 @@ CFLAGS:append = " ${@(' -I%s/safeclib ' % d.getVar('STAGING_INCDIR')) if (bb.uti
 
 BBMASK .= "|meta-rdk-oss-reference/recipes-devtools/elfutils/elfutils_0.148.bb"
 BBMASK .= "|meta-rdk-oss-reference/recipes-devtools/elfutils/elfutils_0.148.bbappend"
+
+#Integrate meta-rdk-bluetooth
+BBMASK .= "|openembedded-core/meta/recipes-connectivity/bluez5"
+BBMASK .= "|meta-oss-common-config/recipes-connectivity/bluez5/bluez5_5.%.bbappend"
 
 BBMASK .= "|meta-rdk-oss-reference/recipes-protocols/net-snmp/net-snmp_5.9.%.bbappend"
 BBMASK .= "|meta-rdk-oss-reference/recipes-connectivity/openssl*"
