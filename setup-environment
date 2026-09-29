@@ -109,8 +109,10 @@ fi
 _PWD_PREV=$(pwd)
 
 # Warning: Sourcing the oe-init-build-env script changes the current directory.
+# NOTE: Wrynose expects conf/templates/default path
 
-TEMPLATECONF=${_PWD_PREV}/meta-rdk/conf source openembedded-core/oe-init-build-env ${_BUILDDIR}
+#TEMPLATECONF=${_PWD_PREV}/meta-rdk/conf source openembedded-core/oe-init-build-env ${_BUILDDIR}
+TEMPLATECONF=${_PWD_PREV}/meta-rdk/conf/templates/default source openembedded-core/oe-init-build-env ${_BUILDDIR}
 
 if [ "$_CONFIGS_FOUND" ]; then
     echo -e "\nConfig files already exist in folder ${_BUILDDIR}/conf/, they were not modified."
