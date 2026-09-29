@@ -15,8 +15,8 @@ SRC_URI = "git://github.com/rdkcentral/rdm-agent;protocol=git;nobranch=1;name=rd
 SRC_URI += "file://rdmDebugToolCron.sh"
 
 SRCREV_FORMAT = "rdmagent"
-# Tag 2.3.3 / sept 11 2026
-SRCREV_rdmagent = "9bd5a2f4ab8587dbc9552d57e1e0310e561ce81f"
+# Tag 2.3.4 / sept 29 2026
+SRCREV_rdmagent = "c73653ae7e4a1d6ffaf720fd9a19995557c31f16"
 
 # Make sure our source directory (for the build) matches the directory structure in the tarball
 S = "${WORKDIR}/git"
