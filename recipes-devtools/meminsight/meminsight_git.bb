@@ -22,8 +22,7 @@ SRC_URI:append = " file://meminsight-runner.service \
 
 SRCREV = "eed318d74f56c46c161a44d9f7a93c33ca8bfea6"
 PV = "2.1.1"
-S = "${WORKDIR}/git"
-
+S = "${UNPACKDIR}/${PN}-${PV}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit autotools systemd
