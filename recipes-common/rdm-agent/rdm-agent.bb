@@ -88,7 +88,7 @@ do_install:append() {
     install -D -m755 ${S}/scripts/downloadUtils.sh ${D}${sysconfdir}/rdm/downloadUtils.sh
     install -D -m755 ${S}/scripts/loggerUtils.sh ${D}${sysconfdir}/rdm/loggerUtils.sh
     install -D -m600 ${S}/rdm-manifest.json ${D}${sysconfdir}/rdm/rdm-manifest.json
-    install -D -m755 ${WORKDIR}/rdmDebugToolCron.sh ${D}/rdklogger/rdmDebugToolCron.sh
+    install -D -m755 ${UNPACKDIR}/rdmDebugToolCron.sh ${D}/rdklogger/rdmDebugToolCron.sh
     install -d ${D}${libdir}
     install -m 0644 ${B}/librdmopenssl.la ${D}${libdir}/
     install -d ${D}${includedir}/rdm
