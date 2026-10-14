@@ -330,6 +330,7 @@ BBMASK .= "|meta-cmf/recipes-support/libcroco/libcroco_0.6.%.bbappend"
 BBMASK .= "|meta-cmf/recipes-support/libproxy/libproxy_0.4.15.bbappend"
 BBMASK .= "|meta-cmf/recipes-support/libtomcrypt/libtomcrypt_1.17.bbappend"
 BBMASK .= "|meta-rdk-oss-reference/recipes-devtools/python/python_2.7.%.bbappend"
+BBMASK .= "|meta-cmf-bananapi/meta-rdk-mtk-bpir4/recipes-core/dropbear/dropbear_2020.%.bbappend"
 
 # Wrynose PREFERRED_VERSION is set
 BBMASK .= "|meta-cmf/recipes-support/icu/icu_64.1.bbappend"
