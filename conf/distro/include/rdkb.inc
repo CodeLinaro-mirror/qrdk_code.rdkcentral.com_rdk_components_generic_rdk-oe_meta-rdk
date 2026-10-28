@@ -410,4 +410,7 @@ BBMASK .= "|meta-rdk-oss-reference/recipes-devtools/rust-1.72.0/"
 BBMASK .= "|meta-rdk-oss-reference/recipes-devtools/cargo-1.72.0/"
 BBMASK .= "|meta-rdk-oss-reference/recipes-core/glib-2.0_2.74.6/"
 BBMASK .= "|meta-rdk-oss-reference/recipes-core/glib-2.0/glib-2.0_2.7%.bbappend"
+BBMASK .= "|meta-rdk-oss-reference/recipes-devtools/breakpad/breakpad_2025.02.25.bb"
+BBMASK .= "|meta-rdk-oss-reference/recipes-support/curl/curl_7.82.0.bbappend"
+BBMASK .= "|meta-rdk-oss-reference/recipes-support/sqlite/sqlite3_3.38.5.bbappend"
 
