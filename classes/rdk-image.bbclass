@@ -39,6 +39,8 @@ python create_version_file() {
 
     version_file = os.path.join(d.getVar("R", True), 'version.txt')
     image_name = d.getVar("IMAGE_NAME", True)
+    image_extn = d.getVar("IMAGE_EXTN", True) or ''
+    version_name = image_name.replace(image_extn, '', 1) if image_extn else image_name
     machine = d.getVar("MACHINE", True).upper()
     branch = d.getVar("PROJECT_BRANCH", True)
     yocto_version = d.getVar("DISTRO_CODENAME", True)
@@ -59,7 +61,7 @@ python create_version_file() {
             for line in fd.readlines():
                 extra_versions.append(line)
     with open(version_file, 'w') as fw:
-        fw.write('imagename:{0}\n'.format(image_name))
+        fw.write('imagename:{0}\n'.format(version_name))
         fw.write('BRANCH={0}\n'.format(branch))
         fw.write('YOCTO_VERSION={0}\n'.format(yocto_version))
         fw.write('VERSION={0}\n'.format(release_version))
