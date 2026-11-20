@@ -237,11 +237,9 @@ BBMASK .= "|meta-rdk-oss-reference/recipes-devtools/elfutils/elfutils_0.148.bbap
 
 #Integrate meta-rdk-bluetooth
 BBMASK .= "|openembedded-core/meta/recipes-connectivity/bluez5"
-BBMASK .= "|meta-oss-common-config/recipes-connectivity/bluez5/bluez5_5.%.bbappend"
 
 BBMASK .= "|meta-rdk-oss-reference/recipes-protocols/net-snmp/net-snmp_5.9.%.bbappend"
 BBMASK .= "|meta-rdk-oss-reference/recipes-connectivity/openssl*"
-BBMASK .= "|meta-oss-common-config/recipes-connectivity/bluez5/bluez5_5.48.bb"
 BBMASK .= "|meta-rdk-oss-reference/recipes-connectivity/bluez5/bluez5_5.66.bb"
 BBMASK .= "|meta-rdk-oss-reference/recipes-core/systemd/systemd_230.bb"
 BBMASK .= "|meta-rdk-oss-reference/recipes-devtools/jsoncpp/jsoncpp_1.8.4.bb"
@@ -259,7 +257,6 @@ BBMASK .= "|.meta-rdk-oss-reference/classes/breakpad-wrapper.bbclass"
 BBMASK .= "|.meta-rdk-oss-reference/recipes-rdk/breakpad_wrapper/breakpad-wrapper.bb"
 BBMASK .= "|.meta-rdk-oss-reference/recipes-containers/crun/crun_1.7.2.bb"
 BBMASK .= "|.meta-rdk-oss-reference/recipes-connectivity/openssl*"
-BBMASK .= "|.meta-oss-common-config/recipes-connectivity/bluez5/bluez5_5.48.bb"
 BBMASK .= "|.meta-rdk-oss-reference/recipes-core/systemd/systemd_230.bb"
 BBMASK .= "|.meta-rdk-oss-reference/recipes-devtools/opkg/opkg_%.bbappend"
 BBMASK .= "|.meta-rdk-oss-reference/recipes-gplv2/gnutls/gnutls_3.3.30.bb"
